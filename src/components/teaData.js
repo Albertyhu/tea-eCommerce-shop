@@ -1,0 +1,60 @@
+import { teaArray } from './teaImages.js';
+
+export const TeaData = [
+    {
+        ID: 0,
+        name: "Black Tea Leaves",
+        description: "Strong dark tea that rivals the caffeine content of coffee",
+        price: 5.25,
+        amount: 48,
+        image: teaArray[0],
+    },
+    {
+        ID: 1,
+        name: "Gingeng Herb",
+        description: "Since ancient times, Ginseng tea has been renown for strengthening the immune system and to help fight off stress and disease.",
+        price: 15.99,
+        amount: 48,
+        image: teaArray[1],
+    },
+    {
+        ID: 2,
+        name: "Green Tea Leaves",
+        description: "Imported from the remote regions of Southern China, green tea has been known to promote weight loss, blood sugar regulation, disease prevention, and exercise recovery.",
+        price: 6.99,
+        amount: 48,
+        image: teaArray[2],
+    },
+    {
+        ID: 3,
+        name: "Iron Buddha Tea",
+        description: "Iron Buddha tea (tie guan yin) is an intensely floral Oolong tea, rolled and fired to create the classic Iron Goddess of Mercy or Goddess of Mercy flavour.",
+        price: 8.99,
+        amount: 48,
+        image: teaArray[3],
+    },
+    {
+        ID: 4,
+        name: "Jasmine Green Tea",
+        description: "As the most popular flower-scented tea in East Asia, Jasmine Green Tea blesses its drinkers with its unforgettable aroma.",
+        price: 6.99,
+        amount: 48,
+        image: teaArray[4],
+    },
+    {
+        ID: 5,
+        name: "Oolong Tea",
+        description: "Oolong tea is a product made from the leaves, buds, and stems of the Camellia sinensis plant.",
+        price: 4.99,
+        amount: 48,
+        image: teaArray[5],
+    },
+    {
+        ID: 6,
+        name: "Oolong Tea",
+        description: "Oolong tea is a product made from the leaves, buds, and stems of the Camellia sinensis plant.",
+        price: 4.99,
+        amount: 48,
+        image: teaArray[5],
+    },
+]

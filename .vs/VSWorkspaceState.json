@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\base_elements",
+    "\\src\\base_elements\\logo",
+    "\\src\\components",
+    "\\src\\screens",
+    "\\src\\screens\\cart",
+    "\\src\\screens\\home_page",
+    "\\src\\screens\\product_page",
+    "\\src\\style",
+    "\\src\\test"
+  ],
+  "SelectedNode": "\\src\\style\\button.css",
+  "PreviewInSolutionExplorer": false
+}

@@ -1,0 +1,51 @@
+body {
+    width: 100%;
+    font-family: 'Palatino Linotype';
+}
+
+#headerBar {
+    background-color: #9D5F38;
+    height: 150px;
+    top: 0px;
+    display: flex; 
+}
+
+#footer {
+    background-color: #9D5F38;
+    height: 30px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    z-index: 1;
+
+}
+
+#rootContainer {
+
+
+}
+
+/*header bar*/
+#earthTonelogo{
+    height: 100%;
+}
+
+#headerMenu {
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: 50px;
+}
+
+.menuLinks {
+    text-decoration: none;
+    color: #ffffff;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 25px;
+
+    /*this line is necessary so that the links align with the cart button*/
+    padding: 10px;
+}
