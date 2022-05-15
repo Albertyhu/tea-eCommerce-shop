@@ -245,14 +245,19 @@
     user-select: none;
     margin-left: auto;
     margin-right: auto;
-    width: 20%;
+    width: auto;
     margin-bottom: 30px;
-
+    display: flex;
 }
 
 #cartButton:active {
     background-color: #b1823b;
     transform: translate(4px, 4px)
+}
+
+#cartButton span {
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .AddCartButton {

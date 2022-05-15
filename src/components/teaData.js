@@ -51,10 +51,10 @@ export const TeaData = [
     },
     {
         ID: 6,
-        name: "Oolong Tea",
-        description: "Oolong tea is a product made from the leaves, buds, and stems of the Camellia sinensis plant.",
-        price: 4.99,
-        amount: 48,
-        image: teaArray[5],
+        name: "Longjing Tea",
+        description: "A first flush Longjing tea picked in early spring. An exceptional quality rarely seen outside of China.",
+        price: 16.95,
+        amount: 2.5,
+        image: teaArray[6],
     },
 ]

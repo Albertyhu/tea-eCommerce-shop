@@ -49,3 +49,10 @@ body {
     /*this line is necessary so that the links align with the cart button*/
     padding: 10px;
 }
+
+#cartIcon {
+    width: 25px; 
+    height: 25px;
+    color: #ffffff;
+    padding-left: 10px;
+}

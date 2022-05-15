@@ -139,21 +139,21 @@ margin-bottom: 50px;
 }
 
 #cartItemContainer {
-display: flex; 
-margin-top: 10px;
-margin-bottom: 10px;
-height: 200px; 
-width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 200px;
+    width: 100%;
 }
 
 #cartImageContainer {
-margin-right: 50px;
-
+    margin-right: 50px;
+    display: inline-block;
 }
 
 .cartItemImage {
     width: auto;
     height: 100%;
+    max-height: 150px;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -161,4 +161,5 @@ margin-right: 50px;
 .cartItemText {
     margin: 10px;
     text-align: left;
+    display: inline-block;
 }
