@@ -8,32 +8,25 @@ import HamburgerIcon from '../images/icon/hamburger_menu_white.png';
 import { Link } from 'react-router-dom'; 
 
 const Header = props => {
-    const { windowWidth } = props; 
     const [normalMenu, setMenu] = useState(true); 
-   // const [screenWidth, setScreenWidth] = React.useState(window.innerWidth);
+    const [screenWidth, setScreenWidth] = React.useState(window.innerWidth);
     const { openHamburgerPanel } = useContext(MyContext)
-    var screenWidth = 0;
-    onFocus =function(){
-        screenWidth = windowWidth; 
-    }
+
     const handleResize = () => {
-        screenWidth = window.innerWidth;
+        if (window.innerWidth <= 468)
+            setMenu(false);
+        else
+            setMenu(true); 
     }
+    
     useEffect(() => {
         if (screenWidth <= 468)
             setMenu(false);
         else
             setMenu(true); 
     }, [screenWidth])
+    
     window.addEventListener('resize', handleResize)
-    /*
-    useEffect(() => {
-        if (screenWidth <= 468)
-            setMenu(false);
-        else
-            setMenu(true); 
-    }, [screenWidth])
-    */
 
 return (
     <div id="headerBar">

@@ -17,10 +17,7 @@ const ProductPage = props => {
         const mainContainer = document.getElementById("mainContainer");
         var heightMultiplier = Math.floor(Object.keys(TeaData).length / 3) + ((Object.keys(TeaData).length % 3) > 0 ? 1 : 0);
         const newHeight = 600 * heightMultiplier;
-        mainContainer.style.height = `${newHeight}px`;
-
-        //for the burger menu 
-        windowWidth = window.innerWidth; 
+        mainContainer.style.height = `${newHeight}px`; 
     }, [])
 
     return (

@@ -13,10 +13,7 @@ import HamburgerPanel from '../../base_elements/hamburgerPanel.js'
 const Home = props => {
     const { openPanel, openHamburger } = props;
     var windowWidth;  
-    useEffect(() => {
-        windowWidth = window.innerWidth; 
 
-    }, [])
     return (
         <div id="home_mainContainer">
             <div id='home_innerContainer'>
