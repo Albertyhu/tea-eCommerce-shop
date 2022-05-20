@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import '../style/button.css';
 import '../style/myStyle.css'; 
 import { MyContext } from '../components/contextItem.js';
-import CartIcon from '../images/icon/shopping-cart.png'; 
+import CartIcon from '../images/icon/shopping-cart-white.png'; 
 
 const HeaderMenu = () => {
     const { toggleCartPanel } = React.useContext(MyContext);

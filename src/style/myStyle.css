@@ -56,3 +56,54 @@ body {
     color: #ffffff;
     padding-left: 10px;
 }
+
+#hamburgerPanel {
+padding-top: 50px;
+margin-bottom: auto;
+}
+
+#hamburgerIcon {
+width: 30px;
+height: 30px;
+margin-right: 20px;
+margin-top: auto;
+margin-bottom: auto;
+margin-left: auto;
+
+}
+
+.hamburgerLinks {
+    padding-top: 5px;
+    padding-bottom: 5px; 
+    text-decoration: none;
+    text-align: left;
+    display: flex; 
+    font-family: inherit; 
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #000000;
+    padding-left: 15px;
+}
+
+.hamburgerLinks:active {
+    background-color: #c7c7c7; 
+}
+
+.hamburgerLinks div {
+    margin-top: auto;
+    margin-bottom: auto;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+    .burgerIcon {
+        width: 30px;
+        height: 30px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+
+@media screen and (max-width: 450px) {
+
+}

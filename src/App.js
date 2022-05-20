@@ -11,9 +11,12 @@ import SlidingPanel from 'react-sliding-side-panel';
 function App() {
     const [cart, setCart] = useState([])
     const [openPanel, setOpenPanel] = useState(false);
+    //for users with small mobile devices 
+    const [hamburgerPanel, setHamburgerPanel] = useState(false); 
     const [addProductMessage, setAddProductMessage] = useState(false); 
     const [message, setMessage] = useState(''); 
     const ref = useRef();
+    const hamburgerRef = useRef()
     const messageRef = useRef() 
     const context = {
         addProduct: (product, productID, additionalStock) => {
@@ -45,18 +48,32 @@ function App() {
         toggleCartPanel: () => {
             setOpenPanel(!openPanel); 
         },
+        openCartPanel: () => {
+            setOpenPanel(true); 
+        }, 
         closeCartPanel: () => {
             setOpenPanel(false);
+        },
+        openHamburgerPanel: () => {
+            setHamburgerPanel(true)
+        },
+        closeHamburgerPanel: () => {
+            setHamburgerPanel(false)
+        },
+        toggleHamburgerPanel: () => {
+            setHamburgerPanel(!hamburgerPanel)
         },
         openAddProductMessage: () => {
             setAddProductMessage(true)
         },
         closeAddProductMessage: () => {
             setAddProductMessage(false)
+           
         },
         //for closing Cart Panel when clicking outside it 
         getRef: () => { return ref; },
-        getMessageRef: () => { return messageRef;},
+        getMessageRef: () => { return messageRef; },
+        getHamburgerRef: () => { return hamburgerRef; },
         calculateTotalCost: () => {
             var total = 0; 
             cart.forEach(item => {
@@ -79,8 +96,19 @@ function App() {
       <div className="App" id="rootContainer" >
           <BrowserRouter>
               <Routes>
-                        <Route path="/tea-eCommerce-shop" element={<Home openPanel={openPanel} />} /> 
-                        <Route path="/product_page" element={<ProductPage openPanel={openPanel} addProductMessage={addProductMessage} />} />
+                        <Route
+                            path="/tea-eCommerce-shop"
+                            element={<Home
+                                openPanel={openPanel}
+                                openHamburger={hamburgerPanel} />}
+                        /> 
+                        <Route
+                            path="/product_page"
+                            element={<ProductPage
+                                openPanel={openPanel}
+                                addProductMessage={addProductMessage}
+                                openHamburger={hamburgerPanel}
+                            />} />
               </Routes>
           </BrowserRouter>    
       </div>

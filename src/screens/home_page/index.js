@@ -1,4 +1,4 @@
-import React, { createRef } from 'react'; 
+import React, { createRef, useEffect } from 'react'; 
 import './home.css'; 
 import '../../images/pouring_tea.jpg'
 import { Link } from "react-router-dom";
@@ -8,14 +8,21 @@ import Header from '../../base_elements/header.js';
 import Footer from '../../base_elements/footer.js';
 import TeaCharacter from '../../base_elements/logo/Tea_chinese_character.png'; 
 import CartPanel from '../cart/cartPanel.js'; 
+import HamburgerPanel from '../../base_elements/hamburgerPanel.js'
 
 const Home = props => {
-    const { openPanel } = props;
+    const { openPanel, openHamburger } = props;
+    var windowWidth;  
+    useEffect(() => {
+        windowWidth = window.innerWidth; 
+
+    }, [])
     return (
         <div id="home_mainContainer">
             <div id='home_innerContainer'>
                 <CartPanel openPanel={openPanel} />
-                <Header />
+                <HamburgerPanel openHamburger={openHamburger}/>
+                <Header windowWidth={windowWidth} />
                 <div id ="centerElements">
                     <div id="titleContainer">
                         <img src={TeaCharacter} id="tea_chinese_character" />

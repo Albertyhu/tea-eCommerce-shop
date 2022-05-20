@@ -298,3 +298,11 @@
         background-color: #25963E;
         transform: translate(4px, 4px)
     }
+
+@media screen and (max-width: 450px) {
+
+    #shopNowButton {
+        font-size: 20px;
+        width: 30%;
+    }
+}

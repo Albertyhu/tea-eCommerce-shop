@@ -2,15 +2,17 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\components",
+    "\\src\\base_elements",
+    "\\src\\base_elements\\logo",
+    "\\src\\images",
+    "\\src\\images\\icon",
+    "\\src\\images\\tea",
     "\\src\\screens",
-    "\\src\\screens\\cart",
-    "\\src\\screens\\home_page",
     "\\src\\screens\\product_page",
     "\\src\\screens\\product_page\\addProductMessage",
     "\\src\\style",
     "\\src\\test"
   ],
-  "SelectedNode": "\\package.json",
+  "SelectedNode": "\\src\\images\\icon\\shopping-cart.png",
   "PreviewInSolutionExplorer": false
 }

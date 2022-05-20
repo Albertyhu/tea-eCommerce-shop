@@ -9,13 +9,6 @@
     font-family: serif;
 }
 
-#buttonContainer {
-    text-align: center;
-    vertical-align: middle;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
 #titleContainer {
     color: #ffffff;
     font-family: inherit;
@@ -47,4 +40,24 @@
 #tea_chinese_character {
 width: 200px;
 height: 200px;
+}
+
+
+@media screen and (max-width: 450px) {
+    #home_mainContainer {
+        height: 120vh;
+    }
+
+    #title {
+        line-height: 35px;
+    }
+
+    #titleContainer p {
+        line-height: 30px;
+    }
+
+    #tea_chinese_character {
+        height: 100px;
+        width: 100px;
+    }
 }
