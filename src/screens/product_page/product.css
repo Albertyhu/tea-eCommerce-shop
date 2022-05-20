@@ -7,6 +7,7 @@
     background-size: cover;
     background-color: #ffffff;
     font-family: serif;
+    margin-top: 170px; 
 }
 
 #buttonContainer {
@@ -15,19 +16,6 @@
     margin-top: auto;
     margin-bottom: auto;
 }
-
-#titleContainer {
-    color: #ffffff;
-    font-family: inherit;
-    text-align: center;
-}
-
-    #titleContainer p {
-        font-size: 20px;
-        line-height: 10px;
-    }
-
-
 
 #innerContainer {
     top: 0px;
@@ -109,8 +97,21 @@ display: inline-block
 }
 
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 540px) {
     #mainContainer {
         height: 120vh;
+        margin-top: 80px;
     }
+    #row {
+        display: inline-table;
+        padding-bottom: 0; 
+        margin: 0;
+    }
+    #contentContainer{
+
+    }
+    .AddCartButton {
+        margin-bottom: 20px;
+    }
+    
 }

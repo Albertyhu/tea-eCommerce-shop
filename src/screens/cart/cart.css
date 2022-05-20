@@ -163,3 +163,10 @@ margin-bottom: 50px;
     text-align: left;
     display: inline-block;
 }
+
+@media screen and (max-width: 540px) {
+
+    #cartItemContainer {
+        height: 415px;
+    }
+}

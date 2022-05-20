@@ -8,16 +8,26 @@ body {
     height: 150px;
     top: 0px;
     display: flex; 
+    position: fixed;
+    width: 100%;
+    z-index: 1;
 }
-
+/*
 #footer {
     background-color: #9D5F38;
     height: 30px;
     bottom: 0;
     left: 0;
     right: 0;
-    position: fixed;
     z-index: 1;
+    position: absolute;
+
+}*/
+
+#footer {
+    background-color: #9D5F38;
+    height: 60px;
+    bottom: 0;
 
 }
 
@@ -103,7 +113,23 @@ margin-left: auto;
         margin-right: 10px;
     }
 
+#logoHamburger {
+    margin: auto;
+    width: 150px;
+    height: 150px;
 
-@media screen and (max-width: 450px) {
+}
 
+@media screen and (max-width: 540px) {
+    #footer {
+        position: fixed;
+        left: 0;
+        right: 0; 
+    }
+    #headerBar {
+        height: 66px; 
+    }
+    #earthTonelogo {
+        display: none;
+    }
 }

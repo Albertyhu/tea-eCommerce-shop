@@ -31,8 +31,9 @@ const Home = props => {
                         <Link to="/product_page" style={{textDecoration: "none"}}><div id = "shopNowButton">Shop Now</div></Link>
                         </div>
                 </div>
-                <Footer />
+      
             </div>
+            <Footer />
         </div>
         )
 }

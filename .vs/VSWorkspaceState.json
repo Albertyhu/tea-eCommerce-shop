@@ -2,7 +2,7 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\components",
+    "\\src\\base_elements",
     "\\src\\images",
     "\\src\\images\\tea",
     "\\src\\screens",
@@ -12,6 +12,6 @@
     "\\src\\screens\\product_page\\addProductMessage",
     "\\src\\style"
   ],
-  "SelectedNode": "\\src\\base_elements\\hamburgerPanel.js",
+  "SelectedNode": "\\src\\base_elements\\header.js",
   "PreviewInSolutionExplorer": false
 }

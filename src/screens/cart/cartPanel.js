@@ -35,6 +35,30 @@ const CartPanel = props => {
             document.removeEventListener("mousedown", checkIfClickedOutside)
         }
     }, [openPanel])
+   
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth); 
+    const [cartPanelWidth, setCartPanelWidth] = useState(50); 
+    const handleResize = () => {
+        setScreenWidth(window.innerWidth); 
+        setCartPanelWidth(screenWidth >= 1000 ? 50 : 100); 
+
+        if (screenWidth >= 1000 && cartPanelWidth !== 50) {
+            setCartPanelWidth(50)
+        }
+        else if (screenWidth < 1000 && cartPanelWidth === 50) {
+            setCartPanelWidth(100)
+        }
+    }
+    window.addEventListener("resize", handleResize)
+    useEffect(() => {
+        if (screenWidth >= 1000 && cartPanelWidth !== 50) {
+            setCartPanelWidth(50)
+        }
+        else if (screenWidth < 1000 && cartPanelWidth === 50) {
+            setCartPanelWidth(100)
+        }
+    }, [screenWidth])
+         
 
     useEffect(() => {
 
@@ -47,7 +71,7 @@ const CartPanel = props => {
         <SlidingPanel
                 type={'right'}
                 isOpen={openPanel}
-                size={50}
+                size={cartPanelWidth}
                 panelContainerClassName="cartPanelContainer"
                 noBackdrop={true}
         >
@@ -56,7 +80,7 @@ const CartPanel = props => {
                     {cart.length > 0 ?
                         (<div id="cartList">
                             <div><b>Number of items in cart:</b> {totalItems}</div>
-                            <div><b>Current Total Cost:</b> ${subtotal}</div>
+                            <div><b>Current Total Cost:</b> ${subtotal.toFixed(2)}</div>
                             {
                                cart.map(item => <RenderTeaItems
                                     image={item.image}

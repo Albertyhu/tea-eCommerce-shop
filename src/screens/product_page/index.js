@@ -16,7 +16,7 @@ const ProductPage = props => {
     useEffect(() => {
         const mainContainer = document.getElementById("mainContainer");
         var heightMultiplier = Math.floor(Object.keys(TeaData).length / 3) + ((Object.keys(TeaData).length % 3) > 0 ? 1 : 0);
-        const newHeight = 600 * heightMultiplier;
+        const newHeight = 530 * heightMultiplier;
         mainContainer.style.height = `${newHeight}px`; 
     }, [])
 
@@ -30,8 +30,8 @@ const ProductPage = props => {
                 <div id="contentContainer">
                     <RenderCollection arrlength={count} />
                 </div>
-                <Footer />
             </div>
+            <Footer />
         </div>
         )
 }

@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 import HomeIcon from '../images/icon/Home-black.png';
 import ShoppingIcon from '../images/icon/price-tag-black.png';
 import CartIcon from '../images/icon/shopping-cart-dark.png'; 
-import CloseIcon from '../images/icon/cancel-round-dark.png'; 
+import CloseIcon from '../images/icon/cancel-round-dark.png';
+import Logo from './logo/Earth Tone-black-transparent.png'; 
 
 const HamburgerPanel = props => {
     const { openHamburger } = props;
@@ -29,7 +30,8 @@ const HamburgerPanel = props => {
             size={50}
             noBackdrop={true}
         >
-            <div className="panel-container" id = "hamburgerPanel" ref={hamburgerRef}>
+            <div className="panel-container" id="hamburgerPanel" ref={hamburgerRef}>
+                <div><img src={Logo} id="logoHamburger"/></div>
                 <Link to="/tea-eCommerce-shop" className="hamburgerLinks" onClick={closeHamburgerPanel} ><img src={HomeIcon} className = 'burgerIcon' /><div>Home</div></Link>
                 <Link to="/product_page" className="hamburgerLinks" onClick={closeHamburgerPanel} ><img src={ShoppingIcon} className='burgerIcon' /><div>Shop</div></Link>
                 <div onClick={() => {
