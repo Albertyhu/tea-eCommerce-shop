@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/tea-eCommerce-shop/static/css/main.0939c6b8.css",
-    "main.js": "/tea-eCommerce-shop/static/js/main.16ac1057.js",
+    "main.css": "/tea-eCommerce-shop/static/css/main.0d1ab9ae.css",
+    "main.js": "/tea-eCommerce-shop/static/js/main.68be33d8.js",
     "static/media/Tea_chinese_character.png": "/tea-eCommerce-shop/static/media/Tea_chinese_character.3a767468176d61fc6dba.png",
     "static/media/black_tea.jpg": "/tea-eCommerce-shop/static/media/black_tea.d42f4232f10eb28e55f1.jpg",
     "static/media/jasmine_tea.jpg": "/tea-eCommerce-shop/static/media/jasmine_tea.65c5181c4607d346fea6.jpg",
@@ -15,11 +15,11 @@
     "static/media/shopping-cart-white.png": "/tea-eCommerce-shop/static/media/shopping-cart-white.5752303e8451202bb6df.png",
     "static/media/ginseng_tea.jpg": "/tea-eCommerce-shop/static/media/ginseng_tea.d3192b02b3cd1cf45497.jpg",
     "index.html": "/tea-eCommerce-shop/index.html",
-    "main.0939c6b8.css.map": "/tea-eCommerce-shop/static/css/main.0939c6b8.css.map",
-    "main.16ac1057.js.map": "/tea-eCommerce-shop/static/js/main.16ac1057.js.map"
+    "main.0d1ab9ae.css.map": "/tea-eCommerce-shop/static/css/main.0d1ab9ae.css.map",
+    "main.68be33d8.js.map": "/tea-eCommerce-shop/static/js/main.68be33d8.js.map"
   },
   "entrypoints": [
-    "static/css/main.0939c6b8.css",
-    "static/js/main.16ac1057.js"
+    "static/css/main.0d1ab9ae.css",
+    "static/js/main.68be33d8.js"
   ]
 }
