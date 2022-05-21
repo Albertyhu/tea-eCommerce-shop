@@ -11,6 +11,7 @@ body {
     position: fixed;
     width: 100%;
     z-index: 1;
+    text-align: left;
 }
 /*
 #footer {
@@ -120,16 +121,25 @@ margin-left: auto;
 
 }
 
-@media screen and (max-width: 540px) {
-    #footer {
-        position: fixed;
-        left: 0;
-        right: 0; 
-    }
-    #headerBar {
-        height: 66px; 
-    }
-    #earthTonelogo {
-        display: none;
-    }
+#LogoContainer {
+    width: 100px;
 }
+
+@media screen and (max-width: 1300px) {
+}
+
+    @media screen and (max-width: 540px) {
+        #footer {
+            position: fixed;
+            left: 0;
+            right: 0;
+        }
+
+        #headerBar {
+            height: 66px;
+        }
+
+        #earthTonelogo {
+            display: none;
+        }
+    }

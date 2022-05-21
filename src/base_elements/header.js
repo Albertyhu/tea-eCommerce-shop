@@ -30,7 +30,7 @@ const Header = props => {
 
 return (
     <div id="headerBar">
-        <Link to= "/tea-eCommerce-shop"><img src={Logo} id="earthTonelogo" /></Link>
+        <Link to= "/tea-eCommerce-shop" id = "LogoContainer"><img src={Logo} id="earthTonelogo" /></Link>
         {normalMenu ?
             <HeaderMenu />
             :
