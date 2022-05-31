@@ -6,6 +6,7 @@ import { MyContext } from '../components/contextItem.js';
 import CartPanel from '../screens/cart/cartPanel.js'; 
 import HamburgerIcon from '../images/icon/hamburger_menu_white.png';
 import { Link } from 'react-router-dom'; 
+import SecondaryHeaderBar from './SecondaryHeaderBar.js'; 
 
 const Header = props => {
     const [normalMenu, setMenu] = useState(true); 
@@ -28,15 +29,18 @@ const Header = props => {
     
     window.addEventListener('resize', handleResize)
 
-return (
-    <div id="headerBar">
-        <Link to= "/tea-eCommerce-shop" id = "LogoContainer"><img src={Logo} id="earthTonelogo" /></Link>
-        {normalMenu ?
-            <HeaderMenu />
-            :
-            <img src={HamburgerIcon} id="hamburgerIcon" onClick={openHamburgerPanel}/>
-            }
+    return (
+        <div id="headerBar">
+            <SecondaryHeaderBar />
+            <div id="PrimaryHeaderBar">
+                <Link to= "/tea-eCommerce-shop" id = "LogoContainer"><img src={Logo} id="earthTonelogo" /></Link>
+                {normalMenu ?
+                    <HeaderMenu />
+                    :
+                    <img src={HamburgerIcon} id="hamburgerIcon" onClick={openHamburgerPanel}/>
+                    }
 
+            </div>
     </div>
     )
 }

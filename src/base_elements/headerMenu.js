@@ -11,7 +11,7 @@ const HeaderMenu = () => {
         <div id="headerMenu" style={{flexDirection: "flex-end"}}>
             <Link to="/tea-eCommerce-shop" className = "menuLinks"><div>Home</div></Link>
             <Link to="/product_page" className="menuLinks"><div>Shop</div></Link>
-            <div id="cartButton" onClick={toggleCartPanel}><span>Cart</span><img src={CartIcon} id="cartIcon" /></div>
+            <div id="cartButton" onClick={toggleCartPanel}><img src={CartIcon} id="cartIcon" /></div>
         </div>
         )
 }

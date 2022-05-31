@@ -7,7 +7,7 @@
     background-size: cover;
     background-color: #000000;
     font-family: serif;
-    margin-top: 120px;
+    margin-top: 150px;
 }
 
 #titleContainer {
@@ -50,11 +50,10 @@ height: 200px;
     }
 }
 
-
-    @media screen and (max-width: 450px) {
+@media screen and (max-width: 450px) {
         #home_mainContainer {
             height: 120vh;
-            margin-top: 66px;
+            margin-top: 90px;
         }
 
         #title {

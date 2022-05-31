@@ -7,6 +7,13 @@ import { MyContext } from './components/contextItem.js';
 import { TeaData } from './components/teaData.js'; 
 import CartPanel from './screens/cart/cartPanel.js'; 
 import SlidingPanel from 'react-sliding-side-panel';
+import SignIn from './screens/nonMember/signIn.js';
+import SignUp from './screens/nonMember/signUp.js'; 
+import { db } from './firebase/initializeFirebase.js';
+import { getAuth, onAuthStateChanged } from 'firebase/auth'; 
+import AccountPage from './screens/account'; 
+
+const auth = getAuth(); 
 
 function App() {
     const [cart, setCart] = useState([])
@@ -15,6 +22,7 @@ function App() {
     const [hamburgerPanel, setHamburgerPanel] = useState(false); 
     const [addProductMessage, setAddProductMessage] = useState(false); 
     const [message, setMessage] = useState(''); 
+    const [user, setUser] = useState(null); 
     const ref = useRef();
     const hamburgerRef = useRef()
     const messageRef = useRef() 
@@ -88,8 +96,12 @@ function App() {
             })
             return total; 
         },
-    }
 
+        //code for user authentication 
+        //sets the current user 
+        setCurrentUser: (currentUser) => { setUser(currentUser) },
+        getCurrentUser: () => { return user},
+    }
 
     return (
       <MyContext.Provider value = {context}>
@@ -109,6 +121,27 @@ function App() {
                                 addProductMessage={addProductMessage}
                                 openHamburger={hamburgerPanel}
                             />} />
+                        <Route
+                            path='/sign_in'
+                            element={<SignIn
+                                openPanel={openPanel}
+                                openHamburger={hamburgerPanel}
+                            />}
+                        />
+                        <Route
+                            path='/sign_up'
+                            element={<SignUp
+                                openPanel={openPanel}
+                                openHamburger={hamburgerPanel}
+                            />}
+                        />
+                        <Route
+                            path='/acount_page'
+                            element={<AccountPage
+                                openPanel={openPanel}
+                                openHamburger={hamburgerPanel}
+                            />}
+                        />
               </Routes>
           </BrowserRouter>    
       </div>
