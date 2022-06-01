@@ -21,8 +21,6 @@ import {
 import '../../style/myStyle.css'; 
 import Header from '../../base_elements/header.js';
 import Footer from '../../base_elements/footer.js';
-import CartPanel from '../cart/cartPanel.js';
-import HamburgerPanel from '../../base_elements/hamburgerPanel.js'
 import { MyContext } from '../../components/contextItem.js';
 import EarthToneLogo from '../../base_elements/logo/Earth Tone-black-transparent.png'
 import { checkEmail } from './checkEmail.js';
@@ -31,11 +29,12 @@ import { MdMailOutline } from 'react-icons/md';
 import { AiOutlineLock } from 'react-icons/ai'; 
 import { Bounce } from "react-activity";
 import "react-activity/dist/library.css";
+import RenderPanels from '../../components/renderPanels.js'; 
 
 const auth = getAuth();
 
 const SignIn = props => {
-    const { openPanel, openHamburger } = props;
+    const { openPanel, openHamburger, accountPanel } = props;
     const [email, setEmail] = useState(''); 
     const [validEmail, setValidEmail] = useState(false); 
     const [password, setPass] = useState(''); 
@@ -77,12 +76,14 @@ const SignIn = props => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
                     alert(errorCode + ': ' + errorMessage);
+                    setLoading(false);
                 });
             setEmail('');
             setPass('');
         }
         else {
             alert(errMessage); 
+            setLoading(false)
         }
     }
 
@@ -101,8 +102,11 @@ const SignIn = props => {
 
     return (
         <MainSignInContainer>
-            <CartPanel openPanel={openPanel} />
-            <HamburgerPanel openHamburger={openHamburger} />
+            <RenderPanels
+                burgerTrigger={openHamburger}
+                cartTrigger={openPanel}
+                accountTrigger={accountPanel}
+            />
             <Header />
             <ETLogoContainer><ETLogo src={EarthToneLogo} /></ETLogoContainer>
             <OuterShell logo={EarthToneLogo}>

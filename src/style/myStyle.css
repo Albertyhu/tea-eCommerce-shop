@@ -40,6 +40,7 @@ body {
 /*header bar*/
 #earthTonelogo{
     height: 100%;
+    
 }
 
 #headerMenu {
@@ -58,13 +59,18 @@ body {
     font-size: 25px;
 
     /*this line is necessary so that the links align with the cart button*/
-    padding: 10px;
+    padding-left: 10px;
+    padding-right: 10px; 
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 #cartIcon {
-    width: 25px; 
+    width: 25px;
     height: 25px;
     color: #ffffff;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 #hamburgerPanel {
@@ -121,7 +127,8 @@ margin-left: auto;
 }
 
 #LogoContainer {
-    width: 100px;
+    width: auto;
+    height: 100%;
 }
 
 @media screen and (max-width: 1300px) {

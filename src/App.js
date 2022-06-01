@@ -1,31 +1,37 @@
-import React, { useState, useRef } from 'react'; 
+import React, { useState, useRef, useEffect } from 'react'; 
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Home from './screens/home_page';
 import ProductPage from './screens/product_page'; 
 import './style/myStyle.css'
 import { MyContext } from './components/contextItem.js'; 
-import { TeaData } from './components/teaData.js'; 
 import CartPanel from './screens/cart/cartPanel.js'; 
-import SlidingPanel from 'react-sliding-side-panel';
 import SignIn from './screens/nonMember/signIn.js';
 import SignUp from './screens/nonMember/signUp.js'; 
+import AccountPage from './screens/account/accountPage.js';
+import { LoadProducts } from './components/loadProducts.js'; 
+
+//firebase code 
 import { db } from './firebase/initializeFirebase.js';
 import { getAuth, onAuthStateChanged } from 'firebase/auth'; 
-import AccountPage from './screens/account'; 
+import { doc, getDoc } from "firebase/firestore";
 
 const auth = getAuth(); 
+const currentUser = auth.currentUser; 
 
 function App() {
     const [cart, setCart] = useState([])
+    const [teaData, setTeaData] = useState(null)
     const [openPanel, setOpenPanel] = useState(false);
     //for users with small mobile devices 
     const [hamburgerPanel, setHamburgerPanel] = useState(false); 
+    const [accountPanel, setAccountPanel] = useState(false); 
     const [addProductMessage, setAddProductMessage] = useState(false); 
-    const [message, setMessage] = useState(''); 
-    const [user, setUser] = useState(null); 
+    const [searchResults, setSearchResults] = useState([])
+    const [user, setUser] = useState(currentUser); 
     const ref = useRef();
     const hamburgerRef = useRef()
     const messageRef = useRef() 
+    const accountPanelRef = useRef()
     const context = {
         addProduct: (product, productID, additionalStock) => {
             var newArr = [...cart]; 
@@ -100,7 +106,18 @@ function App() {
         //code for user authentication 
         //sets the current user 
         setCurrentUser: (currentUser) => { setUser(currentUser) },
-        getCurrentUser: () => { return user},
+        getCurrentUser: () => { return user },
+
+        //code for account panel
+        getAccountPanelRef: () => { return accountPanelRef }, 
+        closeAccountPanel: () => { setAccountPanel(false) }, 
+        openAccountPanel: () => {
+            setAccountPanel(true)
+        }, 
+        getTeaData: () => { return teaData},
+    }
+    if (!teaData) {
+        LoadProducts(setTeaData)
     }
 
     return (
@@ -108,40 +125,46 @@ function App() {
       <div className="App" id="rootContainer" >
           <BrowserRouter>
               <Routes>
-                        <Route
-                            path="/tea-eCommerce-shop"
-                            element={<Home
-                                openPanel={openPanel}
-                                openHamburger={hamburgerPanel} />}
-                        /> 
-                        <Route
-                            path="/product_page"
-                            element={<ProductPage
-                                openPanel={openPanel}
-                                addProductMessage={addProductMessage}
-                                openHamburger={hamburgerPanel}
-                            />} />
-                        <Route
-                            path='/sign_in'
-                            element={<SignIn
-                                openPanel={openPanel}
-                                openHamburger={hamburgerPanel}
-                            />}
-                        />
-                        <Route
-                            path='/sign_up'
-                            element={<SignUp
-                                openPanel={openPanel}
-                                openHamburger={hamburgerPanel}
-                            />}
-                        />
-                        <Route
-                            path='/acount_page'
-                            element={<AccountPage
-                                openPanel={openPanel}
-                                openHamburger={hamburgerPanel}
-                            />}
-                        />
+                <Route
+                    path="/tea-eCommerce-shop"
+                    element={<Home
+                        openPanel={openPanel}
+                        openHamburger={hamburgerPanel}
+                        accountPanel={accountPanel}
+                    />}
+                /> 
+                <Route
+                    path="/product_page"
+                    element={<ProductPage
+                        openPanel={openPanel}
+                        addProductMessage={addProductMessage}
+                        openHamburger={hamburgerPanel}
+                        accountPanel={accountPanel}
+                    />} />
+                <Route
+                    path='/sign_in'
+                    element={<SignIn
+                        openPanel={openPanel}
+                        openHamburger={hamburgerPanel}
+                        accountPanel={accountPanel}
+                    />}
+                />
+                <Route
+                    path='/sign_up'
+                    element={<SignUp
+                        openPanel={openPanel}
+                        openHamburger={hamburgerPanel}
+                        accountPanel={accountPanel}
+                    />}
+                />
+                <Route
+                    path='/acount_page'
+                    element={<AccountPage
+                        openPanel={openPanel}
+                        openHamburger={hamburgerPanel}
+                        accountPanel={accountPanel}
+                    />}
+                />
               </Routes>
           </BrowserRouter>    
       </div>

@@ -7,18 +7,22 @@ import '../../style/myStyle.css';
 import Header from '../../base_elements/header.js';
 import Footer from '../../base_elements/footer.js';
 import TeaCharacter from '../../base_elements/logo/Tea_chinese_character.png'; 
+//renders the panels 
+import RenderPanels from '../../components/renderPanels.js';
 import CartPanel from '../cart/cartPanel.js'; 
-import HamburgerPanel from '../../base_elements/hamburgerPanel.js'
 
 const Home = props => {
-    const { openPanel, openHamburger } = props;
+    const { openPanel, openHamburger, accountPanel } = props;
     var windowWidth;  
 
     return (
         <div id="home_mainContainer">
             <div id='home_innerContainer'>
-                <CartPanel openPanel={openPanel} />
-                <HamburgerPanel openHamburger={openHamburger}/>
+                <RenderPanels
+                    burgerTrigger={openHamburger}
+                    cartTrigger={openPanel}
+                    accountTrigger={accountPanel}
+                />
                 <Header windowWidth={windowWidth} />
                 <div id ="centerElements">
                     <div id="titleContainer">

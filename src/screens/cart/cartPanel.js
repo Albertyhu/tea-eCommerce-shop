@@ -13,8 +13,7 @@ const CartPanel = props => {
     const [totalCost, setTotalCost] = useState(0);
     const [subtotal, setSubTotal] = useState(0); 
     const [totalItems, setTotalItems] = useState(0); 
-    
-
+   
    const ref = getRef(); 
 
     useEffect(() => {

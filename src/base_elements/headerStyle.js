@@ -51,6 +51,28 @@ export const MemberTag = styled.div`
     right: 20px;
     top: 10px;
     display: flex;
+    cursor: pointer; 
+   @media screen and (max-width: 540px) {
+    position: relative;
+    text-align: center;
+    right: auto;
+    top: auto;
+}
+
+  @media screen and (max-width: 280px) {
+    margin-top: 10px;
+}
+`
+
+export const WelcomeTag = styled.div`
+    color: #ffffff; 
+    margin-top: auto;
+    margin-bottom: auto;
+    text-decoration: none;
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    display: flex;
    @media screen and (max-width: 540px) {
     position: relative;
     text-align: center;

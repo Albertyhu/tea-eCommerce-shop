@@ -11,7 +11,7 @@ export const TeaData = [
     },
     {
         ID: 1,
-        name: "Gingeng Herb",
+        name: "Gingseng Herb",
         description: "Since ancient times, Ginseng tea has been renown for strengthening the immune system and to help fight off stress and disease.",
         price: 15.99,
         amount: 48,

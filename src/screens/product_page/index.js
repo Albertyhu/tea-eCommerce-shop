@@ -5,12 +5,11 @@ import Header from '../../base_elements/header.js';
 import Footer from '../../base_elements/footer.js';
 import RenderCollection from './renderCollection.js'; 
 import { TeaData } from '../../components/teaData.js'; 
-import CartPanel from '../cart/cartPanel.js'; 
 import RenderMessage from './addProductMessage/renderMessagePanel.js';
-import HamburgerPanel from '../../base_elements/hamburgerPanel.js'; 
+import RenderPanels from '../../components/renderPanels.js'; 
 
 const ProductPage = props => {
-    const { openPanel, addProductMessage, openHamburger } = props; 
+    const { openPanel, accountPanel, addProductMessage, openHamburger } = props; 
     var count = Object.keys(TeaData).length;
     var windowWidth; 
     useEffect(() => {
@@ -23,8 +22,11 @@ const ProductPage = props => {
     return (
         <div id="mainContainer">
             <div id='innerContainer'>
-                <CartPanel openPanel={openPanel} />
-                <HamburgerPanel openHamburger={openHamburger} />
+                <RenderPanels
+                    burgerTrigger={openHamburger}
+                    cartTrigger={openPanel}
+                    accountTrigger={accountPanel}
+                />
                 <RenderMessage addProductMessage={addProductMessage} message="Product has been added to your cart." />
                 <Header windowWidth={windowWidth} />
                 <div id="contentContainer">

@@ -17,13 +17,12 @@ import {
 import '../../style/myStyle.css';
 import Header from '../../base_elements/header.js';
 import Footer from '../../base_elements/footer.js';
-import CartPanel from '../cart/cartPanel.js';
-import HamburgerPanel from '../../base_elements/hamburgerPanel.js'
 import { MyContext } from '../../components/contextItem.js';
 import { ValidIcon, InvalidIcon } from './checkmarkIcon.js';
 import { checkEmail } from './checkEmail.js'
 import { Bounce } from "react-activity";
 import "react-activity/dist/library.css";
+import RenderPanels from '../../components/renderPanels.js'; 
 
 //firebase 
 import { getAuth, createUserWithEmailAndPassword} from 'firebase/auth'
@@ -34,7 +33,7 @@ import { db } from '../../firebase/initializeFirebase.js';
 const auth = getAuth(); 
 
 const SignUp = props => {
-    const { openPanel, openHamburger } = props;
+    const { openPanel, openHamburger, accountPanel } = props;
     const [first, setFirst] = useState('');
     const [last, setLast] = useState('');
     const [userEmail, setEmail] = useState('');
@@ -120,10 +119,12 @@ const SignUp = props => {
                     }
                     else
                         alert(error.code + ": " + error.message)
+                    setLoading(false)
                 })
         }
         else {
             alert(errorMessage)
+            setLoading(false)
         }
     }
 
@@ -159,8 +160,11 @@ const SignUp = props => {
 
     return (
         <MainContainer>
-            <CartPanel openPanel={openPanel} />
-            <HamburgerPanel openHamburger={openHamburger} />
+            <RenderPanels
+                burgerTrigger={openHamburger}
+                cartTrigger={openPanel}
+                accountTrigger={accountPanel}
+            />
             <Header />
             <OuterShell>
                 <InnerShell loading={loading}>

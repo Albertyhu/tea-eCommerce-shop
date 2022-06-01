@@ -1,16 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\public",
     "\\src",
     "\\src\\base_elements",
-    "\\src\\base_elements\\logo",
-    "\\src\\firebase",
+    "\\src\\images",
     "\\src\\screens",
+    "\\src\\screens\\account",
     "\\src\\screens\\cart",
-    "\\src\\screens\\nonMember",
-    "\\src\\screens\\product_page"
+    "\\src\\screens\\home_page",
+    "\\src\\searchBar",
+    "\\src\\style"
   ],
-  "SelectedNode": "\\src\\screens\\nonMember\\signUp.js",
+  "SelectedNode": "\\src\\searchBar\\renderList.js",
   "PreviewInSolutionExplorer": false
 }
