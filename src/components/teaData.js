@@ -1,5 +1,15 @@
 import { teaArray } from './teaImages.js';
 
+const importCol = (col) => {
+    return col.keys().map(col); 
+}
+
+//cannot use this because the bundler needs to the pathway of all files ahead of time before the app is rendered
+const createCol = (name) => {
+    return importCol(require.context(`../images/tea/${name}/`, false, /\.(png|jpe?g|svg)$/))
+    
+}
+
 export const TeaData = [
     {
         ID: 0,
@@ -8,6 +18,12 @@ export const TeaData = [
         price: 5.25,
         amount: 48,
         image: teaArray[0],
+        imageArray: importCol(require.context('../images/tea/black_tea/', false, /\.(png|jpe?g|svg)$/)), 
+        weight: "48 oz",
+        width: 4, 
+        length: 3, 
+        height: 10,
+        shippingDays: 3, 
     },
     {
         ID: 1,
@@ -16,6 +32,12 @@ export const TeaData = [
         price: 15.99,
         amount: 48,
         image: teaArray[1],
+        imageArray: importCol(require.context('../images/tea/ginseng_tea/', false, /\.(png|jpe?g|svg)$/)), 
+        weight: "48 oz",
+        width: 5,
+        length: 3,
+        height: 12, 
+        shippingDays: 3, 
     },
     {
         ID: 2,
@@ -24,6 +46,12 @@ export const TeaData = [
         price: 6.99,
         amount: 48,
         image: teaArray[2],
+        imageArray: importCol(require.context('../images/tea/green_tea/', false, /\.(png|jpe?g|svg)$/)), 
+        weight: "48 oz",
+        width: 4,
+        length: 3,
+        height: 10, 
+        shippingDays: 3, 
     },
     {
         ID: 3,
@@ -32,6 +60,12 @@ export const TeaData = [
         price: 8.99,
         amount: 48,
         image: teaArray[3],
+        imageArray: importCol(require.context('../images/tea/iron_buddha_tea/', false, /\.(png|jpe?g|svg)$/)), 
+        weight: "48 oz",
+        width: 4,
+        length: 3,
+        height: 10, 
+        shippingDays: 3, 
     },
     {
         ID: 4,
@@ -40,6 +74,12 @@ export const TeaData = [
         price: 6.99,
         amount: 48,
         image: teaArray[4],
+        imageArray: importCol(require.context('../images/tea/jasmine_tea/', false, /\.(png|jpe?g|svg)$/)), 
+        weight: "48 oz",
+        width: 4,
+        length: 3,
+        height: 10,
+        shippingDays: 3, 
     },
     {
         ID: 5,
@@ -48,13 +88,25 @@ export const TeaData = [
         price: 4.99,
         amount: 48,
         image: teaArray[5],
+        imageArray: importCol(require.context('../images/tea/oolong_tea/', false, /\.(png|jpe?g|svg)$/)), 
+        weight: "48 oz",
+        width: 4,
+        length: 3,
+        height: 10, 
+        shippingDays: 3, 
     },
     {
         ID: 6,
         name: "Longjing Tea",
         description: "A first flush Longjing tea picked in early spring. An exceptional quality rarely seen outside of China.",
         price: 16.95,
-        amount: 2.5,
+        amount: 60,
         image: teaArray[6],
+        imageArray: importCol(require.context('../images/tea/LongjinTea/', false, /\.(png|jpe?g|svg)$/)), 
+        weight: "60 oz",
+        width: 4,
+        length: 3,
+        height: 10, 
+        shippingDays: 3, 
     },
 ]

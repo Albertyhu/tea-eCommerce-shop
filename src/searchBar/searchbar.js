@@ -3,16 +3,18 @@ import { MyContext } from '../components/contextItem.js';
 import styled from 'styled-components'; 
 import { BiSearchAlt2 } from 'react-icons/bi';
 import RenderSearchResults from './renderList.js'; 
+import { TeaData } from '../components/teaData.js'; 
 
 const SearchBar = props => {
     const { data } = props; 
     const [query, setQuery] = useState(''); 
     const [results, setResults] = useState([]); 
     const [diplaySearchResults, setDisplay] = useState(false); 
+
     const searchByCriteria = (obj, criteria) => {
         switch (criteria) {
             case "name": {
-                return obj.name.toLowerCase().search(query.toTrim().toLowerCase())
+                return obj.name.toLowerCase().search(query.trim().toLowerCase())
             }
             default: 
                 return -1
@@ -20,10 +22,10 @@ const SearchBar = props => {
     }
 
     const filterData = () => {
-        if (data) {
-            let newArray = data.filter(val => {
-               return searchByCriteria(val, "name") > -1
-            })
+        if (TeaData) {
+            let newArray = TeaData.filter(val => searchByCriteria(val, "name") > -1
+            )
+     
             setResults(newArray.map(val => val))
         }
     }
@@ -32,14 +34,22 @@ const SearchBar = props => {
         setQuery(event.target.value)
     }
 
+    const resetSearch = () => {
+        setQuery('')
+        setResults([]);
+        setDisplay(false)
+    }
+
     useEffect(() => {
-        filterData(); 
-        if (results.length > 0 && query.length > 0) {
+        filterData();
+        if (results.length > 0 && query.trim().length > 0) {
+
             setDisplay(true)
         }
         else {
             setDisplay(false)
-            return () => { setResults([])}
+            return () => { setResults([]) }
+        
         }
     }, [query])
 
@@ -51,7 +61,11 @@ const SearchBar = props => {
                 onChange={handleQuery}
             />
             <BiSearchAlt2 style={iconStyle} />
-            {diplaySearchResults ? <RenderSearchResults searchResults={results} />
+            {diplaySearchResults ? <RenderSearchResults
+                searchResult={results}
+                reset={resetSearch}
+                diplaySearchResults={diplaySearchResults}
+            />
                 :
                 null
             }

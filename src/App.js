@@ -4,11 +4,11 @@ import Home from './screens/home_page';
 import ProductPage from './screens/product_page'; 
 import './style/myStyle.css'
 import { MyContext } from './components/contextItem.js'; 
-import CartPanel from './screens/cart/cartPanel.js'; 
 import SignIn from './screens/nonMember/signIn.js';
 import SignUp from './screens/nonMember/signUp.js'; 
 import AccountPage from './screens/account/accountPage.js';
 import { LoadProducts } from './components/loadProducts.js'; 
+import ProductProfilePage from './screens/product_page/productProfile/productProfile.js'; 
 
 //firebase code 
 import { db } from './firebase/initializeFirebase.js';
@@ -117,7 +117,7 @@ function App() {
         getTeaData: () => { return teaData},
     }
     if (!teaData) {
-        LoadProducts(setTeaData)
+     //   LoadProducts(setTeaData)
     }
 
     return (
@@ -164,7 +164,15 @@ function App() {
                         openHamburger={hamburgerPanel}
                         accountPanel={accountPanel}
                     />}
-                />
+                        />
+                    <Route
+                        path='/product_profile'
+                        element={<ProductProfilePage
+                            openPanel={openPanel}
+                            openHamburger={hamburgerPanel}
+                            accountPanel={accountPanel}
+                        />}
+                    />
               </Routes>
           </BrowserRouter>    
       </div>
