@@ -1,6 +1,6 @@
 import BurgerMenuPanel from '../base_elements/hamburgerPanel.js'; 
 import CartPanel from '../screens/cart/cartPanel.js'; 
-import AccountPanel from '../screens/account/accountPanel.js'; 
+import AccountPanel from '../screens/account_panel/accountPanel.js'; 
 
 const RenderPanels = props => {
     const { burgerTrigger, cartTrigger, accountTrigger } = props 

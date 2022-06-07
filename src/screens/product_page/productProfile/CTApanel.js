@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect, useCallback } from 'react'; 
 import { MyContext } from '../../../components/contextItem.js'; 
 import {
     CTAPanelContainer,
     InnerContainer,
     SalesPrice, 
-    StockSelection,
-    StockSelectionElement,
-    CustomStock,
-    CustomStockInput,
-    DarkGreenButton,
-    GreenButton,
-} from './profileStyledComp.js'; 
-import {
+    ButtonContainer, 
     BrownButton,
-    TanButton, 
-
-} from '../../../style/styledButton.js'; 
+    TanButton,
+    SecureTransBlock,
+    WishButton, 
+} from './profileStyledComp.js'; 
+import RenderStockSelection from '../functions/stockSelection.js'
+import RenderShippingInfo from '../functions/renderShippingInfo.js'; 
+import { AiFillLock } from 'react-icons/ai';
+import { TeaData } from '../../../components/teaData.js'; 
+import { useNavigate } from 'react-router-dom'; 
 
 const CTA = props => {
     const { addProduct, openAddProductMessage } = React.useContext(MyContext)
@@ -24,6 +23,9 @@ const CTA = props => {
     const [customQuan, setCustomQuan] = useState(0); 
     const [displayCustomStock, setDisplayCustomStock] = useState(false); 
     const [ subtotal, setSubtotal ] = useState(price)
+    const navigate = useNavigate(); 
+
+    const goProductPage = useCallback(() => navigate('../product_page', { replace: true }), [navigate])
 
     const handleStockChange = event => {
         setQuantity(event.target.value)
@@ -38,13 +40,37 @@ const CTA = props => {
     const handleCustomSubmit = () => {
         setQuantity(customQuan);
         setDisplayCustomStock(false);
-       // setCustomQuan(0);
     }
 
     const closeCustom = () => {
         setDisplayCustomStock(false);
         setCustomQuan(0);
         setQuantity(0);
+    }
+
+    const handleAddCart = () => {
+        var trueStock = 0;
+        if (displayCustomStock) {
+            trueStock = customQuan;
+        }
+        else {
+            trueStock = quantity;
+        }
+        if (trueStock !== 0) {
+            addProduct(productID, parseInt(trueStock), price)
+            openAddProductMessage()
+            reset();
+            setTimeout(()=> goProductPage(), 1000); 
+        }
+        else {
+
+        }
+    }
+
+    const reset = () => {
+        setQuantity(1)
+        setCustomQuan(0)
+        setDisplayCustomStock(false);
     }
 
     useEffect(() => {
@@ -65,34 +91,22 @@ const CTA = props => {
         <CTAPanelContainer>
             <InnerContainer>
                 <SalesPrice>${subtotal.toFixed(2)}</SalesPrice>
-                <StockSelection>
-                    <b style={{ display: 'inline-block' }}>Stock: </b>
-                    <StockSelectionElement onChange={handleStockChange}  value={quantity}>
-                        <option>0</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                        <option>10</option>
-                        {customQuan != 0 ? <option>{customQuan}</option> : null}
-                        <option>custom</option>
-                    </StockSelectionElement >
-                </StockSelection>
-                {displayCustomStock ? 
-                    <CustomStock>
-                        <b>Custom Amount: </b>
-                        <CustomStockInput onChange={handleCustomStock} value={customQuan} />
-                        <GreenButton onClick={handleCustomSubmit}>submit</GreenButton>
-                        <DarkGreenButton onClick={closeCustom}>cancel</DarkGreenButton >
-                    </CustomStock>
-                    :
-                    null
-                }
+                <RenderStockSelection
+                    handleStockChange={handleStockChange}
+                    quantity={quantity}
+                    customQuan={customQuan}
+                    displayCustomStock={displayCustomStock}
+                    handleCustomStock={handleCustomStock}
+                    closeCustom={closeCustom}
+                    handleCustomSubmit={handleCustomSubmit}
+                />
+                <RenderShippingInfo shippingDays={shippingDays} />
+                <ButtonContainer>
+                    <BrownButton onClick={handleAddCart}>Add to Cart</BrownButton>
+                    <TanButton id="buyNowBTN">Buy Now</TanButton>
+                    <SecureTransBlock><AiFillLock style={lockStyle} /><span>Secure Transaction</span></SecureTransBlock>
+                    <WishButton>Add to Wish List</WishButton>
+                </ButtonContainer> 
             </InnerContainer>
         </CTAPanelContainer>
         )
@@ -100,3 +114,9 @@ const CTA = props => {
 }
 
 export default CTA; 
+
+const lockStyle = {
+    width: "30px",
+    height: "30px",
+
+}

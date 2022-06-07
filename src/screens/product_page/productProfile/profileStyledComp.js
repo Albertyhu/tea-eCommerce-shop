@@ -187,3 +187,103 @@ export const GreenButton = styled.div`
     transform: translate(4px, 4px)
 }
 `
+
+//CTA Buttons 
+export const ButtonContainer = styled.div`
+margin-left: auto; 
+margin-right: auto;
+margin-bottom: 20px; 
+`
+export const BrownButton = styled.div`
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #9D5F38;
+    width: 50%;
+    text-align: center;
+    color: #ffffff;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 15px;
+    user-select: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+&:hover{
+    background-color: #B26D41;
+}
+
+&:active{
+    background-color: #9D5F38;
+    transform: translate(4px, 4px)
+}
+`
+
+export const TanButton = styled.div`
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #D19C4C;
+    width: 50%;
+    text-align: center;
+    color: #ffffff;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 15px;
+    user-select: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+&:hover{
+    background-color: #BC8E47;
+}
+
+&:active{
+    background-color: #D19C4C;
+    transform: translate(4px, 4px)
+}
+`
+
+export const WishButton = styled.div`
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #10C135;
+    width: 50%;
+    text-align: center;
+    color: #000000;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 15px;
+    user-select: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+&:hover{
+    background-color: #0F9B2C;
+}
+
+&:active{
+    background-color: #10C135;
+    transform: translate(4px, 4px)
+}
+`
+
+export const SecureTransBlock = styled.div`
+    margin-left: auto;
+    margin-right: auto; 
+    margin-bottom: 20px; 
+    width: 90%; 
+    color: #25963E; 
+    display: flex;
+    & > span {
+     margin-top: auto;
+     margin-bottom: auto;
+    }
+`

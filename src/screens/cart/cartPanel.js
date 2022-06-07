@@ -1,10 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import SlidingPanel from 'react-sliding-side-panel';
 import { MyContext } from '../../components/contextItem.js';
-import '../../style/button.css'; 
 import './cart.css';
 import RenderTeaItems from './renderTeaItems.js'; 
-import uuid from 'react-uuid'; 
+import uuid from 'react-uuid';
+import { TeaData } from '../../components/teaData.js'; 
+import { CartPanelButtonContainer } from './cartStyledComp.js'; 
+import {
+    TanButton,
+    DarkGreenButton,
+    GreenButton, 
+    BrownButton,
+} from '../../style/styledButton.js';
+import { useNavigate } from 'react-router-dom'; 
+
 
 const CartPanel = props => {
     const { openPanel } = props; 
@@ -13,7 +22,7 @@ const CartPanel = props => {
     const [totalCost, setTotalCost] = useState(0);
     const [subtotal, setSubTotal] = useState(0); 
     const [totalItems, setTotalItems] = useState(0); 
-   
+    const navigate = useNavigate(); 
    const ref = getRef(); 
 
     useEffect(() => {
@@ -57,8 +66,9 @@ const CartPanel = props => {
             setCartPanelWidth(100)
         }
     }, [screenWidth])
-         
 
+    const goCheckout = useCallback(() => navigate('../checkout', {replace: true}), [navigate])
+    const goCart = useCallback(() => navigate('../cart', {replace: true}), [navigate])
     useEffect(() => {
 
         return () => {
@@ -76,25 +86,45 @@ const CartPanel = props => {
         >
                 <div className="panel-container" ref={ref}>
                     <h1>Shopping Cart</h1>
+                    
                     {cart.length > 0 ?
                         (<div id="cartList">
                             <div><b>Number of items in cart:</b> {totalItems}</div>
                             <div><b>Current Total Cost:</b> ${subtotal.toFixed(2)}</div>
+                            <CartPanelButtonContainer id= "CartPanelButtonContainer">
+                                <TanButton id="CartPanCheckoutButt" onClick={() => {
+                                    goCheckout();
+                                    closeCartPanel();
+                                }}>Checkout</TanButton>
+                                <BrownButton id="CartPanEditButt" onClick={() => {
+                                    goCart();
+                                    closeCartPanel();
+                                }}>Edit Cart</BrownButton>
+                            </CartPanelButtonContainer>
                             {
-                               cart.map(item => <RenderTeaItems
-                                    image={item.image}
-                                    name={item.name}
-                                    description={item.description}
-                                    price={item.price}
-                                    stock={item.stock}
-                                    key={uuid()}
-                                    />)
+                                cart.map(item => {
+                                    const cartItem = TeaData.find(val => val.ID === item.ID)
+                                    return (<RenderTeaItems
+                                        id={item.ID}
+                                        image={cartItem.image}
+                                        name={cartItem.name}
+                                        description={cartItem.description}
+                                        price={cartItem.price}
+                                        stock={item.stock}
+                                        amount={cartItem.amount}
+                                        weight={cartItem.weight}
+                                        width={cartItem.width}
+                                        length={cartItem.length}
+                                        height={cartItem.height}
+                                        key={uuid()}
+                                 />)
+                             })
                             }
                         </div>)
                             :
                         <p>Your shopping cart is currently empty.</p>
                     }
-                <div id="cartButton" onClick={closeCartPanel}>Close</div>
+                    <DarkGreenButton id="cartPanelButton" onClick={closeCartPanel}>Close</DarkGreenButton>
             </div>
             </SlidingPanel>
             </div>

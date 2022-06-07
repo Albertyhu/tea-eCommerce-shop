@@ -1,36 +1,35 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import '../product.css'; 
 import '../../../style/button.css'; 
 import RenderPanels from '../../../components/renderPanels.js'; 
-import { TeaData } from '../../../components/teaData.js'; 
 import Footer from '../../../base_elements/footer.js';
 import Header from '../../../base_elements/header.js';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ImagePanel from './imagePanel.js'; 
 import TextPanel from './textPanel.js'; 
 import { MainSection } from './profileStyledComp.js';
 import CTAPanel from './CTApanel.js'
 import RenderMessage from '../addProductMessage/renderMessagePanel.js'; 
 import { MyContext } from '../../../components/contextItem.js';
+import { TeaData } from '../../../components/teaData.js'; 
 
 const ProductProfile = props => {
     const location = useLocation(); 
+    const navigate = useNavigate(); 
+    const goHome = useCallback(() => navigate('/tea-eCommerce-shop', { replace: true }), [navigate]);
+
     const {
         id,
-        name,
-        image,
-        description, 
-        price,
-        amount,
-        imageArray,
-        weight, 
-        width,
-        length,
-        height,
-        shippingDays, 
     } = location.state;
-    const { openPanel, accountPanel, addProductMessage, openHamburger } = props; 
 
+    const { openPanel, accountPanel, addProductMessage, openHamburger } = props; 
+    const [product, setProduct] = useState(TeaData.find(val => val.ID === id))
+    useEffect(() => {
+
+        var item = TeaData.find(val => val.ID === id)
+        setProduct(item)
+        
+    }, [id])
 
 
     return (
@@ -43,26 +42,30 @@ const ProductProfile = props => {
                 />
                 <RenderMessage addProductMessage={addProductMessage} message="Product has been added to your cart." />
                 <Header />
-                <MainSection>
-                {imageArray.length > 0 ?       
-                    <ImagePanel imageArray={imageArray} initial={image}/>
+                {product ?
+                    <MainSection>
+                        {product.imageArray.length > 0 ?
+                            <ImagePanel imageArray={product.imageArray} initial={product.image} />
+                            :
+                            null
+                        }
+                        <TextPanel name={product.name}
+                            description={product.description}
+                            price={product.price}
+                            amount={product.amount}
+                            weight={product.weight}
+                            width={product.width}
+                            length={product.length}
+                            height={product.height}
+                        />
+                        <CTAPanel price={product.price}
+                            productID={id}
+                            shippingDays={product.shippingDays}
+                        />
+                    </MainSection > 
                     :
                     null
-                }
-                    <TextPanel name={name}
-                        description={description}
-                        price={price}
-                        amount={amount}
-                        weight={weight}
-                        width={width}
-                        length={length}
-                        height={height}
-                    />
-                    <CTAPanel price={price}
-                        productID={id}
-                        shippingDays={shippingDays}
-                    />
-                </MainSection > 
+                    }
             </div>
             <Footer />
         </div>
@@ -70,8 +73,3 @@ const ProductProfile = props => {
 }
 
 export default ProductProfile; 
-
-const imgStyle = {
-    width: "100px", 
-    height: "100px",
-}

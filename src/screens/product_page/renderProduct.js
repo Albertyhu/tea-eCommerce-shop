@@ -47,16 +47,7 @@ const RenderProduct = props => {
             trueStock = stockPurchase; 
         }
         if (trueStock !== 0) {
-            var product = {
-                ID,
-                name,
-                description,
-                price,
-                amount,
-                image,
-                stock: parseInt(trueStock),
-            }
-            addProduct(product, ID, parseInt(trueStock))
+            addProduct(ID, parseInt(trueStock), price)
             openAddProductMessage();
             reset();
         }

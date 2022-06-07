@@ -10,17 +10,6 @@ const RenderItem = props => {
             <Link to="/product_profile"
                 state={{
                     id: props.ID,
-                    name: props.name,
-                    image: props.image,
-                    description: props.description,
-                    price: props.price,
-                    amount: props.amount,
-                    imageArray: props.imageArray,
-                    weight: props.weight, 
-                    width: props.width,
-                    length: props.length,
-                    height: props.height, 
-                    shippingDays: props.shippingDays, 
                 }}
                 style={linkStyle}
                 onClick={reset}

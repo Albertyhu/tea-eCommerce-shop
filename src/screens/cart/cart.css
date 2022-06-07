@@ -164,6 +164,24 @@ margin-bottom: 50px;
     display: inline-block;
 }
 
+@media screen and (max-width: 1240px) {
+    #CartPanelButtonContainer {
+        width: 50%; 
+    }
+    #CartPanCheckoutButt, #CartPanEditButt {
+
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    #CartPanelButtonContainer {
+        width: 70%;
+    }
+
+    #CartPanCheckoutButt, #CartPanEditButt {
+    }
+}
+
 @media screen and (max-width: 540px) {
 
     #cartItemContainer {

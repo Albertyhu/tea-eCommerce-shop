@@ -9,6 +9,9 @@ import SignUp from './screens/nonMember/signUp.js';
 import AccountPage from './screens/account/accountPage.js';
 import { LoadProducts } from './components/loadProducts.js'; 
 import ProductProfilePage from './screens/product_page/productProfile/productProfile.js'; 
+import RenderCheckOut from './screens/checkout/checkoutPage.js'; 
+import RenderWishList from './screens/wishlist/wishlist.js';
+import RenderCartPage from './screens/cart/renderCartPage.js'; 
 
 //firebase code 
 import { db } from './firebase/initializeFirebase.js';
@@ -20,6 +23,7 @@ const currentUser = auth.currentUser;
 
 function App() {
     const [cart, setCart] = useState([])
+    const [wishlist, setWish] = useState([]); 
     const [teaData, setTeaData] = useState(null)
     const [openPanel, setOpenPanel] = useState(false);
     //for users with small mobile devices 
@@ -33,28 +37,29 @@ function App() {
     const messageRef = useRef() 
     const accountPanelRef = useRef()
     const context = {
-        addProduct: (product, productID, additionalStock) => {
+        addProduct: (productID, additionalStock, ProductPrice) => {
             var newArr = [...cart]; 
             var obj = newArr.find(item => item.ID === productID)
             if (obj) {
                 //add stock to existing product in cart
                 var ind = newArr.indexOf(obj)
-
                 newArr[ind].stock += additionalStock; 
             }
             else {
                 //add new item to cart array
-                newArr.push(product)
+                const newItem = {
+                    ID: productID,
+                    stock: additionalStock, 
+                    price: ProductPrice, 
+                }
+                newArr.push(newItem)
             }
             setCart([...newArr])
         },
         removeFromCart: (productID) => {
-            var obj = cart.find(val => val.ID === productID)
-            if (obj) {
-                var newArr = cart.filter(item => item.ID !== productID)
-                setCart([...newArr])
-            }
- 
+            var arr = cart.filter(val => val.ID !== productID);
+            setCart(arr);
+
         },
         updateCart: () => { },
         updateItemInCart: () => { }, 
@@ -114,10 +119,17 @@ function App() {
         openAccountPanel: () => {
             setAccountPanel(true)
         }, 
-        getTeaData: () => { return teaData},
-    }
-    if (!teaData) {
-     //   LoadProducts(setTeaData)
+        getTeaData: () => { return teaData },
+        getWish: () => { return wishlist },
+        setWish: (productID) => {
+            var arr = wishlist; 
+            arr.push(productID)
+            setWish(arr)
+        },
+        removeWish: (productID) => {
+            var arr = wishlist.filter(val => val !== productID);
+            setWish(arr)
+        }, 
     }
 
     return (
@@ -171,8 +183,40 @@ function App() {
                             openPanel={openPanel}
                             openHamburger={hamburgerPanel}
                             accountPanel={accountPanel}
+                            addProductMessage={addProductMessage}
                         />}
-                    />
+                        />
+                    <Route
+                        path='/checkout'
+                            element={<RenderCheckOut
+                                cart={cart}
+                                openPanel={openPanel}
+                                openHamburger={hamburgerPanel}
+                                accountPanel={accountPanel}
+                                addProductMessage={addProductMessage}
+                        />}
+                        />
+                        <Route
+                            path='/wishlist'
+                            element={<RenderWishList
+                                cart={cart}
+                                openPanel={openPanel}
+                                openHamburger={hamburgerPanel}
+                                accountPanel={accountPanel}
+                                addProductMessage={addProductMessage}
+                                wishlist={wishlist}
+                            />}
+                        />
+                        <Route
+                            path='/cart'
+                            element={<RenderCartPage
+                                cart={cart}
+                                openPanel={openPanel}
+                                openHamburger={hamburgerPanel}
+                                accountPanel={accountPanel}
+                                addProductMessage={addProductMessage}
+                            />}
+                        />
               </Routes>
           </BrowserRouter>    
       </div>

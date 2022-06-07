@@ -2,15 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\components",
-    "\\src\\images",
-    "\\src\\images\\tea",
+    "\\src\\base_elements",
     "\\src\\screens",
-    "\\src\\screens\\product_page",
-    "\\src\\screens\\product_page\\addProductMessage",
+    "\\src\\screens\\account",
+    "\\src\\screens\\account_panel",
+    "\\src\\screens\\shipping",
     "\\src\\searchBar",
-    "\\src\\style"
+    "\\src\\style",
+    "\\src\\test"
   ],
-  "SelectedNode": "\\src\\screens\\product_page\\productProfile.js",
+  "SelectedNode": "\\src\\screens\\account\\accountPage.js",
   "PreviewInSolutionExplorer": false
 }
