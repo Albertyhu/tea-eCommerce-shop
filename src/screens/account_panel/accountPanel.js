@@ -5,7 +5,7 @@ import '../../style/button.css';
 import './account.css'; 
 import { Link, useNavigate } from 'react-router-dom'; 
 import { HandleSignOut } from '../../components/signOut.js'; 
-import { MenuOptions } from './accountStyledComponents.js'; 
+import { MenuOptions, OptionsContainer } from './accountStyledComponents.js'; 
 
 const AccountPanel = props => {
     const { openPanel } = props; 
@@ -28,6 +28,7 @@ const AccountPanel = props => {
     const goWishlist = useCallback(() => navigate('../wishlist', { replace: true }), [navigate])
     const goCart = useCallback(() => navigate('../cart', { replace: true }), [navigate])
     const goAccount = useCallback(() => navigate('../acount_page', { replace: true }), [navigate])
+    const goOrderPage = useCallback(() => navigate('../orders', { replace: true }), [navigate])
 
     return (
         <div>
@@ -39,10 +40,15 @@ const AccountPanel = props => {
                 noBackdrop={true}
             >
                 <div className="panel-container" ref={accountRef}>
+                    <OptionsContainer>
                     <MenuOptions onClick={() => {
                         goAccount();
                         closeAccountPanel();
-                    }}>Your Account</MenuOptions>
+                        }}>Your Account</MenuOptions>
+                    <MenuOptions onClick={() => {
+                        goOrderPage();
+                        closeAccountPanel();
+                    }}>Your Orders</MenuOptions>
                     <MenuOptions onClick={() => {
                         goCheckout();
                         closeAccountPanel();
@@ -58,7 +64,8 @@ const AccountPanel = props => {
                     <MenuOptions onClick={() => {
                         HandleSignOut();
                         closeAccountPanel();
-                    }}>Sign Out</MenuOptions>
+                        }}>Sign Out</MenuOptions>
+                    </OptionsContainer>
                 </div>
             </SlidingPanel>
         </div>

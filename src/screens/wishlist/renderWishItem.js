@@ -30,6 +30,7 @@ const RenderWishItem = props => {
         height,
         deleteWish, 
     } = props; 
+
     const { addProduct } = useContext(MyContext); 
     const navigate = useNavigate(); 
     const goProductProfile = useCallback(() => navigate('../product_profile', {

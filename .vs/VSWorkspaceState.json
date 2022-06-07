@@ -2,15 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\base_elements",
+    "\\src\\components",
     "\\src\\screens",
-    "\\src\\screens\\account",
-    "\\src\\screens\\account_panel",
-    "\\src\\screens\\shipping",
-    "\\src\\searchBar",
-    "\\src\\style",
-    "\\src\\test"
+    "\\src\\screens\\checkout",
+    "\\src\\screens\\nonMember",
+    "\\src\\screens\\product_page",
+    "\\src\\screens\\product_page\\addProductMessage",
+    "\\src\\screens\\product_page\\productProfile",
+    "\\src\\screens\\wishlist"
   ],
-  "SelectedNode": "\\src\\screens\\account\\accountPage.js",
+  "SelectedNode": "\\src\\screens\\nonMember\\signIn.js",
   "PreviewInSolutionExplorer": false
 }

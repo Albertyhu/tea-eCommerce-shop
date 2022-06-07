@@ -1,5 +1,27 @@
 import styled from 'styled-components'
 
+export const ShopNowButton = styled.div`
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid #ffffff;
+    border-radius: 25px;
+    padding: 10px;
+    background - color: none;
+    width: 10%;
+    text-align: center;
+    color: #ffffff;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 20px;
+    user-select: none;
+
+&:hover{
+    background-color: #ffffff;
+    color: #333333; 
+    transition-duration: 1s;
+}
+`
+
 export const BrownButton = styled.div`
     margin-left: auto;
     margin-right: auto;
@@ -94,16 +116,15 @@ export const TanButton = styled.div`
 export const DarkGreenButton = styled.div`
     margin-left: auto;
     margin-right: auto;
-    border-radius: 5px;
+    border-radius: 25px;
     padding: 10px;
     background-color: #25963E;
-    width: 20%;
+    width: 10%;
     text-align: center;
     color: #ffffff;
     cursor: pointer;
     text-decoration: none;
     font-size: 25px;
-    text-transform: uppercase;
     user-select: none;
 &:hover{
     background-color: #31B64E;
@@ -121,6 +142,11 @@ export const DarkGreenButton = styled.div`
     padding-bottom: 5px;
     padding-left: 15px;
     padding-right: 15px;
+    margin-bottom: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+&#ShippingSubmit{
+    margin-top: 20px;
     margin-bottom: 20px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }

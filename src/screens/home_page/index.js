@@ -9,7 +9,7 @@ import Footer from '../../base_elements/footer.js';
 import TeaCharacter from '../../base_elements/logo/Tea_chinese_character.png'; 
 //renders the panels 
 import RenderPanels from '../../components/renderPanels.js';
-import CartPanel from '../cart/cartPanel.js'; 
+import { ShopNowButton } from '../../style/styledButton.js'; 
 
 const Home = props => {
     const { openPanel, openHamburger, accountPanel } = props;
@@ -32,7 +32,7 @@ const Home = props => {
                         <p>Browse our collection of authentic tea leaves.</p>
                     </div>
                     <div id="buttonContainer">
-                        <Link to="/product_page" style={{textDecoration: "none"}}><div id = "shopNowButton">Shop Now</div></Link>
+                        <Link to="/product_page" style={{ textDecoration: "none" }}><ShopNowButton>Shop Now</ShopNowButton></Link>
                         </div>
                 </div>
       

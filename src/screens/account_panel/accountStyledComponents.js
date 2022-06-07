@@ -8,13 +8,21 @@ export const Title = styled.h1``
 export const MenuOptions = styled.div`
     margin-left: auto;
     margin-right: auto;
-    margin-top: 20px; 
-    margin-bottom: 20px; 
+    padding-top: 20px;
+    padding-bottom: 20px;
     cursor: pointer; 
+    width: 100%;
+    &:hover{
+       background-color: #C7C7C7; 
+    }
     &:active{
-    background-color: #bfbfbf ; 
-    border-radius: 5px;
+     background-color: #ffffff; 
+     border-radius: 5px;
+    }
 }
+`
+export const OptionsContainer = styled.div`
+     margin-top: 30px;
 `
 
 export const Shell = styled.div`

@@ -12,6 +12,7 @@ import ProductProfilePage from './screens/product_page/productProfile/productPro
 import RenderCheckOut from './screens/checkout/checkoutPage.js'; 
 import RenderWishList from './screens/wishlist/wishlist.js';
 import RenderCartPage from './screens/cart/renderCartPage.js'; 
+import OrderPage from './screens/order/order.js'; 
 
 //firebase code 
 import { db } from './firebase/initializeFirebase.js';
@@ -32,6 +33,22 @@ function App() {
     const [addProductMessage, setAddProductMessage] = useState(false); 
     const [searchResults, setSearchResults] = useState([])
     const [user, setUser] = useState(currentUser); 
+    const [shipping, setShipping] = useState({
+        address1: '',
+        address2: '',
+        city: '',
+        state: '',
+        zipcode: '',
+        country: '', 
+    })
+    const [billingAddress, setBillingAdd] = useState({
+        address1: '',
+        address2: '',
+        city: '',
+        state: '',
+        zipcode: '',
+        country: '', 
+    })
     const ref = useRef();
     const hamburgerRef = useRef()
     const messageRef = useRef() 
@@ -130,6 +147,14 @@ function App() {
             var arr = wishlist.filter(val => val !== productID);
             setWish(arr)
         }, 
+        getShippingAdd: () => { return shipping },
+        setShippingAdd: (address) => {
+            setShipping(address)
+        }, 
+        getBillingAdd: () => { return billingAddress },
+        setBillingAdd: (address) => {
+            setBillingAdd(address)
+        },  
     }
 
     return (
@@ -210,6 +235,16 @@ function App() {
                         <Route
                             path='/cart'
                             element={<RenderCartPage
+                                cart={cart}
+                                openPanel={openPanel}
+                                openHamburger={hamburgerPanel}
+                                accountPanel={accountPanel}
+                                addProductMessage={addProductMessage}
+                            />}
+                        />
+                        <Route
+                            path='/orders'
+                            element={<OrderPage
                                 cart={cart}
                                 openPanel={openPanel}
                                 openHamburger={hamburgerPanel}

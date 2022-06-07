@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'; 
+import React, { useEffect, useState, useCallback } from 'react'; 
 import './product.css';
 import '../../style/button.css'; 
 import uuid from 'react-uuid'; 
 import { MyContext } from '../../components/contextItem.js'; 
 import RenderMessage from './addProductMessage/renderMessagePanel.js'; 
+import { useNavigate } from 'react-router-dom'; 
+
 //What does it need
 //Product ID
 //Product Image 
@@ -16,6 +18,7 @@ const RenderProduct = props => {
     const [stockPurchase, setStock] = useState(0); 
     const [customStock, setCustomStock] = useState(0)
     const [displayCustomStock, setDisplayCustomStock] = useState(false); 
+    const navigate = useNavigate(); 
     const handleStockChange = event => {
         setStock(event.target.value)
     }
@@ -31,6 +34,13 @@ const RenderProduct = props => {
         setCustomStock(0);
         setStock(0);
     }
+
+    const goProductProfile = useCallback(() => navigate('../product_profile', {
+        replace: true, 
+        state: {
+            id: ID, 
+        }
+    }), [navigate])
 
     useEffect(() => {
         if (stockPurchase === "custom") { setDisplayCustomStock(true) }
@@ -64,7 +74,7 @@ const RenderProduct = props => {
 
     return (
         <div className="productDiv" >
-            <img src={image} id="productImage" />
+            <img src={image} id="productImage" onClick={goProductProfile} />
             <h3>{name}</h3>
             <div className="descriptionArea">{description}</div>
             <div><b>Amount Per Bag:</b>  {amount} oz.</div>

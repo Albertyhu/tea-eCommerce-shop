@@ -10,6 +10,7 @@ import ShippingForm from '../shipping/shippingForm.js';
 import { Shell, } from './accountStyledComponents.js'; 
 
 const AccountPage = props => {
+
     const {
         openHamburger,
         openPanel,
@@ -18,21 +19,21 @@ const AccountPage = props => {
         message
     } = props; 
     return (
-        <div>
-            <RenderPanels
-                burgerTrigger={openHamburger}
-                cartTrigger={openPanel}
-                accountTrigger={accountPanel}
+            <PageTemplate MainContent={MainContent}
+                openHamburger={openHamburger} 
+                openPanel={openPanel}
+                accountPanel={accountPanel}
+                addProductMessage={addProductMessage} 
+                message={message}
             />
-            <RenderMessage addProductMessage={addProductMessage} message={message} />
-            <PageTemplate MainContent={MainContent} />
-        </div>
         )
 } 
 
 export default AccountPage; 
 
 const MainContent = () => {
+    const [displayBillingAdd, setDisplayBillingAdd] = useState(false);
+    const [displayShippingAdd, setDisplayShippingAdd] = useState(false); 
     return (
         <OuterShell>
             <Shell>

@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react'; 
-import Header from '../../base_elements/header.js';
-import Footer from '../../base_elements/footer.js';
+import React, { useState, useCallback } from 'react'; 
 import { TeaData } from '../../components/teaData.js';
-import RenderMessage from '../product_page/addProductMessage/renderMessagePanel.js';
-import RenderPanels from '../../components/renderPanels.js'; 
 import { MyContext } from '../../components/contextItem.js'; 
 import uuid from 'react-uuid'; 
 import RenderWishItem from './renderWishItem.js'; 
-
+import PageTemplate from '../../PageTemplate.js';
+import { useNavigate } from 'react-router-dom'; 
+import { BrownButton } from '../../style/styledButton.js';
 import {
     MainContainer,
     InnerContainer,
@@ -18,20 +16,35 @@ import {
 } from './wishStyled.js'; 
 
 const RenderWishList = props => {
-    const { wishlist,
+    const {
+        wishlist,
         openHamburger,
         openPanel,
-        accountPanel, 
+        accountPanel,
         addProductMessage,
-    } = props; 
-    const { removeWish } = React.useContext(MyContext); 
+        message
+    } = props;
+
+    return (<PageTemplate MainContent={MainContent}
+        openHamburger={openHamburger}
+        openPanel={openPanel}
+        accountPanel={accountPanel}
+        addProductMessage={addProductMessage}
+        message={message}
+        wishlist={wishlist}
+        />)
+}
+
+const MainContent = (props) => {
+    const { wishlist } = props; 
+    const { removeWish} = React.useContext(MyContext); 
+
     const LoadWishes = () => {
         var arr = TeaData.filter(val => {
             return wishlist.some(wish => wish === val.ID)
         })
         return arr; 
     }
-
     const [data, setData] = useState(LoadWishes()); 
 
     const deleteWish = (ProductID) => {
@@ -40,33 +53,32 @@ const RenderWishList = props => {
         removeWish(ProductID);   
     }
 
-    useEffect(() => { }, [])
+    const navigate = useNavigate(); 
+    const goProductPage = useCallback(() => navigate('../product_page', { replace: true }), [navigate])
 
-    return (
-    <MainContainer>
-        <InnerContainer>
-            <RenderPanels
-                burgerTrigger={openHamburger}
-                cartTrigger={openPanel}
-                accountTrigger={accountPanel}
-            />
-            <RenderMessage addProductMessage={addProductMessage} message="Product has been added to your cart." />
-                <Header />
-                {wishlist ?
+    return(<div>
+    {
+            wishlist.length !== 0 && wishlist !== null ?
+                <OuterShell>
                     <Shell>
-                    <h1>Wish List</h1>{
+                        <h1>Wish List</h1>
+                        {
                             data.map(val => <RenderWishItem {...val}
                                 key={uuid()}
                                 deleteWish={deleteWish}
                         />)}
                     </Shell>
-                    :
-                    <Title>You have no items currently in your wish list</Title> 
-                }
-        </InnerContainer>
-        <Footer />
-        </MainContainer>
-        )
+                    <Shell id="rightPanel">
+                        <CheckOutContainer>
+                            <BrownButton id="ContinueButton" onClick={goProductPage}>Continue Shopping</BrownButton>
+                        </CheckOutContainer>
+                    </Shell>
+                </OuterShell>
+            :
+            <Title>You have no items currently in your wish list</Title> 
+        }
+
+    </div>)    
 }
 
 export default RenderWishList; 

@@ -23,9 +23,12 @@ export const Shell = styled.div`
     font-family: inherit;
     border: 1px solid rgba(0,0,0, 0.3); 
     border-radius: 10px; 
-    margin-left: auto;
-    margin-right: auto;
-    width: 90%;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 80%;
+    &#rightPanel{
+        width: 20%;
+    }
 `
 
 export const OuterShell = styled.div`
