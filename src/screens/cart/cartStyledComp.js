@@ -9,14 +9,17 @@ export const MainContainer = styled.div`
     background-size: cover;
     background-color: #ffffff;
     font-family: serif;
-    margin-top: 210px; 
+   // margin-top: 210px; 
+
+    
 `
 
 export const InnerContainer = styled.div`
     top: 0px;
     width: 100%;
-    height: inherit;
     background-color: rgba(255,255,255, 1);
+    height: ${props => props.heightType || "inherit"};
+    margin-bottom: 20px;
 `
 
 export const Shell = styled.div`

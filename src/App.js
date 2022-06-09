@@ -34,20 +34,21 @@ function App() {
     const [searchResults, setSearchResults] = useState([])
     const [user, setUser] = useState(currentUser); 
     const [shipping, setShipping] = useState({
-        address1: '',
-        address2: '',
-        city: '',
-        state: '',
-        zipcode: '',
-        country: '', 
+        address1: '742 Evergreen Terrace',
+        address2: 'n/a',
+        city: 'Springfield',
+        state: 'Illinois',
+        zipcode: '94575',
+        country: "United States"
+      
     })
     const [billingAddress, setBillingAdd] = useState({
-        address1: '',
-        address2: '',
-        city: '',
-        state: '',
-        zipcode: '',
-        country: '', 
+        address1: '742 Evergreen Terrace',
+        address2: 'n/a',
+        city: 'Springfield',
+        state: 'Illinois',
+        zipcode: '94575',
+        country: "United States"
     })
     const ref = useRef();
     const hamburgerRef = useRef()

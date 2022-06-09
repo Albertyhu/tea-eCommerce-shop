@@ -4,6 +4,15 @@ export const Container = styled.div`
     width: 90%;
     margin-left: auto;
     margin-right: auto; 
+    margin-bottom: 60px;
+`
+
+export const InnerContainer = styled.div`
+    width: 100; 
+    border: 1px solid rgba(0,0,0,0.3);
+    border-radius: 10px;
+        margin-left: auto;
+    margin-right: auto; 
 `
 
 export const Title = styled.h2``
@@ -13,8 +22,10 @@ text-align: left;
 `
 
 export const InputField = styled.div`
-    width: 100%; 
+    width: 90%; 
     margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto; 
 `
 
 export const SubCont = styled.div`
@@ -24,7 +35,7 @@ export const SubCont = styled.div`
     margin-right: auto;
     justify-content: space-between; 
    & > div{
-    width: 30%;
+    width: 23%;
 }
    & > div#stateContainer{
    
@@ -40,7 +51,7 @@ export const SubCont = styled.div`
 `
 
 export const Input = styled.input`
- width: 100%; 
+width: 100%; 
 border-radius: 10px;
 padding-left: 10px;
 padding-right: 10px;

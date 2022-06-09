@@ -17,8 +17,8 @@ import { TeaData } from '../../../components/teaData.js';
 import { useNavigate } from 'react-router-dom'; 
 
 const CTA = props => {
-    const { addProduct, openAddProductMessage } = React.useContext(MyContext)
-    const { shippingDays, productID, price } = props 
+    const { addProduct, openAddProductMessage, setWish} = React.useContext(MyContext)
+    const { shippingDays, productID, price, setMessage  } = props 
     const [quantity, setQuantity] = useState(1); 
     const [customQuan, setCustomQuan] = useState(0); 
     const [displayCustomStock, setDisplayCustomStock] = useState(false); 
@@ -58,6 +58,7 @@ const CTA = props => {
         }
         if (trueStock !== 0) {
             addProduct(productID, parseInt(trueStock), price)
+            setMessage("The product has been added to your cart.")
             openAddProductMessage()
             reset();
             setTimeout(()=> goProductPage(), 1000); 
@@ -65,6 +66,13 @@ const CTA = props => {
         else {
 
         }
+    }
+
+    const handleAddWish = () => {
+        setMessage("The product has been added to your wish list")
+        openAddProductMessage()
+        setWish(productID)
+  
     }
 
     const reset = () => {
@@ -105,7 +113,7 @@ const CTA = props => {
                     <BrownButton onClick={handleAddCart}>Add to Cart</BrownButton>
                     <TanButton id="buyNowBTN">Buy Now</TanButton>
                     <SecureTransBlock><AiFillLock style={lockStyle} /><span>Secure Transaction</span></SecureTransBlock>
-                    <WishButton>Add to Wish List</WishButton>
+                    <WishButton onClick={handleAddWish}>Add to Wish List</WishButton>
                 </ButtonContainer> 
             </InnerContainer>
         </CTAPanelContainer>

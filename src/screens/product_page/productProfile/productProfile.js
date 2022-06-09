@@ -10,9 +10,8 @@ import TextPanel from './textPanel.js';
 import { MainSection } from './profileStyledComp.js';
 import CTAPanel from './CTApanel.js'
 import RenderMessage from '../addProductMessage/renderMessagePanel.js'; 
-import { MyContext } from '../../../components/contextItem.js';
 import { TeaData } from '../../../components/teaData.js'; 
-
+import { Filler } from '../../../style/globalStyledComp.js'; 
 const ProductProfile = props => {
     const location = useLocation(); 
     const navigate = useNavigate(); 
@@ -24,13 +23,15 @@ const ProductProfile = props => {
 
     const { openPanel, accountPanel, addProductMessage, openHamburger } = props; 
     const [product, setProduct] = useState(TeaData.find(val => val.ID === id))
+    const [ renderMessage, setMessage ] = useState('')
     useEffect(() => {
-
         var item = TeaData.find(val => val.ID === id)
-        setProduct(item)
-        
+        setProduct(item) 
     }, [id])
 
+    const handleMessage = val => {
+        setMessage(val)
+    }
 
     return (
         <div id="mainContainer">
@@ -40,8 +41,9 @@ const ProductProfile = props => {
                     cartTrigger={openPanel}
                     accountTrigger={accountPanel}
                 />
-                <RenderMessage addProductMessage={addProductMessage} message="Product has been added to your cart." />
+                <RenderMessage addProductMessage={addProductMessage} message={renderMessage} />
                 <Header />
+                <Filler />
                 {product ?
                     <MainSection>
                         {product.imageArray.length > 0 ?
@@ -61,6 +63,7 @@ const ProductProfile = props => {
                         <CTAPanel price={product.price}
                             productID={id}
                             shippingDays={product.shippingDays}
+                            setMessage={handleMessage}
                         />
                     </MainSection > 
                     :

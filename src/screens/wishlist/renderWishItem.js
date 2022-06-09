@@ -48,9 +48,9 @@ const RenderWishItem = props => {
     return (
         <ListItem >
             <Image src={image} onClick={() => goProductProfile(ID)} />
-            <DetailTable>
+            <DetailTable id = "WishDetailTable">
             <tbody>
-                <tr><th><Title>{name}</Title></th></tr>
+                    <tr><th colspan="3"><Title>{name}</Title></th></tr>
                     <tr><TH>Price  </TH><td>${price.toFixed(2)}</td></tr>
                     <tr><TH>Weight </TH><td>{weight}</td></tr>
                     <tr><TH>Dimensions </TH><td>{width}x{length}x{height} in.</td></tr>

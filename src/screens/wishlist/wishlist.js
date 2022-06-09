@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'; 
+import React, { useState, useCallback, useEffect } from 'react'; 
 import { TeaData } from '../../components/teaData.js';
 import { MyContext } from '../../components/contextItem.js'; 
 import uuid from 'react-uuid'; 
@@ -25,6 +25,17 @@ const RenderWishList = props => {
         message
     } = props;
 
+    const [innerContHeight, setInnerContHeight] = useState("inherit")
+
+    useEffect(() => {
+        if (wishlist.length > 1) {
+            setInnerContHeight("auto")
+        }
+        else {
+            setInnerContHeight("inherit")
+        }
+    }, [wishlist])
+
     return (<PageTemplate MainContent={MainContent}
         openHamburger={openHamburger}
         openPanel={openPanel}
@@ -32,13 +43,14 @@ const RenderWishList = props => {
         addProductMessage={addProductMessage}
         message={message}
         wishlist={wishlist}
+        heightType={innerContHeight} 
         />)
 }
 
 const MainContent = (props) => {
     const { wishlist } = props; 
     const { removeWish} = React.useContext(MyContext); 
-
+   
     const LoadWishes = () => {
         var arr = TeaData.filter(val => {
             return wishlist.some(wish => wish === val.ID)
@@ -56,7 +68,7 @@ const MainContent = (props) => {
     const navigate = useNavigate(); 
     const goProductPage = useCallback(() => navigate('../product_page', { replace: true }), [navigate])
 
-    return(<div>
+    return (<div id = "wishlistDiv">
     {
             wishlist.length !== 0 && wishlist !== null ?
                 <OuterShell>

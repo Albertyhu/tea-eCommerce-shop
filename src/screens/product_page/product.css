@@ -7,7 +7,7 @@
     background-size: cover;
     background-color: #ffffff;
     font-family: serif;
-    margin-top: 210px; 
+   /* margin-top: 210px; */
 }
 
 #buttonContainer {
@@ -20,7 +20,6 @@
 #innerContainer {
     top: 0px;
     width: 100%;
-    height: inherit;
     background-color: rgba(255,255,255, 1);
     align-items: center;
     align-content: center;
@@ -123,3 +122,23 @@ display: inline-block
     }
     
 }
+
+#addToWishlist {
+    color: #787878;
+    text-decoration: underline;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 25px;
+    cursor: pointer; 
+}
+    #addToWishlist:hover {
+        color: #9B9B9B;
+        text-decoration: none;
+    }
+
+    #addToWishlist:active {
+        color: #787878;
+        text-decoration: underline;
+    }

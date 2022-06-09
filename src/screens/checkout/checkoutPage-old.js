@@ -15,15 +15,11 @@ import {
 } from './checkoutStyle.js'; 
 import { TanButton, BrownButton } from '../../style/styledButton.js';
 import { MyContext } from '../../components/contextItem.js'; 
-import { useNavigate } from 'react-router-dom'; 
+import { Link } from 'react-router-dom'; 
 import RenderList from './renderList.js'; 
 import uuid from 'react-uuid'; 
-import {Filler} from '../../style/globalStyledComp.js'
+import { useNavigate } from 'react-router-dom'; 
 
-//displays shipping information
-//displays order summary 
-//displays Stripe 
-//displays list of items in cart and allows ability to change quantity
 const RenderCheckOut = props => {
     const { cart, openHamburger, openPanel, accountPanel, addProductMessage } = props; 
     const { } = React.useContext(MyContext); 
@@ -84,7 +80,6 @@ const RenderCheckOut = props => {
                 />
                 <RenderMessage addProductMessage={addProductMessage} message="Product has been added to your cart." />
                 <Header />
-                <Filler />
                 <h1>Checkout</h1>
                 {checkoutList !== null && checkoutList.length !== 0 ?
                     <OuterShell>

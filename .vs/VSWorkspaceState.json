@@ -1,16 +1,16 @@
 {
   "ExpandedNodes": [
     "",
+    "\\public",
     "\\src",
-    "\\src\\components",
+    "\\src\\base_elements",
+    "\\src\\base_elements\\logo",
     "\\src\\screens",
+    "\\src\\screens\\cart",
     "\\src\\screens\\checkout",
-    "\\src\\screens\\nonMember",
-    "\\src\\screens\\product_page",
-    "\\src\\screens\\product_page\\addProductMessage",
-    "\\src\\screens\\product_page\\productProfile",
+    "\\src\\screens\\order",
     "\\src\\screens\\wishlist"
   ],
-  "SelectedNode": "\\src\\screens\\nonMember\\signIn.js",
+  "SelectedNode": "\\src\\style\\globalStyledComp.js",
   "PreviewInSolutionExplorer": false
 }

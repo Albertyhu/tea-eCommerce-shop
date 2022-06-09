@@ -1,10 +1,9 @@
-import React, { useEffect, useState, useCallback } from 'react'; 
+import React, { useEffect, useState, useCallback, useContext } from 'react'; 
 import './product.css';
 import '../../style/button.css'; 
-import uuid from 'react-uuid'; 
 import { MyContext } from '../../components/contextItem.js'; 
-import RenderMessage from './addProductMessage/renderMessagePanel.js'; 
 import { useNavigate } from 'react-router-dom'; 
+import { ProductContext } from './productContext.js'; 
 
 //What does it need
 //Product ID
@@ -14,7 +13,8 @@ import { useNavigate } from 'react-router-dom';
 //Product title 
 const RenderProduct = props => {
     const { image, name, price, description, ID, amount } = props
-    const { addProduct, openAddProductMessage } = React.useContext(MyContext)
+    const { addProduct, openAddProductMessage, setWish } = React.useContext(MyContext)
+    const { changeMessage } = useContext(ProductContext); 
     const [stockPurchase, setStock] = useState(0); 
     const [customStock, setCustomStock] = useState(0)
     const [displayCustomStock, setDisplayCustomStock] = useState(false); 
@@ -57,6 +57,7 @@ const RenderProduct = props => {
             trueStock = stockPurchase; 
         }
         if (trueStock !== 0) {
+            changeMessage('Product has been added to your cart')
             addProduct(ID, parseInt(trueStock), price)
             openAddProductMessage();
             reset();
@@ -70,6 +71,12 @@ const RenderProduct = props => {
         setStock(0);
         setCustomStock(0);
         setDisplayCustomStock(false);
+    }
+
+    const addToWishlist = () => {
+        changeMessage('Product has been added to your wishlist')
+        openAddProductMessage();
+        setWish(ID)
     }
 
     return (
@@ -109,6 +116,10 @@ const RenderProduct = props => {
                 }
             </div>
             <div className="AddCartButton" onClick={handleAddCart}>Add to cart</div>
+            <div
+                id="addToWishlist"
+                onClick={addToWishlist}
+            >Add to Wishlist</div>
         </div>
         )
 }

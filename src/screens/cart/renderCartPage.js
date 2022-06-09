@@ -18,6 +18,7 @@ import {
     OuterShell, 
 } from './cartStyledComp.js'; 
 import { TanButton, BrownButton } from '../../style/styledButton.js';
+import { Filler } from '../../style/globalStyledComp.js'; 
 const RenderCartPage = props => {
     const { cart,
         openHamburger,
@@ -51,19 +52,24 @@ const RenderCartPage = props => {
     const goProductPage = useCallback(() => navigate('../product_page',
         { replace: true }), [navigate]) 
     const [cartList, setCartList] = useState(loadData())
-
+    const [innerContHeight, setInnerContHeight] = useState("inherit")
     const removeItem = prodID => {
         var arr = cartList.filter(val => val.ID !== prodID)
         setCartList(arr)
     }
 
     useEffect(() => {
-        loadData();    
-    }, [])
+        console.log("cart list length: " + cartList.length)
+        if (cartList.length > 1) {
+            setInnerContHeight("auto")
+        }
+        else
+            setInnerContHeight("inherit")
+    }, [cart])
 
     return (
         <MainContainer>
-            <InnerContainer>
+            <InnerContainer heightType={innerContHeight}>
                 <RenderPanels
                     burgerTrigger={openHamburger}
                     cartTrigger={openPanel}
@@ -71,6 +77,7 @@ const RenderCartPage = props => {
                 />
                 <RenderMessage addProductMessage={addProductMessage} message="Product has been added to your cart." />
                 <Header />
+                <Filler />
                 <h1>Shopping Cart</h1>
                 {cartList !== null && cartList.length !== 0 ?
                     <OuterShell>

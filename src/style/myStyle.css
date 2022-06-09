@@ -29,7 +29,10 @@ body {
     background-color: #9D5F38;
     height: 60px;
     bottom: 0;
-
+    left: 0;
+    right: 0;
+    position: inherit;
+    z-index: 2;
 }
 
 #rootContainer {
@@ -155,3 +158,15 @@ margin-left: auto;
             height: 56px;
         }
     }
+
+@media screen and (max-height: 538px) {
+
+    #earthTonelogo {
+        display: none;
+    }
+
+    #PrimaryHeaderBar {
+        height: 68px;
+        transition-duration: 1s;
+    }
+}

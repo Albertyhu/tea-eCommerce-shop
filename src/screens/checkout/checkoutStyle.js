@@ -9,7 +9,7 @@ export const MainContainer = styled.div`
     background-size: cover;
     background-color: #ffffff;
     font-family: serif;
-    margin-top: 210px; 
+   /* margin-top: 210px; */
 `
 
 export const InnerContainer = styled.div`

@@ -10,6 +10,7 @@ import TeaCharacter from '../../base_elements/logo/Tea_chinese_character.png';
 //renders the panels 
 import RenderPanels from '../../components/renderPanels.js';
 import { ShopNowButton } from '../../style/styledButton.js'; 
+import { Filler } from '../../style/globalStyledComp.js'; 
 
 const Home = props => {
     const { openPanel, openHamburger, accountPanel } = props;
@@ -24,6 +25,7 @@ const Home = props => {
                     accountTrigger={accountPanel}
                 />
                 <Header windowWidth={windowWidth} />
+                <Filler />
                 <div id ="centerElements">
                     <div id="titleContainer">
                         <img src={TeaCharacter} id="tea_chinese_character" />

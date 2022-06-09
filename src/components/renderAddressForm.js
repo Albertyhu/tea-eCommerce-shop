@@ -56,11 +56,11 @@ const RenderStateSelect = () => {
         <Container>
             <Title>Shipping Address</Title> 
             <InputField>
-                <Subtitle>Address 1</Subtitle> 
+                <Subtitle>Address Line 1</Subtitle> 
                 <Input value={data.address1} type = 'text' name='address1' onChange={changeHandler} />
             </InputField>
             <InputField>
-                <Subtitle>Address 2</Subtitle>
+                <Subtitle>Address Line 2</Subtitle>
                 <Input value={data.address2} type='text' name='address2' onChange={changeHandler} />
             </InputField>
             <SubCont>

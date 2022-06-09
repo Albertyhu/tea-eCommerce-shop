@@ -15,7 +15,7 @@ const OrderPage = props => {
         accountPanel={accountPanel}
         addProductMessage={addProductMessage}
         message={message}
-      
+        heightType={"inherit"}
     />)
 }
 

@@ -46,9 +46,10 @@ export const CheckOutContainer = styled.div`
 export const ListItem = styled.div`
     margin-left: auto;
     margin-right: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    text-align: left;
+    margin-top: 40px;
+    margin-bottom: 60px;
+    text-align: center;
+
 `
 export const ListDetails = styled.div`
     margin-left: auto;
@@ -64,11 +65,16 @@ export const DetailTable = styled.table`
     margin-bottom: 20px;
     max-height: 10px;
 }
- & > tr th {
-    width: 200px;
+ & > tbody tr th {
+    min-width: 200px;
+    text-align: center;
 }
 & > tbody tr td{
    min-width: 120px;
+}
+
+&#WishDetailTable{
+    margin-left: 50px;
 }
 
 `

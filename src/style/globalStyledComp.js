@@ -3,23 +3,35 @@ import styled from 'styled-components';
 export const MainContainer = styled.div`
     width: 100%;
     height: 100vh;
+    height:  ${props => props.heightChange};
     text-align: center;
     background-image: none;
     background-repeat: no-repeat;
     background-size: cover;
     background-color: #ffffff;
     font-family: serif;
-    margin-top: 210px; 
+    //margin-top: 210px; 
+@media screen and (max-width: 540px){
+    margin-top: 110px; 
+}
 `
 
 export const InnerContainer = styled.div`
     top: 0px;
     width: 100%;
-    height: inherit;
     background-color: rgba(255,255,255, 1);
+    height: ${props => props.heightType || "auto"};
+& > div#wishlistDiv {
+    margin-top: 20px; 
+    margin-bottom: 20px;
+}
 `
 export const OuterShell = styled.div`
     display: flex;
+    &#addressCont{
+        display:block; 
+        margin-bottom: 40px;
+    }
 `
 
 export const Shell = styled.div`
@@ -65,10 +77,48 @@ export const DetailTable = styled.table`
     max-height: 10px;
 }
  & > tr th {
-    width: 200px;
+    min-width: 200px;
 }
 & > tbody tr td{
    min-width: 120px;
+}
+
+&#addressTable{
+    font-size: 25px;
+    width: 50%;
+    border: 1px solid rgba(0,0,0, 0.3); 
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: inline-table;
+    margin-left: auto;
+    margin-right: auto;
+@media screen and (max-width: 540px){
+    width: 90%;
+    line-height: 25px;
+}
+
+}
+
+&#addressTable tr {
+border: 1px solid rgba(0,0,0, 0.3); 
+
+text-align: center;
+@media screen and (max-width: 540px){
+height: 60px;
+}
+}
+
+&#addressTable tr th{
+    text-align: left;
+@media screen and (max-width: 540px){
+    line-height: 25px;
+    text-align: center;
+}
+}
+
+&#addressTable tr td{
+   padding-left: 25px;
+    text-align: left;
 }
 
 `
@@ -114,3 +164,10 @@ export const TDseparator = styled.td`
     text-align: center;
 `
 export const ContinueButton = styled.div``
+
+export const Filler = styled.div`
+    height: 190px;
+@media screen and (max-width: 540px){
+    height: 95px;
+}
+`
