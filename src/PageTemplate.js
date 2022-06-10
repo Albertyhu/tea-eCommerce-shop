@@ -19,7 +19,7 @@ const PageTemplate = props => {
         addProductMessage, 
         message,
         wishlist,
-
+        cart, 
         //heightType dictates the height of the InnerContainer div
         //This is to help fix the issue of the footer being out of place. 
         //Some pages that have a fixed determined height should have a heightType of inherit
@@ -53,7 +53,7 @@ const PageTemplate = props => {
                 <RenderMessage addProductMessage={addProductMessage} message={message} />
                 <Header />
                 <Filler />
-                <MainContent wishlist={wishlist} changeHeight={changeHeight} />
+                <MainContent wishlist={wishlist} changeHeight={changeHeight} cart={cart} />
             </InnerContainer>
             <Footer />
         </MainContainer>

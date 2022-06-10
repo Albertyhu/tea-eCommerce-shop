@@ -18,14 +18,44 @@ import { MyContext } from '../../components/contextItem.js';
 import { useNavigate } from 'react-router-dom'; 
 import RenderList from './renderList.js'; 
 import uuid from 'react-uuid'; 
-import {Filler} from '../../style/globalStyledComp.js'
+import { SecondInnerCont } from '../../style/globalStyledComp.js'
+import PageTemplate from '../../PageTemplate.js'; 
+
+//requires props for data, submitEvent, title
+import { RenderAddress } from '../account/accountPage.js';
 
 //displays shipping information
 //displays order summary 
 //displays Stripe 
 //displays list of items in cart and allows ability to change quantity
-const RenderCheckOut = props => {
-    const { cart, openHamburger, openPanel, accountPanel, addProductMessage } = props; 
+
+const RenderCheckout = props => {
+    const {cart, openHamburger, openPanel, accountPanel, addProductMessage, message} = props;
+    const [innerContHeight, setInnerContHeight] = useState("inherit")
+
+    useEffect(() => {
+        if (cart.length > 1) {
+            setInnerContHeight("auto")
+        }
+        else {
+            setInnerContHeight("inherit")
+        }
+    }, [cart])
+
+    return (<PageTemplate MainContent={MainContent}
+        openHamburger={openHamburger}
+        openPanel={openPanel}
+        accountPanel={accountPanel}
+        addProductMessage={addProductMessage}
+        message={message}
+        heightType={innerContHeight}
+        cart={cart}
+    />)
+
+}
+
+const MainContent = props => {
+    const { cart } = props; 
     const { } = React.useContext(MyContext); 
     const [ checkoutList, setCheckout] = useState(null)
 
@@ -65,7 +95,6 @@ const RenderCheckOut = props => {
         setCheckout(arr)
     }
     const navigate = useNavigate();
-    const goCheckout = useCallback(() => navigate('../checkout', { replace: true }), [navigate])
     const goProductPage = useCallback(() => navigate('../product_page',
         { replace: true }), [navigate]) 
 
@@ -75,43 +104,33 @@ const RenderCheckOut = props => {
     }, [])
 
     return (
-        <MainContainer>
-            <InnerContainer>
-                <RenderPanels
-                    burgerTrigger={openHamburger}
-                    cartTrigger={openPanel}
-                    accountTrigger={accountPanel}
-                />
-                <RenderMessage addProductMessage={addProductMessage} message="Product has been added to your cart." />
-                <Header />
-                <Filler />
-                <h1>Checkout</h1>
-                {checkoutList !== null && checkoutList.length !== 0 ?
-                    <OuterShell>
-                       <Shell>
+        <SecondInnerCont>
+            <h1>Checkout</h1>
+            {checkoutList !== null && checkoutList.length !== 0 ?
+                <OuterShell>
+                    <Shell>
+                        <CheckOutContainer>
+                                {checkoutList.map(itm => <RenderList {...itm}
+                                    key={uuid()}
+                                    refreshList={refreshList}
+                                    removeItem={removeItem}
+                                />)}
+                        </CheckOutContainer>
+                    </Shell >
+                    <Shell id = "rightPanel">
                             <CheckOutContainer>
-                                    {checkoutList.map(itm => <RenderList {...itm}
-                                        key={uuid()}
-                                        refreshList={refreshList}
-                                        removeItem={removeItem}
-                                    />)}
+                            <RenderSubtotal />
+                            <TanButton id="ContinueButton">Proceed to Shipping</TanButton>
+                            <BrownButton id="ContinueButton" onClick={goProductPage}>Continue Shopping</BrownButton>
                             </CheckOutContainer>
-                        </Shell >
-                        <Shell id = "rightPanel">
-                                <CheckOutContainer>
-                                <RenderSubtotal />
-                                <TanButton id="ContinueButton">Proceed to Shipping</TanButton>
-                                <BrownButton id="ContinueButton" onClick={goProductPage}>Continue Shopping</BrownButton>
-                             </CheckOutContainer>
-                        </Shell>
-                    </OuterShell>
-                    :
-                <Title>There are currently no items in your cart.</Title>
-                }
-            </InnerContainer> 
-            <Footer />
-        </MainContainer>
+                    </Shell>
+                </OuterShell>
+                :
+            <Title>There are currently no items in your cart.</Title>
+            }
+
+        </SecondInnerCont>
         )
 }
 
-export default RenderCheckOut; 
+export default RenderCheckout; 

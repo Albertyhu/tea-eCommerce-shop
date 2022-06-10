@@ -15,7 +15,7 @@ const RenderProduct = props => {
     const { image, name, price, description, ID, amount } = props
     const { addProduct, openAddProductMessage, setWish } = React.useContext(MyContext)
     const { changeMessage } = useContext(ProductContext); 
-    const [stockPurchase, setStock] = useState(0); 
+    const [stockPurchase, setStock] = useState(1); 
     const [customStock, setCustomStock] = useState(0)
     const [displayCustomStock, setDisplayCustomStock] = useState(false); 
     const navigate = useNavigate(); 

@@ -17,7 +17,7 @@ export const SecHeadBarCont = styled.div`
     text-align: center;
 
    @media screen and (max-width: 540px) {
-    display: block;
+    justify-content: space-between;
 }
   @media screen and (max-width: 280px) {
     height: 80px;
@@ -83,4 +83,35 @@ export const WelcomeTag = styled.div`
   @media screen and (max-width: 280px) {
     margin-top: 10px;
 }
+`
+
+export const MobileMenuCont = styled.div`
+   display: flex;
+
+& > div#SignIn{
+    display: flex
+}
+`
+
+export const MobileSignInText = styled.div`
+    color: #ffffff;
+    align-self: flex-end; 
+`
+
+export const TextLogo = styled.div`
+    font-family: "Linotype Gianotten Black"
+    color: #ffffff;
+`
+
+/*hamburger panel */
+
+export const LogoContainer = styled.div`
+background-color: #000000; 
+
+`
+
+export const LinkCont = styled.div`
+background-color: #D19C4C;
+background-image: url('../images/diagonal-lines.svg')
+height: 100%;
 `

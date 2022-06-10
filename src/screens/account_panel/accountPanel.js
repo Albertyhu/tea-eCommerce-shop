@@ -5,7 +5,9 @@ import '../../style/button.css';
 import './account.css'; 
 import { Link, useNavigate } from 'react-router-dom'; 
 import { HandleSignOut } from '../../components/signOut.js'; 
-import { MenuOptions, OptionsContainer } from './accountStyledComponents.js'; 
+import { MenuOptions, OptionsContainer, ImageLogo } from './accountStyledComponents.js'; 
+import Logo from '../../base_elements/logo/Earth Tone-white-transparent.png';
+import { LogoContainer } from '../../base_elements/headerStyle.js'
 
 const AccountPanel = props => {
     const { openPanel } = props; 
@@ -35,11 +37,12 @@ const AccountPanel = props => {
             <SlidingPanel
                 type={'right'}
                 isOpen={openPanel}
-                size={20}
+                size={window.innerWidth > 540 ? 20 : 75}
               //  panelContainerClassName="accountPanelContainer"
                 noBackdrop={true}
             >
                 <div className="panel-container" ref={accountRef}>
+                    <LogoContainer><ImageLogo src={Logo} /></LogoContainer>
                     <OptionsContainer>
                     <MenuOptions onClick={() => {
                         goAccount();

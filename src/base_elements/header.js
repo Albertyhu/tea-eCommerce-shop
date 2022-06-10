@@ -11,8 +11,7 @@ import SearchBar from '../searchBar/searchbar.js';
 const Header = props => {
     const [normalMenu, setMenu] = useState(true); 
     const [screenWidth, setScreenWidth] = React.useState(window.innerWidth);
-    const { openHamburgerPanel, getTeaData } = useContext(MyContext)
-
+    const { getTeaData } = useContext(MyContext)
     const handleResize = () => {
         if (window.innerWidth <= 468)
             setMenu(false);
@@ -38,7 +37,7 @@ const Header = props => {
                 {normalMenu ?
                     <HeaderMenu />
                     :
-                    <img src={HamburgerIcon} id="hamburgerIcon" onClick={openHamburgerPanel}/>
+                   null
                     }
 
             </div>

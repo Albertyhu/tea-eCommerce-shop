@@ -82,6 +82,10 @@ border-radius: 5px;
 height: 30px;
 margin: auto;
 width: 60%;
+
+@media screen and (max-width: 540px){
+    width: 93%; 
+}
 `
 
 const Bar = styled.input`

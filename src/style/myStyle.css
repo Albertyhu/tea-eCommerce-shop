@@ -77,8 +77,9 @@ body {
 }
 
 #hamburgerPanel {
-padding-top: 50px;
-margin-bottom: auto;
+    /*padding-top: 50px;*/
+    margin-bottom: auto;
+    background-color: #D19C4C;
 }
 
 #hamburgerIcon {
@@ -87,7 +88,7 @@ height: 30px;
 margin-right: 20px;
 margin-top: auto;
 margin-bottom: auto;
-margin-left: auto;
+margin-left: 20px;
 
 }
 
@@ -139,7 +140,7 @@ margin-left: auto;
 
     @media screen and (max-width: 540px) {
         #footer {
-            position: fixed;
+            position: relative;
             left: 0;
             right: 0;
         }

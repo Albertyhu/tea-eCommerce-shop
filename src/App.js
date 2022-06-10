@@ -19,8 +19,14 @@ import { db } from './firebase/initializeFirebase.js';
 import { getAuth, onAuthStateChanged } from 'firebase/auth'; 
 import { doc, getDoc } from "firebase/firestore";
 
+//stripe
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+
 const auth = getAuth(); 
-const currentUser = auth.currentUser; 
+const currentUser = auth.currentUser;
+
+const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
 function App() {
     const [cart, setCart] = useState([])
@@ -158,7 +164,13 @@ function App() {
         },  
     }
 
+    const options = {
+        // passing the client secret obtained from the server
+        clientSecret: '{{CLIENT_SECRET}}',
+    };
+
     return (
+        <Elements stripe={stripePromise}>
       <MyContext.Provider value = {context}>
       <div className="App" id="rootContainer" >
           <BrowserRouter>
@@ -256,7 +268,8 @@ function App() {
               </Routes>
           </BrowserRouter>    
       </div>
-      </MyContext.Provider>
+    </MyContext.Provider>
+    </Elements>
   );
 }
 

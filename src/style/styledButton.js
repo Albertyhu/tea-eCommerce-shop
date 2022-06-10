@@ -20,6 +20,10 @@ export const ShopNowButton = styled.div`
     color: #333333; 
     transition-duration: 1s;
 }
+
+@media screen and (max-width: 540px){
+    min-width: 100px
+}
 `
 
 export const BrownButton = styled.div`

@@ -26,6 +26,11 @@ export const InnerContainer = styled.div`
     margin-bottom: 20px;
 }
 `
+export const SecondInnerCont = styled.div`
+    margin-top: 20px; 
+    margin-bottom: 20px;
+`
+
 export const OuterShell = styled.div`
     display: flex;
     &#addressCont{

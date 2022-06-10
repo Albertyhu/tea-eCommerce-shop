@@ -36,3 +36,9 @@ export const Shell = styled.div`
         width: 20%;
     }
 `
+
+export const ImageLogo = styled.img`
+    margin: auto;
+    width: 150px;
+    height: 150px;
+`
