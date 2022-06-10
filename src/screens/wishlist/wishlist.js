@@ -4,6 +4,7 @@ import { MyContext } from '../../components/contextItem.js';
 import uuid from 'react-uuid'; 
 import RenderWishItem from './renderWishItem.js'; 
 import PageTemplate from '../../PageTemplate.js';
+import { PageTemplateContext } from '../../components/pageTemplateContext.js'; 
 import { useNavigate } from 'react-router-dom'; 
 import { BrownButton } from '../../style/styledButton.js';
 import {
@@ -25,17 +26,6 @@ const RenderWishList = props => {
         message
     } = props;
 
-    const [innerContHeight, setInnerContHeight] = useState("inherit")
-
-    useEffect(() => {
-        if (wishlist.length > 1) {
-            setInnerContHeight("auto")
-        }
-        else {
-            setInnerContHeight("inherit")
-        }
-    }, [wishlist])
-
     return (<PageTemplate MainContent={MainContent}
         openHamburger={openHamburger}
         openPanel={openPanel}
@@ -43,14 +33,13 @@ const RenderWishList = props => {
         addProductMessage={addProductMessage}
         message={message}
         wishlist={wishlist}
-        heightType={innerContHeight} 
         />)
 }
 
 const MainContent = (props) => {
     const { wishlist } = props; 
-    const { removeWish} = React.useContext(MyContext); 
-   
+    const { removeWish } = React.useContext(MyContext);
+    const { setUnitForMeasure } = React.useContext(PageTemplateContext)
     const LoadWishes = () => {
         var arr = TeaData.filter(val => {
             return wishlist.some(wish => wish === val.ID)
@@ -67,6 +56,14 @@ const MainContent = (props) => {
 
     const navigate = useNavigate(); 
     const goProductPage = useCallback(() => navigate('../product_page', { replace: true }), [navigate])
+
+    //This is to help determine the value of the height of the <InnerContainer>
+    //This is to prevent the footer from being positioned in the middle of the screen.
+    //If there are more than one items displayed on the screen, set height of <InnerContainer> to auto
+    //...so that the last product at the bottom doesn't overlap the footer. 
+    useEffect(() => {
+        setUnitForMeasure(wishlist);
+      }, [wishlist])
 
     return (<div id = "wishlistDiv">
     {

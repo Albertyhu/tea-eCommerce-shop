@@ -5,10 +5,9 @@ import {
     DetailTable, 
     TH
 } from '../../style/globalStyledComp.js';
-import { TanButton, BrownButton, DarkGreenButton, GreenButton } from '../../style/styledButton.js'; 
-import RenderMessage from '../product_page/addProductMessage/renderMessagePanel.js';
-import RenderPanels from '../../components/renderPanels.js'; 
+import { GreenButton } from '../../style/styledButton.js';
 import PageTemplate from '../../PageTemplate.js';
+import { PageTemplateContext } from '../../components/pageTemplateContext.js'; 
 import ShippingForm from '../shipping/shippingForm.js'; 
 import { MyContext } from '../../components/contextItem.js'; 
 
@@ -38,17 +37,10 @@ export default AccountPage;
 
 const MainContent = props => {
     const { getShippingAdd, setShippingAdd, getBillingAdd, setBillingAdd } = React.useContext(MyContext)
-    const { changeHeight } = props; 
+    const { makePageAuto} = useContext(PageTemplateContext)
     const [displayBillingAdd, setDisplayBillingAdd] = useState(true);
     const [displayShippingAdd, setDisplayShippingAdd] = useState(true);
-    const { innerWidth: width, innerHeight: height } = window;
-    const webHeight = 100; 
-    const mobileHeight = 120; 
-    const [baseHeight, setBaseHeight] = useState(window.innerWidth > 540 ? webHeight : mobileHeight)
-    //adjustedHeight is based on screen height changing based on changing size of the div's 
-    const [adjustedHeight, setAdHeight] = useState(window.innerWidth > 540 ? webHeight : mobileHeight)
-   // console.log("adjustedHeight: " + adjustedHeight)
-    const [isMobile, setIsMobile] = useState(window.innerWidth > 540 ? false: true)
+
     const openEditBillingAdd = () => {
         setDisplayBillingAdd(false)
     }
@@ -72,74 +64,8 @@ const MainContent = props => {
         setBillingAdd(data)
         setDisplayBillingAdd(true);
     }
-    //changeHeight(`${baseHeight}vh`)
-   // console.log("window width = " + window.innerWidth)
-   // console.log("ismobile: " + isMobile)
-
-    useEffect(() => {
-        const isItMobibile = () => {
-            if (window.innerWidth <= 540)
-                setIsMobile(true)
-            else {
-                setIsMobile(false)
-            }
-        }
-        window.addEventListener('resize', isItMobibile);
-
-        return () => { window.removeEventListener('resize', isItMobibile) }
-
-    }, [])
-
-    //mobile screens require larger height to display everything
-    useEffect(() => {
-        if (isMobile) {
-            setAdHeight(mobileHeight)
-        }
-        else {
-            setAdHeight(webHeight)
-        }
-        var newHeight = `${adjustedHeight}vh`; 
-        changeHeight(newHeight)
-    }, [isMobile])
-
-    //function for adjusting the height of the main container of the screen when the size of div adjusts 
-    const handleAdjustHeight = (boolVal) => {
-        var newHeight = 0
-        var addMobile = 15;
-        var substractMobile = -15; 
-        //If div contracts and is not mobile, subtract 25 from height 
-        if (boolVal && !isMobile && adjustedHeight - newHeight > webHeight) {
-            newHeight = -30;
-        }
-        else if (boolVal && isMobile && adjustedHeight - newHeight > mobileHeight) {
-            newHeight = substractMobile;
-        }
-        //if div expands and is not mobile, add 30 to height
-        if (!boolVal && !isMobile && adjustedHeight + newHeight < 160) {
-            newHeight = 30;
-        }
-        else if (!boolVal && isMobile && adjustedHeight + newHeight < 190) {
-            newHeight = addMobile ;
-        }
-        var oldHeight = adjustedHeight; 
-        setAdHeight(oldHeight + newHeight)
-    }
-
-    //use effect is used for changing the value of adjustedHeight because it doesn't update right away
-    useEffect(() => {
-        console.log("adjusted height: " + adjustedHeight)
-        changeHeight(`${adjustedHeight}vh`); 
-    }, [adjustedHeight])
-
-//if billing address is being edited and the pixels is needed to add to height of main container
-    useEffect(() => {
-
-        handleAdjustHeight(displayBillingAdd)
-    }, [displayBillingAdd])
-
-    useEffect(() => {
-        handleAdjustHeight(displayShippingAdd)
-    }, [displayShippingAdd])
+    window.onFocus = makePageAuto()
+    
 
     return (
         <OuterShell id="addressCont">

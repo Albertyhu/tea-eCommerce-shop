@@ -20,9 +20,10 @@ import RenderList from './renderList.js';
 import uuid from 'react-uuid'; 
 import { SecondInnerCont } from '../../style/globalStyledComp.js'
 import PageTemplate from '../../PageTemplate.js'; 
-
+import { PageTemplateContext } from '../../components/pageTemplateContext.js'; 
 //requires props for data, submitEvent, title
 import { RenderAddress } from '../account/accountPage.js';
+import RenderShippingForm from '../shipping/shippingForm.js';
 
 //displays shipping information
 //displays order summary 
@@ -32,7 +33,6 @@ import { RenderAddress } from '../account/accountPage.js';
 const RenderCheckout = props => {
     const {cart, openHamburger, openPanel, accountPanel, addProductMessage, message} = props;
     const [innerContHeight, setInnerContHeight] = useState("inherit")
-
     useEffect(() => {
         if (cart.length > 1) {
             setInnerContHeight("auto")
@@ -55,9 +55,11 @@ const RenderCheckout = props => {
 }
 
 const MainContent = props => {
-    const { cart } = props; 
-    const { } = React.useContext(MyContext); 
+    const { cart, changeHeight } = props; 
+    const { getShippingAdd, setShippingAdd, getBillingAdd, setBillingAdd } = React.useContext(MyContext); 
     const [ checkoutList, setCheckout] = useState(null)
+    const [editShipping, setEditShipping] = useState(false)
+    const { setUnitForMeasure } = React.useContext(PageTemplateContext)
 
     const loadData = () => {
         if (cart) {
@@ -103,19 +105,37 @@ const MainContent = props => {
         return () => {setCheckout(null)}
     }, [])
 
+    useEffect(() => {
+        setUnitForMeasure(checkoutList)
+    }, [checkoutList])
+
+    const OpenEditShippingDiv = () => {
+
+        setEditShipping(true)
+
+    }
+
+    const UpdateShipping = newAdd => {
+        setShippingAdd(newAdd)
+        setEditShipping(false)
+    }
+
     return (
         <SecondInnerCont>
             <h1>Checkout</h1>
             {checkoutList !== null && checkoutList.length !== 0 ?
                 <OuterShell>
                     <Shell>
-                        <CheckOutContainer>
-                                {checkoutList.map(itm => <RenderList {...itm}
-                                    key={uuid()}
-                                    refreshList={refreshList}
-                                    removeItem={removeItem}
-                                />)}
-                        </CheckOutContainer>
+                        {!editShipping ?
+                            <RenderAddress
+                                data={getShippingAdd()}
+                                submitEvent={OpenEditShippingDiv}
+                                title="Shipping Address" />
+                            :
+                            <RenderShippingForm initialData={getShippingAdd()}
+                                submitEvent={UpdateShipping}
+                                title="Update Shipping Address" />
+                        }
                     </Shell >
                     <Shell id = "rightPanel">
                             <CheckOutContainer>
@@ -134,3 +154,19 @@ const MainContent = props => {
 }
 
 export default RenderCheckout; 
+
+
+const RenderCheck = props => {
+
+    const { checkoutList, refreshList, removeItem } = props
+    return (
+    
+        <CheckOutContainer>
+            {checkoutList.map(itm => <RenderList {...itm}
+                key={uuid()}
+                refreshList={refreshList}
+                removeItem={removeItem}
+            />)}
+        </CheckOutContainer>
+    )
+}

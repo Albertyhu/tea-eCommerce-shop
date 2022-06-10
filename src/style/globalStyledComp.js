@@ -12,7 +12,7 @@ export const MainContainer = styled.div`
     font-family: serif;
     //margin-top: 210px; 
 @media screen and (max-width: 540px){
-    margin-top: 110px; 
+    // margin-top: 110px; 
 }
 `
 
