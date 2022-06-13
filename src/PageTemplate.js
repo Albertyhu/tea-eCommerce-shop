@@ -57,31 +57,30 @@ const PageTemplate = props => {
     //If there are more than one items displayed on the screen, set height of <InnerContainer> to auto
     //...so that the last product at the bottom doesn't overlap the footer. 
     useEffect(() => {
+     //   console.log("arrData = " + arrData.length)
         if (!keepAuto) {
             if (arrData !== null) {
                 if (arrData.length > 1) {
                     setInnerContHeight("auto")
                 }
                 else {
-                    console.log("set to false 1")
                     setInnerContHeight("100%")
                 }
             }
             else {
-                console.log("set to false 2 ")
                 setInnerContHeight("100%")
             }
         }
         else {
-            console.log("set to true ")
             setInnerContHeight("auto")
         }
+      //  console.log("After InnerContHeight = " + InnerContHeight)
     }, [keepAuto, arrData])
 
     return (
         <PageTemplateContext.Provider value = {context}>
-        <MainContainer heightChange={height}>
-                <InnerContainer heightType={InnerContHeight}>
+        <MainContainer heightChange={height} id = "MainContainer">
+                <InnerContainer heightType={InnerContHeight} id = "InnerContainer">
                 <RenderPanels
                     burgerTrigger={openHamburger}
                     cartTrigger={openPanel}

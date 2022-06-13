@@ -29,6 +29,15 @@ export const InnerContainer = styled.div`
 export const SecondInnerCont = styled.div`
     margin-top: 20px; 
     margin-bottom: 20px;
+    
+&#PrivacyPolicyContainer{
+margin-left: 50px;
+margin-right: 50px;
+text-align: left;
+@media screen and (max-width: 540px){
+
+}
+}
 `
 
 export const OuterShell = styled.div`

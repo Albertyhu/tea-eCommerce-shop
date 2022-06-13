@@ -1,4 +1,9 @@
+import React, { useEffect, useContext, useState } from 'react'; 
 import PageTemplate from '../../PageTemplate.js'; 
+import { MyContext } from '../../components/contextItem.js'; 
+import RenderOrderItem from './renderOrderItem.js'; 
+import uuid from 'react-uuid'; 
+import { PageTemplateContext } from '../../components/pageTemplateContext.js'; 
 
 const OrderPage = props => {
     const {
@@ -8,6 +13,8 @@ const OrderPage = props => {
         addProductMessage,
         message
     } = props; 
+
+    
 
     return (<PageTemplate MainContent={MainContent}
         openHamburger={openHamburger}
@@ -22,5 +29,17 @@ const OrderPage = props => {
 export default OrderPage;
 
 const MainContent = props => {
-    return(<div></div>)
+    const { getOrders } = useContext(MyContext); 
+    const [orderList, setOrderList] = useState(getOrders())
+    const { makePageAuto} = useContext(PageTemplateContext)
+    useEffect(() => {
+        if (orderList) {
+            makePageAuto(); 
+        }
+    }, [orderList])
+
+    return (<div>
+        <h2>Order History</h2>
+        {orderList.map(val => <RenderOrderItem {...val} key={uuid()} />)}
+    </div>)
 }

@@ -1,21 +1,16 @@
 import React, { useEffect, useState, useCallback } from 'react'; 
-import Header from '../../base_elements/header.js';
-import Footer from '../../base_elements/footer.js';
 import { TeaData } from '../../components/teaData.js'; 
-import RenderMessage from '../product_page/addProductMessage/renderMessagePanel.js';
-import RenderPanels from '../../components/renderPanels.js'; 
 import { RenderSubtotal } from '../../components/renderTotal.js';
 import {
-    MainContainer,
-    InnerContainer,
     Title,
     CheckOutContainer,
     Shell, 
-    OuterShell
+    OuterShell,
+    LoadingContainer
 } from './checkoutStyle.js'; 
 import { TanButton, BrownButton } from '../../style/styledButton.js';
 import { MyContext } from '../../components/contextItem.js'; 
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate, Link } from 'react-router-dom'; 
 import RenderList from './renderList.js'; 
 import uuid from 'react-uuid'; 
 import { SecondInnerCont } from '../../style/globalStyledComp.js'
@@ -24,6 +19,12 @@ import { PageTemplateContext } from '../../components/pageTemplateContext.js';
 //requires props for data, submitEvent, title
 import { RenderAddress } from '../account/accountPage.js';
 import RenderShippingForm from '../shipping/shippingForm.js';
+import styled from 'styled-components'
+import { PaymentElement, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import './stripe.css';
+import axios from 'axios'; 
+import { Bounce } from "react-activity";
+import "react-activity/dist/library.css";
 
 //displays shipping information
 //displays order summary 
@@ -56,10 +57,19 @@ const RenderCheckout = props => {
 
 const MainContent = props => {
     const { cart, changeHeight } = props; 
-    const { getShippingAdd, setShippingAdd, getBillingAdd, setBillingAdd } = React.useContext(MyContext); 
+    const { getShippingAdd,
+        setShippingAdd,
+        getBillingAdd,
+        setBillingAdd,
+        setNewOrder,
+        clearCart, 
+    } = React.useContext(MyContext); 
     const [ checkoutList, setCheckout] = useState(null)
     const [editShipping, setEditShipping] = useState(false)
-    const { setUnitForMeasure } = React.useContext(PageTemplateContext)
+    const [editBilling, setEditBilling] = useState(false)
+    const { makePageAuto } = React.useContext(PageTemplateContext)
+    const [processingIndicator, setProcessingInd] = useState(false); 
+    const [finalCost, ck_setFinalCost] = useState(0)
 
     const loadData = () => {
         if (cart) {
@@ -106,8 +116,9 @@ const MainContent = props => {
     }, [])
 
     useEffect(() => {
-        setUnitForMeasure(checkoutList)
-    }, [checkoutList])
+        if (cart !== null && cart.length !== 0)
+            makePageAuto()
+    }, [cart])
 
     const OpenEditShippingDiv = () => {
 
@@ -118,6 +129,105 @@ const MainContent = props => {
     const UpdateShipping = newAdd => {
         setShippingAdd(newAdd)
         setEditShipping(false)
+    }
+
+    const OpenEditBillingDiv = () => {
+
+        setEditBilling(true)
+
+    }
+
+    const UpdateBilling = newAdd => {
+        setBillingAdd(newAdd)
+        setEditBilling(false)
+    }
+
+    const goOrderCompletePage = useCallback(() => navigate('../order_summary', {replace: true}), [navigate])
+
+    const confirmShipping = async (e) => {
+        var shipping = getShippingAdd() 
+        var isValid = true; 
+        var errMessage = "Please, correct the following issues. \n "; 
+        if (shipping.address1 === "") {
+            errMessage += "Please, write your address on Address Line 1."; 
+            isValid = false; 
+        }
+        if (shipping.city === "") {
+            errMessage += "Please, write down your city.";
+            isValid = false;
+        }
+        if (shipping.zipcode === "") {
+            errMessage += "Please, write down your zipcode";
+            isValid = false;
+        }
+
+ 
+        if (isValid) {
+           await confirmOrder(e)
+        }
+        else {
+            alert(errMessage)
+        }
+
+    };
+
+    const stripe = useStripe();
+    const elements = useElements();
+    const confirmOrder = async (e) => {
+        e.preventDefault(); 
+        if (!stripe || !elements) {
+            // Stripe.js has not yet loaded.
+            // Make sure to disable form submission until Stripe.js has loaded.
+            return;
+        }
+        var shippingData = getShippingAdd(); 
+        const { error, paymentMethod } = await stripe.createPaymentMethod({
+            type: "card",
+            card: elements.getElement(CardElement),
+            billing_details: {
+                address: {
+                    line1: `${shippingData.address1}`, 
+                    line2: `${shippingData.address2}`, 
+                    city: `${shippingData.city}`,
+                    state: `${shippingData.state}`,
+                    postal_code: `${shippingData.zipcode}`, 
+                    country: `${shippingData.country}`,
+                },
+                email: "john@gmail.com",
+                name: "John Edwards",
+                phone: "978-125-1122", 
+            },
+        })
+
+        if (!error) {
+            try {
+                const { id } = paymentMethod;
+                const amount_to_charge = (finalCost * 100).toFixed(0);
+                var dateObj = new Date();
+                var newOrder = {
+                    orderID: id,
+                    cart,
+                    amountPaid: finalCost,
+                    orderDate: dateObj,
+                }
+               // console.log("amount to charge: " + amount_to_charge)
+                const response = await axios.post("http://localhost:4000/payment", {
+                    amount: amount_to_charge,
+                    id,
+                }).then(setProcessingInd(true))
+
+                if (response.data.success) {
+                    setProcessingInd(false);
+                    setNewOrder(newOrder);
+                    goOrderCompletePage();
+                    clearCart(); 
+                }
+            } catch (e) { console.log("[ERROR]" + e) }
+        }
+        else {
+            console.log(error.message)
+        }
+
     }
 
     return (
@@ -136,14 +246,37 @@ const MainContent = props => {
                                 submitEvent={UpdateShipping}
                                 title="Update Shipping Address" />
                         }
+                        {!editBilling ? 
+                            <RenderAddress
+                                data={getBillingAdd()}
+                                submitEvent={OpenEditBillingDiv}
+                                title="Billing Address" />
+                            :
+                            <RenderAddress
+                                data={getBillingAdd()}
+                                submitEvent={UpdateBilling}
+                                title="Update Billing Address" />
+                        }
                     </Shell >
                     <Shell id = "rightPanel">
                             <CheckOutContainer>
-                            <RenderSubtotal />
-                            <TanButton id="ContinueButton">Proceed to Shipping</TanButton>
-                            <BrownButton id="ContinueButton" onClick={goProductPage}>Continue Shopping</BrownButton>
+                            <TanButton id="ContinueButton" onClick={(e) => confirmShipping(e)}>Place Order</TanButton>
+                            <TermsAndCondStatement />
+                            <RenderSubtotal shippingFee={5.99}
+                                salesTax={7.75}
+                                ck_setFinalCost={ck_setFinalCost}
+                            />
+                            <h2>Card</h2>
+                            <CardElement className="card" options={CARD_OPTIONS}  />
                             </CheckOutContainer>
                     </Shell>
+                    {processingIndicator ?
+                        <LoadingContainer>
+                            <Bounce />
+                        </LoadingContainer>
+                        :
+                        null
+                            } 
                 </OuterShell>
                 :
             <Title>There are currently no items in your cart.</Title>
@@ -160,7 +293,6 @@ const RenderCheck = props => {
 
     const { checkoutList, refreshList, removeItem } = props
     return (
-    
         <CheckOutContainer>
             {checkoutList.map(itm => <RenderList {...itm}
                 key={uuid()}
@@ -169,4 +301,37 @@ const RenderCheck = props => {
             />)}
         </CheckOutContainer>
     )
+}
+
+const TermsAndCondStatement = () => {
+return(<Terms>By placing this order, you agree to Earth Tone's <Link to="/privacy_policy" target="_blank">privacy policy</Link>.</Terms>)
+}
+
+const Terms = styled.div`
+color: #575757; 
+text-align: center; 
+`
+
+const CARD_OPTIONS = {
+    iconStyle: "solid",
+    /*added */
+    hidePostalCode: true,
+    style: {
+        base: {
+            border: "1px solid rgba(0,0,0,05)",
+            borderRadius: "15px",
+            iconColor: "#c4f0ff",
+            color: "#000",
+            fontWeight: 500,
+            fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
+            fontSize: "16px",
+            fontSmoothing: "antialiased",
+            ":-webkit-autofill": { color: "#fce883" },
+            "::placeholder": { color: "#87bbfd" }
+        },
+        invalid: {
+            iconColor: "#ffc7ee",
+            color: "#ffc7ee"
+        }
+    }
 }

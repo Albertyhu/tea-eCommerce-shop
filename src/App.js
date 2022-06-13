@@ -13,6 +13,9 @@ import RenderCheckOut from './screens/checkout/checkoutPage.js';
 import RenderWishList from './screens/wishlist/wishlist.js';
 import RenderCartPage from './screens/cart/renderCartPage.js'; 
 import OrderPage from './screens/order/order.js'; 
+import OrderCompletePage from './screens/order/orderComplete.js'; 
+import PrivacyPolicy from './screens/privacy_statement/privacy_policy.js'; 
+import { genKey} from './components/randGen.js'
 
 //firebase code 
 import { db } from './firebase/initializeFirebase.js';
@@ -26,7 +29,7 @@ import { loadStripe } from '@stripe/stripe-js';
 const auth = getAuth(); 
 const currentUser = auth.currentUser;
 
-const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
+const stripePromise = loadStripe(`${process.env.REACT_APP_PUBLISHABLE_KEY}`);
 
 function App() {
     const [cart, setCart] = useState([])
@@ -37,15 +40,21 @@ function App() {
     const [hamburgerPanel, setHamburgerPanel] = useState(false); 
     const [accountPanel, setAccountPanel] = useState(false); 
     const [addProductMessage, setAddProductMessage] = useState(false); 
-    const [searchResults, setSearchResults] = useState([])
     const [user, setUser] = useState(currentUser); 
+    const [pendingOrders, setPendingOrders] = useState([{
+        orderID: genKey(10), 
+        cart: [{ ID: 2, stock: 5, price: 4.99 }, { ID: 0, stock: 3, price: 5.25 }],
+        amountPaid: 50.31,
+        orderDate: new Date(), 
+    }]); 
+
     const [shipping, setShipping] = useState({
         address1: '742 Evergreen Terrace',
         address2: 'n/a',
         city: 'Springfield',
         state: 'Illinois',
         zipcode: '94575',
-        country: "United States"
+        country: "US"
       
     })
     const [billingAddress, setBillingAdd] = useState({
@@ -54,7 +63,7 @@ function App() {
         city: 'Springfield',
         state: 'Illinois',
         zipcode: '94575',
-        country: "United States"
+        country: "US"
     })
     const ref = useRef();
     const hamburgerRef = useRef()
@@ -62,19 +71,19 @@ function App() {
     const accountPanelRef = useRef()
     const context = {
         addProduct: (productID, additionalStock, ProductPrice) => {
-            var newArr = [...cart]; 
+            var newArr = [...cart];
             var obj = newArr.find(item => item.ID === productID)
             if (obj) {
                 //add stock to existing product in cart
                 var ind = newArr.indexOf(obj)
-                newArr[ind].stock += additionalStock; 
+                newArr[ind].stock += additionalStock;
             }
             else {
                 //add new item to cart array
                 const newItem = {
                     ID: productID,
-                    stock: additionalStock, 
-                    price: ProductPrice, 
+                    stock: additionalStock,
+                    price: ProductPrice,
                 }
                 newArr.push(newItem)
             }
@@ -84,6 +93,9 @@ function App() {
             var arr = cart.filter(val => val.ID !== productID);
             setCart(arr);
 
+        },
+        clearCart: () => {
+            setCart([]); 
         },
         updateCart: () => { },
         updateItemInCart: () => { }, 
@@ -161,7 +173,18 @@ function App() {
         getBillingAdd: () => { return billingAddress },
         setBillingAdd: (address) => {
             setBillingAdd(address)
-        },  
+        },
+        setNewOrder: (ord) => {
+            var arr = pendingOrders; 
+            arr.push(ord); 
+            setPendingOrders(arr); 
+        }, 
+        getOrders: () => pendingOrders, 
+        deleteOrder: (ID) => {
+            var arr = pendingOrders.filter(val => val.orderID === ID); 
+            setPendingOrders(arr); 
+        }, 
+      
     }
 
     const options = {
@@ -170,7 +193,7 @@ function App() {
     };
 
     return (
-        <Elements stripe={stripePromise}>
+      <Elements stripe={stripePromise}>
       <MyContext.Provider value = {context}>
       <div className="App" id="rootContainer" >
           <BrowserRouter>
@@ -265,6 +288,22 @@ function App() {
                                 addProductMessage={addProductMessage}
                             />}
                         />
+                    <Route
+                        path='/privacy_policy'
+                        element={<PrivacyPolicy
+                            openPanel={openPanel}
+                            openHamburger={hamburgerPanel}
+                            accountPanel={accountPanel}
+                        />}
+                        />
+                    <Route
+                        path='/order_summary'
+                        element={<OrderCompletePage
+                            openPanel={openPanel}
+                            openHamburger={hamburgerPanel}
+                            accountPanel={accountPanel}
+                        />}
+                    />
               </Routes>
           </BrowserRouter>    
       </div>

@@ -2,15 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\components",
-    "\\src\\firebase",
     "\\src\\screens",
     "\\src\\screens\\account",
-    "\\src\\screens\\account_panel",
-    "\\src\\screens\\home_page",
+    "\\src\\screens\\cart",
+    "\\src\\screens\\checkout",
+    "\\src\\screens\\order",
     "\\src\\screens\\product_page",
-    "\\src\\test"
+    "\\src\\screens\\wishlist",
+    "\\src\\style"
   ],
-  "SelectedNode": "\\src\\App.js",
+  "SelectedNode": "\\src\\screens\\order\\renderOrderItem.js",
   "PreviewInSolutionExplorer": false
 }

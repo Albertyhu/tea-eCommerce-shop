@@ -24,6 +24,7 @@ export const TeaData = [
         length: 3, 
         height: 10,
         shippingDays: 3, 
+        returnExpDays: 30, 
     },
     {
         ID: 1,
@@ -38,6 +39,7 @@ export const TeaData = [
         length: 3,
         height: 12, 
         shippingDays: 3, 
+        returnExpDays: 30, 
     },
     {
         ID: 2,
@@ -52,6 +54,7 @@ export const TeaData = [
         length: 3,
         height: 10, 
         shippingDays: 3, 
+        returnExpDays: 30, 
     },
     {
         ID: 3,
@@ -66,6 +69,7 @@ export const TeaData = [
         length: 3,
         height: 10, 
         shippingDays: 3, 
+        returnExpDays: 30, 
     },
     {
         ID: 4,
@@ -80,6 +84,7 @@ export const TeaData = [
         length: 3,
         height: 10,
         shippingDays: 3, 
+        returnExpDays: 30, 
     },
     {
         ID: 5,
@@ -94,6 +99,7 @@ export const TeaData = [
         length: 3,
         height: 10, 
         shippingDays: 3, 
+        returnExpDays: 30, 
     },
     {
         ID: 6,
@@ -108,5 +114,6 @@ export const TeaData = [
         length: 3,
         height: 10, 
         shippingDays: 3, 
+        returnExpDays: 30, 
     },
 ]

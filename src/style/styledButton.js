@@ -62,7 +62,9 @@ export const BrownButton = styled.div`
     text-transform: none;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     margin-bottom: 20px;
+
 }
+
 `
 
 export const TanButton = styled.div`
@@ -113,6 +115,29 @@ export const TanButton = styled.div`
     padding-right: 15px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; 
     
+}
+
+
+&#ContinueBrowsing{
+        font-size: 20px; 
+    border-radius: 15px;
+    text-transform: none;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-top: 20px;
+    padding: 5px;
+    min-width: 300px;
+    white-space: nowrap;
+}
+
+&#OrderReviewButton{
+    font-size: 20px; 
+    border-radius: 15px;
+    text-transform: none;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-top: 20px;
+    padding: 5px;
+    min-width: 300px;
+    white-space: nowrap;
 }
 
 `
@@ -193,5 +218,31 @@ export const GreenButton = styled.div`
     font-size: 15px;
     padding: 5px;
 
+}
+`
+
+
+export const WhiteButton = styled.div`
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #ffffff;
+    width: 20%;
+    text-align: center;
+    color: #000000;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 25px;
+    text-transform: uppercase;
+    user-select: none;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+&:active{
+    background-color: #cbcbcb;
+    transform: translate(4px, 4px)
+}
+&:hover{
+    background-color: #ffffff;
 }
 `
