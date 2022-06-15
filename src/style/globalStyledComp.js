@@ -20,22 +20,23 @@ export const InnerContainer = styled.div`
     top: 0px;
     width: 100%;
     background-color: rgba(255,255,255, 1);
-    height: ${props => props.heightType || "auto"};
+    height: ${props => props.heightType};
 & > div#wishlistDiv {
     margin-top: 20px; 
     margin-bottom: 20px;
+ 
 }
 `
 export const SecondInnerCont = styled.div`
     margin-top: 20px; 
     margin-bottom: 20px;
-    
+    opacity: ${props => props.opacityVal};
 &#PrivacyPolicyContainer{
 margin-left: 50px;
 margin-right: 50px;
 text-align: left;
 @media screen and (max-width: 540px){
-
+height:auto;
 }
 }
 `

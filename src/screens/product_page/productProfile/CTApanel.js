@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'; 
 import { MyContext } from '../../../components/contextItem.js'; 
+import { PageTemplateContext } from '../../../components/pageTemplateContext.js'; 
 import {
     CTAPanelContainer,
     InnerContainer,
@@ -17,7 +18,8 @@ import { TeaData } from '../../../components/teaData.js';
 import { useNavigate } from 'react-router-dom'; 
 
 const CTA = props => {
-    const { addProduct, openAddProductMessage, setWish} = React.useContext(MyContext)
+    const { addProduct, openAddProductMessage, setWish } = React.useContext(MyContext)
+    const { changeMessage } = React.useContext(PageTemplateContext); 
     const { shippingDays, productID, price, setMessage  } = props 
     const [quantity, setQuantity] = useState(1); 
     const [customQuan, setCustomQuan] = useState(0); 
@@ -58,7 +60,7 @@ const CTA = props => {
         }
         if (trueStock !== 0) {
             addProduct(productID, parseInt(trueStock), price)
-            setMessage("The product has been added to your cart.")
+            changeMessage("The product has been added to your cart.")
             openAddProductMessage()
             reset();
             setTimeout(()=> goProductPage(), 1000); 
@@ -69,7 +71,7 @@ const CTA = props => {
     }
 
     const handleAddWish = () => {
-        setMessage("The product has been added to your wish list")
+        changeMessage("The product has been added to your wish list")
         openAddProductMessage()
         setWish(productID)
   

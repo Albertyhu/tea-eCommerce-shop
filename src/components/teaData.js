@@ -25,6 +25,8 @@ export const TeaData = [
         height: 10,
         shippingDays: 3, 
         returnExpDays: 30, 
+        ratingAvg: 4.3, 
+        ratingCount: 653,
     },
     {
         ID: 1,
@@ -40,6 +42,8 @@ export const TeaData = [
         height: 12, 
         shippingDays: 3, 
         returnExpDays: 30, 
+        ratingAvg: 3.4, 
+        ratingCount: 323,
     },
     {
         ID: 2,
@@ -55,6 +59,8 @@ export const TeaData = [
         height: 10, 
         shippingDays: 3, 
         returnExpDays: 30, 
+        ratingAvg: 4.6, 
+        ratingCount: 1751,
     },
     {
         ID: 3,
@@ -70,6 +76,8 @@ export const TeaData = [
         height: 10, 
         shippingDays: 3, 
         returnExpDays: 30, 
+        ratingAvg: 4.7, 
+        ratingCount: 2540,
     },
     {
         ID: 4,
@@ -85,6 +93,8 @@ export const TeaData = [
         height: 10,
         shippingDays: 3, 
         returnExpDays: 30, 
+        ratingAvg: 4.8, 
+        ratingCount: 6411,
     },
     {
         ID: 5,
@@ -100,6 +110,8 @@ export const TeaData = [
         height: 10, 
         shippingDays: 3, 
         returnExpDays: 30, 
+        ratingAvg: 3.8, 
+        ratingCount: 402,
     },
     {
         ID: 6,
@@ -115,5 +127,7 @@ export const TeaData = [
         height: 10, 
         shippingDays: 3, 
         returnExpDays: 30, 
+        ratingAvg: 3.6, 
+        ratingCount: 353,
     },
 ]

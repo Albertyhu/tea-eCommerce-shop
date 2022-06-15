@@ -8,7 +8,8 @@ import CartIcon from '../images/icon/shopping-cart-dark.png';
 import CloseIcon from '../images/icon/cancel-round-dark.png';
 import Logo from './logo/Earth Tone-white-transparent.png'; 
 import { LogoContainer, LinkCont } from './headerStyle.js'
-
+import { HiOutlineSwitchHorizontal } from 'react-icons/hi';
+import { GoSignOut } from 'react-icons/go';
 const HamburgerPanel = props => {
     const { openHamburger } = props;
     const { closeHamburgerPanel, openCartPanel, getHamburgerRef  } = useContext(MyContext)
@@ -46,8 +47,8 @@ const HamburgerPanel = props => {
                 <div onClick={() => {
                     closeHamburgerPanel(); 
                     goSignin(); 
-                }} className="hamburgerLinks"><img src={CloseIcon} className='burgerIcon' /><div>Switch Accounts</div></div>
-                <div onClick={closeHamburgerPanel} className="hamburgerLinks"><img src={CloseIcon} className='burgerIcon' /><div>Sign Out</div></div>
+                }} className="hamburgerLinks"><HiOutlineSwitchHorizontal  className='burgerIcon' /><div>Switch Accounts</div></div>
+                <div onClick={closeHamburgerPanel} className="hamburgerLinks"><GoSignOut src={CloseIcon} className='burgerIcon' /><div>Sign Out</div></div>
                 <div onClick={closeHamburgerPanel} className="hamburgerLinks"><img src={CloseIcon} className='burgerIcon' /><div>Close Menu</div></div>
             </div>
         </SlidingPanel>

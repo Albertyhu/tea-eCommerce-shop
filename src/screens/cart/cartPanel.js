@@ -19,7 +19,6 @@ const CartPanel = props => {
     const { openPanel } = props; 
     const { closeCartPanel, getCart, getRef, calculateTotalCost, calculateTotalItems } = React.useContext(MyContext);
     const [cart, setCart] = useState([])
-    const [totalCost, setTotalCost] = useState(0);
     const [subtotal, setSubTotal] = useState(0); 
     const [totalItems, setTotalItems] = useState(0); 
     const navigate = useNavigate(); 

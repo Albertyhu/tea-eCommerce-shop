@@ -15,7 +15,8 @@ import RenderCartPage from './screens/cart/renderCartPage.js';
 import OrderPage from './screens/order/order.js'; 
 import OrderCompletePage from './screens/order/orderComplete.js'; 
 import PrivacyPolicy from './screens/privacy_statement/privacy_policy.js'; 
-import { genKey} from './components/randGen.js'
+import { genKey } from './components/randGen.js'
+import ProductReviewPage from './screens/productReview/productReviewPage.js'; 
 
 //firebase code 
 import { db } from './firebase/initializeFirebase.js';
@@ -302,6 +303,16 @@ function App() {
                             openPanel={openPanel}
                             openHamburger={hamburgerPanel}
                             accountPanel={accountPanel}
+                        />}
+                            />
+                    <Route
+                        path='/review_product'
+                            element={<ProductReviewPage
+                            openPanel={openPanel}
+                            openHamburger={hamburgerPanel}
+                            accountPanel={accountPanel}
+                            addProductMessage={addProductMessage}
+
                         />}
                     />
               </Routes>

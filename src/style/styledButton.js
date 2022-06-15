@@ -155,6 +155,8 @@ export const DarkGreenButton = styled.div`
     text-decoration: none;
     font-size: 25px;
     user-select: none;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
 &:hover{
     background-color: #31B64E;
 }
@@ -202,6 +204,8 @@ export const GreenButton = styled.div`
     text-decoration: none;
     font-size: 25px;
     user-select: none;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
 &:active{
     background-color: #b8b8b8;
     transform: translate(4px, 4px)

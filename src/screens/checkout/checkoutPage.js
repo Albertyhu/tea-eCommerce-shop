@@ -193,9 +193,9 @@ const MainContent = props => {
                     postal_code: `${shippingData.zipcode}`, 
                     country: `${shippingData.country}`,
                 },
-                email: "john@gmail.com",
-                name: "John Edwards",
-                phone: "978-125-1122", 
+                email: "",
+                name: "",
+                phone: "", 
             },
         })
 
@@ -210,7 +210,7 @@ const MainContent = props => {
                     amountPaid: finalCost,
                     orderDate: dateObj,
                 }
-               // console.log("amount to charge: " + amount_to_charge)
+
                 const response = await axios.post("http://localhost:4000/payment", {
                     amount: amount_to_charge,
                     id,
@@ -231,7 +231,7 @@ const MainContent = props => {
     }
 
     return (
-        <SecondInnerCont>
+        <SecondInnerCont opacityVal={processingIndicator ? 0.3 : 1.0 }>
             <h1>Checkout</h1>
             {checkoutList !== null && checkoutList.length !== 0 ?
                 <OuterShell>
@@ -265,6 +265,7 @@ const MainContent = props => {
                             <RenderSubtotal shippingFee={5.99}
                                 salesTax={7.75}
                                 ck_setFinalCost={ck_setFinalCost}
+                                isCheckout={true}
                             />
                             <h2>Card</h2>
                             <CardElement className="card" options={CARD_OPTIONS}  />

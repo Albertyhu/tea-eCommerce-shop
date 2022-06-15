@@ -59,7 +59,6 @@ const RenderCartPage = props => {
     }
 
     useEffect(() => {
-        console.log("cart list length: " + cartList.length)
         if (cartList.length > 1) {
             setInnerContHeight("auto")
         }
@@ -91,7 +90,7 @@ const RenderCartPage = props => {
                         </Shell>
                         <Shell id="rightPanel">
                             <CheckOutContainer>
-                                <RenderSubtotal />
+                                <RenderSubtotal isCheckout={false} />
                                 <TanButton id="ContinueToCheckoutButton" onClick={goCheckout}>Continue to Checkout</TanButton>
                                 <BrownButton id="ContinueButton" onClick={goProductPage}>Continue Shopping</BrownButton>
                             </CheckOutContainer>

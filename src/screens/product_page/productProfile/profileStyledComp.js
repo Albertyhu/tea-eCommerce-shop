@@ -4,6 +4,9 @@ export const MainSection = styled.div`
     display: flex;
     width: 100%; 
     height: 100%;
+@media screen and (max-width: 540px){
+    display: contents;
+}
 `
 
 //image panel 
@@ -12,6 +15,11 @@ export const ImageMainContainer = styled.div`
     max-height: 600px;
     width: 100%; 
     margin-right: 10px;
+@media screen and (max-width: 540px){
+    margin-right: auto;
+    margin-left: auto;
+    
+}
 `
 export const InnerShell = styled.div`
     display: flex; 
@@ -24,13 +32,15 @@ export const MainImage = styled.img`
 `
 
 export const ImageList = styled.ul`
-    
     list-style: none;
 `
 
 export const ImageListItem = styled.li`
     margin: 10px; 
     cursor: pointer; 
+@media screen and (max-width: 540px){
+    margin: 0;
+}
 `
 
 export const ChildImage = styled.img`
@@ -42,6 +52,11 @@ export const ChildImage = styled.img`
 
 export const TextPanel = styled.div`
     width: 600px;
+@media screen and (max-width: 599px){
+    width: 92%;
+    margin-left: auto; 
+    margin-right: auto; 
+}
 `
 
 export const ProductTitle = styled.h1`
@@ -96,6 +111,12 @@ border-radius: 5px;
 width: 20%;
 margin-right: 20px;
 margin-left: 20px;
+@media screen and (max-width: 540px){
+width: 95%; 
+margin-top: 20px;
+margin-right: auto;
+margin-left: auto;
+}
 `
 export const InnerContainer = styled.div`
 margin-left: auto;

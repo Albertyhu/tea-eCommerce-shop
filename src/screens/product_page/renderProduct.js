@@ -3,8 +3,8 @@ import './product.css';
 import '../../style/button.css'; 
 import { MyContext } from '../../components/contextItem.js'; 
 import { useNavigate } from 'react-router-dom'; 
-import { ProductContext } from './productContext.js'; 
-
+import { ProductContext } from './productContext.js';
+import RenderRatings from '../../components/rating/renderRatings.js'; 
 //What does it need
 //Product ID
 //Product Image 
@@ -12,7 +12,7 @@ import { ProductContext } from './productContext.js';
 //Product Details 
 //Product title 
 const RenderProduct = props => {
-    const { image, name, price, description, ID, amount } = props
+    const { image, name, price, description, ID, amount, ratingAvg, ratingCount } = props
     const { addProduct, openAddProductMessage, setWish } = React.useContext(MyContext)
     const { changeMessage } = useContext(ProductContext); 
     const [stockPurchase, setStock] = useState(1); 
@@ -83,6 +83,8 @@ const RenderProduct = props => {
         <div className="productDiv" >
             <img src={image} id="productImage" onClick={goProductProfile} />
             <h3>{name}</h3>
+            <RenderRatings rating={ratingAvg} />
+            <span>{ratingCount} vote(s)</span>
             <div className="descriptionArea">{description}</div>
             <div><b>Amount Per Bag:</b>  {amount} oz.</div>
             <div className = "price"><b>${price.toFixed(2)}</b></div>

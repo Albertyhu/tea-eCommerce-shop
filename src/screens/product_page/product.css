@@ -29,8 +29,8 @@
 #row {
     padding-bottom: 10px;
     margin: 10px;
-    height: 500px;
-    max-height: 500px;
+    height: 544px;
+    max-height: 544px;
     display: flex;
     justify-content: center;
   
@@ -103,6 +103,9 @@ display: inline-block;
 display: inline-block
 }
 
+#ratingContainer span {
+    display: inline-block;
+}
 
 @media screen and (max-width: 540px) {
     #mainContainer {
@@ -112,6 +115,7 @@ display: inline-block
     #row {
         display: inline-table;
         padding-bottom: 0; 
+        max-height: 600px; 
         margin: 0;
     }
     #contentContainer{
@@ -120,6 +124,7 @@ display: inline-block
     .AddCartButton {
         margin-bottom: 20px;
     }
+
     
 }
 

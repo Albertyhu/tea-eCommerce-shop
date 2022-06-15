@@ -19,21 +19,20 @@ const PageTemplate = props => {
         openPanel,
         accountPanel,
         addProductMessage,
-        message,
         wishlist,
         cart,
-        //heightType dictates the height of the InnerContainer div
-        //This is to help fix the issue of the footer being out of place. 
-        //Some pages that have a fixed determined height should have a heightType of inherit
-        //So the <InnerContainer< inherits the height of the parent div <MainContainer>
-        //Some page that dynamically generated height should have a heightType of auto
-        heightType,
+        ProductProfileID, 
     } = props;
 
     const [height, setHeight] = useState("100vh")
     const [InnerContHeight, setInnerContHeight] = useState("100%");
     const [keepAuto, setKeepAuto] = useState(false)
     const [arrData, setArrData] = useState(null)
+    const [message, setMessage] = useState(''); 
+
+    //The following state component is to pass information from the page to the template. 
+    const [interimData, setInterimData] = useState(null); 
+
     const changeHeight = change => {
         setHeight(change)
     }
@@ -49,33 +48,23 @@ const PageTemplate = props => {
         setUnitForMeasure: data => { setArrData(data) },
 
         //makePageAuto is for screens that don't have a list but have elements that take up the full screen and can dynamically change the size of the screen.
-        makePageAuto: () => { setKeepAuto(true)},
+        makePageAuto: () => {
+            setInnerContHeight("auto")
+        },
+        makePageInherit: () => {
+            setInnerContHeight("100%")
+        },
+        //This is pass the product ID to the Product Profile Page so that the product can be displayed on that page. 
+        getProductID: () => ProductProfileID, 
+        changeMessage: (mess) => {
+            setMessage(mess);
+        },
         }
 
     //The following code for context and useEffect block are to help determine the value of the height of the <InnerContainer>
     //This is to prevent the footer from being positioned in the middle of the screen.
     //If there are more than one items displayed on the screen, set height of <InnerContainer> to auto
     //...so that the last product at the bottom doesn't overlap the footer. 
-    useEffect(() => {
-     //   console.log("arrData = " + arrData.length)
-        if (!keepAuto) {
-            if (arrData !== null) {
-                if (arrData.length > 1) {
-                    setInnerContHeight("auto")
-                }
-                else {
-                    setInnerContHeight("100%")
-                }
-            }
-            else {
-                setInnerContHeight("100%")
-            }
-        }
-        else {
-            setInnerContHeight("auto")
-        }
-      //  console.log("After InnerContHeight = " + InnerContHeight)
-    }, [keepAuto, arrData])
 
     return (
         <PageTemplateContext.Provider value = {context}>

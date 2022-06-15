@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom'
+import React, { useState, useContext, useEffect, useCallback } from 'react';
+import { Link, useNavigate } from 'react-router-dom'
 import { MyContext } from '../../components/contextItem.js';
 import styled from 'styled-components'
 import { TeaData } from '../../components/teaData.js'; 
@@ -25,7 +25,13 @@ const RenderCartItem = props => {
     ));  
 
     const currentDate = new Date(); 
-
+    const navigate = useNavigate(); 
+    const goReviewProduct = useCallback(() => navigate('../review_product', {
+        replace: true,
+        state: {
+            productID: cartData.ID, 
+        }
+    }), [navigate])
     useEffect(() => {
         if (currentDate > returnExpDate) {
             setReturn(false)
@@ -56,7 +62,7 @@ const RenderCartItem = props => {
                 </CartItemText>
                 <CTAPanel>
                     <Block><Text>Do you want to share your experience with the product?</Text>
-                        <ButtonStyled id="OrderReviewButton">Write a product review</ButtonStyled> </Block>
+                        <ButtonStyled id="OrderReviewButton" onClick={goReviewProduct}>Write a product review</ButtonStyled> </Block>
                         <Block> <Text>Would you like more of this product?</Text>
                         <Link to="../product_profile"
                             state={{
@@ -132,7 +138,7 @@ const Text = styled.div`
 `
 
 const ButtonStyled = styled.div`
-    font-size: 20px; 
+    font-size: 15px; 
     border-radius: 15px;
     text-transform: none;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;

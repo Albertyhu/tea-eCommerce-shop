@@ -1,16 +1,16 @@
 {
   "ExpandedNodes": [
     "",
+    "\\server",
     "\\src",
+    "\\src\\base_elements",
     "\\src\\screens",
-    "\\src\\screens\\account",
-    "\\src\\screens\\cart",
-    "\\src\\screens\\checkout",
-    "\\src\\screens\\order",
+    "\\src\\screens\\account_panel",
+    "\\src\\screens\\home_page",
     "\\src\\screens\\product_page",
-    "\\src\\screens\\wishlist",
-    "\\src\\style"
+    "\\src\\screens\\product_page\\addProductMessage",
+    "\\src\\screens\\product_page\\productProfile"
   ],
-  "SelectedNode": "\\src\\screens\\order\\renderOrderItem.js",
+  "SelectedNode": "\\src\\base_elements\\hamburgerPanel.js",
   "PreviewInSolutionExplorer": false
 }

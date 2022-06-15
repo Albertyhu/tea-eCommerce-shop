@@ -23,6 +23,8 @@ const RenderCollection = props => {
             price: item.price,
             amount: item.amount, 
             image: item.image, 
+            ratingAvg: item.ratingAvg,
+            ratingCount: item.ratingCount, 
         }
 
         groupRow[rowCount].push(tea)

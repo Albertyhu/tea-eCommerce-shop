@@ -5,16 +5,20 @@ import styled from 'styled-components';
 export const RenderSubtotal= props => {
     const { calculateTotalCost, calculateTotalItems } = useContext(MyContext); 
     const [totalItems, setTotalItems] = useState(calculateTotalItems())
-    const [subtotal, setSubtotal] = useState(calculateTotalCost())
-    const { changeTotal, shippingFee, salesTax, ck_setFinalCost } = props; 
+    const [subtotal, setSubtotal] = useState(calculateTotalCost()); 
+
+    //isCheckout determines whether the prices to be displayed is at the shopping cart or at checkout
+    //This is a necessary prop to render this component
+    const { changeTotal, shippingFee, salesTax, ck_setFinalCost, isCheckout } = props; 
     const [totalBeforeTax, setTotalBeforeTax] = useState(0);
     const [estimatedTaxes, setEstimatedTaxes] = useState(0)
     const [finalCost, setFinalCost] = useState(0)
+    
     const recalculate = () => {
         setTotalItems(calculateTotalItems())
         setSubtotal(calculateTotalCost())
     }
-
+    console.log("isCheckout =" + isCheckout )
     const CalcuateSalesTax = () => {
         if (salesTax !== null && totalBeforeTax !== null) {
             setFinalCost(totalBeforeTax * (1.0 + salesTax))
@@ -38,26 +42,28 @@ export const RenderSubtotal= props => {
     }, [totalBeforeTax])
 
     useEffect(() => {
-        var total = totalBeforeTax + estimatedTaxes; 
-        setFinalCost(total)
-        ck_setFinalCost(total)
+        if (isCheckout) {
+            var total = totalBeforeTax + estimatedTaxes;
+            setFinalCost(total)
+            ck_setFinalCost(total)
+        }
     }, [estimatedTaxes])
 
     return (
         <Container>
             <Detail><b>Total items:</b> {totalItems}</Detail>
-            {shippingFee !== null ? 
+            {isCheckout ? 
                 <div>
                     <Block>
                         <Detail><b>Subtotal: </b>${subtotal.toFixed(2)}</Detail>
-                        <Detail id="shippingFeeInfo"><b>Shipping and handling: </b><span>${shippingFee.toFixed(2)}</span></Detail>
+                        <Detail id="shippingFeeInfo"><b>Shipping and handling: </b><span>${shippingFee.toFixed(2) || null}</span></Detail>
                     </Block>
                     <Block>
-                        <Detail><b>Subtotal before taxes: </b>${totalBeforeTax.toFixed(2)}</Detail>
-                        <Detail id="taxInfo"><b>Estimated taxes to be collected: </b>${estimatedTaxes.toFixed(2)}</Detail>
+                        <Detail><b>Subtotal before taxes: </b>${totalBeforeTax.toFixed(2) || null}</Detail>
+                        <Detail id="taxInfo"><b>Estimated taxes to be collected: </b>${estimatedTaxes.toFixed(2) || null}</Detail>
                     </Block>
                     <Block>
-                        <Detail><b>Total Cost: </b>${finalCost.toFixed(2)}</Detail>
+                        <Detail><b>Total Cost: </b>${finalCost.toFixed(2) || null}</Detail>
                     </Block>
                 </div>
                 :
