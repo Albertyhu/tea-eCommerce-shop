@@ -8,7 +8,7 @@ const ReviewPanel = props => {
     var reviews = data.filter(val => val.ID === productID); 
     return (
         <Panel>
-            <h3>Reviews about this product</h3>
+            {reviews !== null && reviews.length != 0 ? <h3>Reviews about this product</h3> : null}
             {reviews ? reviews.map(val => <ReviewBlock {...val} />) : null}
         </Panel>
         )

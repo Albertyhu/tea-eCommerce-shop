@@ -14,7 +14,7 @@ import RenderRatings from '../../components/rating/renderRatings.js';
 const RenderProduct = props => {
     const { image, name, price, description, ID, amount, ratingAvg, ratingCount } = props
     const { addProduct, openAddProductMessage, setWish } = React.useContext(MyContext)
-    const { changeMessage } = useContext(ProductContext); 
+    const { changeMessage, changeOpacity } = useContext(ProductContext); 
     const [stockPurchase, setStock] = useState(1); 
     const [customStock, setCustomStock] = useState(0)
     const [displayCustomStock, setDisplayCustomStock] = useState(false); 
@@ -61,6 +61,7 @@ const RenderProduct = props => {
             addProduct(ID, parseInt(trueStock), price)
             openAddProductMessage();
             reset();
+            changeOpacity();
         }
         else {
    
@@ -78,12 +79,13 @@ const RenderProduct = props => {
         openAddProductMessage();
         setWish(ID)
     }
-
+    const RenderStars = useCallback((e) => <RenderRatings rating={ratingAvg} />, [ratingAvg])
+    //The ratings is causing a bug where everytime a button is clicked, all the components look like they are twitching
     return (
         <div className="productDiv" >
             <img src={image} id="productImage" onClick={goProductProfile} />
             <h3>{name}</h3>
-            <RenderRatings rating={ratingAvg} />
+            {ratingAvg ? RenderStars() : null} 
             <span>{ratingCount} vote(s)</span>
             <div className="descriptionArea">{description}</div>
             <div><b>Amount Per Bag:</b>  {amount} oz.</div>

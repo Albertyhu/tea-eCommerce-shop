@@ -79,7 +79,8 @@ const PageTemplate = props => {
                 <RenderMessage addProductMessage={addProductMessage} message={message} />
                 <Header />
                 <Filler />
-                    <MainContent wishlist={wishlist}
+                    <MainContent
+                        wishlist={wishlist}
                         changeHeight={changeHeight}
                         cart={cart}
                     />

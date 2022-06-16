@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\screens",
-    "\\src\\screens\\productReview",
+    "\\src\\screens\\account",
+    "\\src\\screens\\account_panel",
+    "\\src\\screens\\cart",
     "\\src\\screens\\product_page",
+    "\\src\\screens\\product_page\\addProductMessage",
     "\\src\\screens\\product_page\\productProfile",
-    "\\src\\screens\\shipping",
-    "\\src\\screens\\wishlist",
-    "\\src\\style",
     "\\src\\test"
   ],
-  "SelectedNode": "\\src\\App.js",
+  "SelectedNode": "\\src\\screens\\product_page\\productProfile\\reviewPanel.js",
   "PreviewInSolutionExplorer": false
 }

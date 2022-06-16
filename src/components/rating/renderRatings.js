@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createRef} from 'react';
+import React, { useState, useEffect, useMemo} from 'react';
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
 import styled from 'styled-components';
 import uuid from 'react-uuid'
@@ -29,15 +29,17 @@ const RenderRatings = props => {
 
     }, [rating])
 
-
+    
     useEffect(() => {
-        setFullStarArr(AddFullStars(FullStarNum))
+        if(FullStarNum !== null || FullStarNum.length > 0)
+          setFullStarArr(Memoized_AddFullStars)
     }, [FullStarNum])
 
-
     useEffect(() => {
-        setEmptyStarArr(AddEmptyStars(EmpStarNum))
+        if(EmpStarNum !== null || EmpStarNum.length > 0)
+            setEmptyStarArr(Memoized_AddEmptyStars)
     }, [EmpStarNum])
+    
 
     //I tried the for loop earlier, but couldn't get to render a component multiple times.
     //So I  tried the Array.map method there. 
@@ -48,7 +50,8 @@ const RenderRatings = props => {
         }
         return arr; 
     }
-    
+    const Memoized_AddFullStars = useMemo(() => AddFullStars(FullStarNum), [FullStarNum])
+
     const AddEmptyStars = num => {
         var arr = []
         for (var i = 0; i < num; i++) {
@@ -56,6 +59,7 @@ const RenderRatings = props => {
         }
         return arr;
     }
+    const Memoized_AddEmptyStars = useMemo(() => AddEmptyStars(EmpStarNum), [EmpStarNum])
 
     return (
         <RatingsContainer>
@@ -86,8 +90,12 @@ const StarContainer = styled.div`
    width: auto;
    height: auto;
 `
-
+//The RatingsContainer is given a min-height and the resize is set to none because the ratings keep rerendering every time a button is clicked 
+//The rerending causes a bug that makes the product panels on the product page twitch 
+//Giving it a fixed height puts a bandaid over the problem. 
 const RatingsContainer = styled.div`
     margin-left: auto;
     margin-right: auto; 
+    min-height: 35px; 
+    resize: none;
 `

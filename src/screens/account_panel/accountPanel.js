@@ -26,11 +26,11 @@ const AccountPanel = props => {
 
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [ panelWidth, setPanelWidth ] = useState(50)
-    const goCheckout = useCallback(() => navigate('../checkout', { replace: true }), [navigate])
-    const goWishlist = useCallback(() => navigate('../wishlist', { replace: true }), [navigate])
-    const goCart = useCallback(() => navigate('../cart', { replace: true }), [navigate])
-    const goAccount = useCallback(() => navigate('../acount_page', { replace: true }), [navigate])
-    const goOrderPage = useCallback(() => navigate('../orders', { replace: true }), [navigate])
+    const goCheckout = useCallback(() => navigate('../checkout', {  }), [navigate])
+    const goWishlist = useCallback(() => navigate('../wishlist', {  }), [navigate])
+    const goCart = useCallback(() => navigate('../cart', {  }), [navigate])
+    const goAccount = useCallback(() => navigate('../acount_page', {  }), [navigate])
+    const goOrderPage = useCallback(() => navigate('../orders', {  }), [navigate])
 
     return (
         <div>

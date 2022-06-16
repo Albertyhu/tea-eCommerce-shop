@@ -66,8 +66,8 @@ const CartPanel = props => {
         }
     }, [screenWidth])
 
-    const goCheckout = useCallback(() => navigate('../checkout', {replace: true}), [navigate])
-    const goCart = useCallback(() => navigate('../cart', {replace: true}), [navigate])
+    const goCheckout = useCallback(() => navigate('../checkout', {}), [navigate])
+    const goCart = useCallback(() => navigate('../cart', {}), [navigate])
     useEffect(() => {
 
         return () => {

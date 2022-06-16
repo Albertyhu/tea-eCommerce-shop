@@ -12,7 +12,7 @@ const RenderMessage = props => {
         if (addProductMessage) {
            setTimeout(() => {
                 closeAddProductMessage();
-            }, 3000)
+            }, 2000)
         }
         const checkIfClickedOutside = e => {
             if (addProductMessage && ref.current && !ref.current.contains(e.target)) {
