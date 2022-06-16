@@ -135,7 +135,6 @@ height: 60px;
    padding-left: 25px;
     text-align: left;
 }
-
 `
 
 export const TH = styled.th`

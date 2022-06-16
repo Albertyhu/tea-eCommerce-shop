@@ -21,7 +21,8 @@ const RenderTextPanel = props => {
         length,
         height, 
         ratingAvg, 
-        ratingCount
+        ratingCount,
+
     } = props; 
 
     return (

@@ -140,6 +140,23 @@ export const TanButton = styled.div`
     white-space: nowrap;
 }
 
+&#PostReturnContinueButton{
+    font-size: 20px; 
+    border-radius: 15px;
+    //width: 80%;
+    text-transform: none;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 540px){
+&#PostReturnContinueButton{
+    width: fit-content; 
+    whitespace: no-wrap;
+    font-size: 16px;
+}
+
+}
 `
 
 export const DarkGreenButton = styled.div`
@@ -227,26 +244,89 @@ export const GreenButton = styled.div`
 
 
 export const WhiteButton = styled.div`
+    font-size: 15px; 
+    border-radius: 15px;
+    text-transform: none;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 5px;
+    white-space: nowrap;
     margin-left: auto;
     margin-right: auto;
-    border-radius: 5px;
-    padding: 10px;
-    background-color: #ffffff;
-    width: 20%;
     text-align: center;
-    color: #000000;
     cursor: pointer;
     text-decoration: none;
-    font-size: 25px;
-    text-transform: uppercase;
     user-select: none;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
+    background-color: #ffffff;
+    color: #000000; 
 &:active{
-    background-color: #cbcbcb;
-    transform: translate(4px, 4px)
+    transform: translate(4px, 4px);
+    background-color: #ffffff;
+    color: #000000; 
+
 }
 &:hover{
+    transition-duration: 2s;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+&#ReturnProduct{
+    display: inline-block; 
+    margin: 20px;
+}
+
+&#ReturnProduct:active{
+    transition-duration: 300ms;
+    transform: translate(4px, 4px);
     background-color: #ffffff;
+    color: #000000; 
+}
+
+`
+
+export const BlackButton = styled.div`
+    font-size: 15px; 
+    border-radius: 15px;
+    text-transform: none;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 5px;
+    white-space: nowrap;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    user-select: none;
+    background-color: #000000;
+    color: #ffffff;
+    border: 3px solid #ffffff;
+
+&:active{
+    transition-duration: 0s;
+    background-color: #000000;
+    color: #ffffff;
+    border: 3px solid #ffffff;
+    transform: translate(4px, 4px); 
+}
+&:hover{
+    transition-duration: 1s;
+    background-color: #ffffff;
+    color: #000000;
+    border: 3px solid #000000;
+}
+
+&#CancelReturn{
+    display: inline-block; 
+    margin: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+&#CancelReturn:active{
+    transition-duration: 300ms;
+    background-color: #000000;
+    color: #ffffff;
+    border: 3px solid #ffffff;
+    transform: translate(4px, 4px); 
 }
 `

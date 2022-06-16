@@ -22,6 +22,7 @@ const PageTemplate = props => {
         wishlist,
         cart,
         ProductProfileID, 
+        data, 
     } = props;
 
     const [height, setHeight] = useState("100vh")
@@ -32,7 +33,6 @@ const PageTemplate = props => {
 
     //The following state component is to pass information from the page to the template. 
     const [interimData, setInterimData] = useState(null); 
-
     const changeHeight = change => {
         setHeight(change)
     }
@@ -59,6 +59,7 @@ const PageTemplate = props => {
         changeMessage: (mess) => {
             setMessage(mess);
         },
+        getData:()=>data, 
         }
 
     //The following code for context and useEffect block are to help determine the value of the height of the <InnerContainer>
@@ -78,7 +79,10 @@ const PageTemplate = props => {
                 <RenderMessage addProductMessage={addProductMessage} message={message} />
                 <Header />
                 <Filler />
-                <MainContent wishlist={wishlist} changeHeight={changeHeight} cart={cart} />
+                    <MainContent wishlist={wishlist}
+                        changeHeight={changeHeight}
+                        cart={cart}
+                    />
             </InnerContainer>
             <Footer />
             </MainContainer>

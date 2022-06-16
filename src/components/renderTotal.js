@@ -18,7 +18,6 @@ export const RenderSubtotal= props => {
         setTotalItems(calculateTotalItems())
         setSubtotal(calculateTotalCost())
     }
-    console.log("isCheckout =" + isCheckout )
     const CalcuateSalesTax = () => {
         if (salesTax !== null && totalBeforeTax !== null) {
             setFinalCost(totalBeforeTax * (1.0 + salesTax))

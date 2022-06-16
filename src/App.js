@@ -17,6 +17,9 @@ import OrderCompletePage from './screens/order/orderComplete.js';
 import PrivacyPolicy from './screens/privacy_statement/privacy_policy.js'; 
 import { genKey } from './components/randGen.js'
 import ProductReviewPage from './screens/productReview/productReviewPage.js'; 
+import ReturnProductPage from './screens/productReturn/returnProdPage.js'; 
+import PostReturnRequest from './screens/productReturn/postReturnRequest.js'; 
+import PageTemplate from './PageTemplate.js'; 
 
 //firebase code 
 import { db } from './firebase/initializeFirebase.js';
@@ -49,6 +52,26 @@ function App() {
         orderDate: new Date(), 
     }]); 
 
+    //For storing reviews of each of the products 
+    const [productRevCol, setProductRev] = useState([
+        {
+            ID: 0,
+            rating: 4,
+            review: "I have always had peppermint tea in the cupboard, having to take lots of medication, including indigestion tablets, I find this drink helps me a lot.",
+        },
+        {
+            ID: 1,
+            rating: 4,
+            review: "Tried and bought it in a store in US. My sister loved it and I gave her more than half of my package. Perfect for the holiday..",
+        },
+       {
+        ID: 2, 
+        rating: 4, 
+        review: "The leaves arrived fresh. I made a pot from them immediately and one sip gave me a sense of alertness and clarity. I would recommend this product to anyone.",
+        },
+    ])
+
+    //This is for storing the user's shipping information. The information initialized here is just the sample. 
     const [shipping, setShipping] = useState({
         address1: '742 Evergreen Terrace',
         address2: 'n/a',
@@ -185,7 +208,19 @@ function App() {
             var arr = pendingOrders.filter(val => val.orderID === ID); 
             setPendingOrders(arr); 
         }, 
-      
+        addProductReview: (productID, Rating, ProductReview) => {
+            const arr = productRevCol; 
+
+            const obj = {
+                ID: productID, 
+                rating: Rating, 
+                review: ProductReview, 
+            }
+
+            arr.push(obj);
+            setProductRev(arr); 
+        },
+        getProductReviewCol: () => productRevCol, 
     }
 
     const options = {
@@ -314,7 +349,25 @@ function App() {
                             addProductMessage={addProductMessage}
 
                         />}
-                    />
+                            />
+                    <Route
+                        path='/return_product'
+                            element={<ReturnProductPage
+                            openPanel={openPanel}
+                            openHamburger={hamburgerPanel}
+                            accountPanel={accountPanel}
+                            addProductMessage={addProductMessage}
+
+                        />}
+                            />
+                    <Route
+                        path='/Return_request_received'
+                            element={<PostReturnRequest
+                            openPanel={openPanel}
+                            openHamburger={hamburgerPanel}
+                            accountPanel={accountPanel}
+                        />}
+                        />
               </Routes>
           </BrowserRouter>    
       </div>

@@ -1,16 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\server",
     "\\src",
-    "\\src\\base_elements",
     "\\src\\screens",
-    "\\src\\screens\\account_panel",
-    "\\src\\screens\\home_page",
+    "\\src\\screens\\productReview",
     "\\src\\screens\\product_page",
-    "\\src\\screens\\product_page\\addProductMessage",
-    "\\src\\screens\\product_page\\productProfile"
+    "\\src\\screens\\product_page\\productProfile",
+    "\\src\\screens\\shipping",
+    "\\src\\screens\\wishlist",
+    "\\src\\style",
+    "\\src\\test"
   ],
-  "SelectedNode": "\\src\\base_elements\\hamburgerPanel.js",
+  "SelectedNode": "\\src\\App.js",
   "PreviewInSolutionExplorer": false
 }

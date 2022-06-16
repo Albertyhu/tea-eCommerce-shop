@@ -1,6 +1,7 @@
 import React, { useState, useEffect, createRef} from 'react';
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
 import styled from 'styled-components';
+import uuid from 'react-uuid'
 
 //Check if ratings exist 
 //determine how many filled stars needs to be rendered by using Math.floor(rating) 
@@ -58,9 +59,9 @@ const RenderRatings = props => {
 
     return (
         <RatingsContainer>
-            {FullStarNum ? FullStarArr.map(val => <BsStarFill style={StarStyle} />) : null}
+            {FullStarNum ? FullStarArr.map(val => <BsStarFill style={StarStyle} key={uuid()} />) : null}
             {displayHalfStar ? <BsStarHalf style={StarStyle} /> : null }
-            {EmpStarNum ? EmptyStarArr.map(val => <BsStar style={EmptyStarStyle} />)  : null}
+            {EmpStarNum ? EmptyStarArr.map(val => <BsStar style={EmptyStarStyle} key={uuid()}  />)  : null}
         </RatingsContainer>
         )
 }

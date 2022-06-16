@@ -4,9 +4,7 @@ import styled from 'styled-components';
 
 
 const RenderRatingInput = props => {
-    const { rating, setRating } = props; 
-
-    const [pickedStar, setPickedStar] = useState(0); 
+    const {pickedStar, setPickedStar} = props;  
     const [tempStar, setTempStar] = useState(pickedStar); 
     var refOne = createRef(); 
     var refTwo = createRef()

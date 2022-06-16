@@ -1,19 +1,18 @@
 import React, { useEffect, useState, useCallback, useContext } from 'react';
 import '../product.css'; 
 import '../../../style/button.css'; 
-import RenderPanels from '../../../components/renderPanels.js'; 
-import Footer from '../../../base_elements/footer.js';
-import Header from '../../../base_elements/header.js';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ImagePanel from './imagePanel.js'; 
 import TextPanel from './textPanel.js'; 
 import { MainSection } from './profileStyledComp.js';
 import CTAPanel from './CTApanel.js'
-import RenderMessage from '../addProductMessage/renderMessagePanel.js'; 
 import { TeaData } from '../../../components/teaData.js'; 
 import { SecondInnerCont} from '../../../style/globalStyledComp.js';
 import PageTemplate from '../../../PageTemplate.js'; 
 import { PageTemplateContext } from '../../../components/pageTemplateContext.js'; 
+import { MyContext } from '../../../components/contextItem.js';
+import styled from 'styled-components'; 
+import ReviewPanel from './reviewPanel.js'; 
 
 const ProductProfile = props => {
 
@@ -28,34 +27,39 @@ const ProductProfile = props => {
         id,
     } = location.state;
 
+    const { getProductReviewCol } = useContext(MyContext)
+
     return (<PageTemplate MainContent={MainContent}
         openHamburger={openHamburger}
         openPanel={openPanel}
         accountPanel={accountPanel}
         addProductMessage={addProductMessage}
         ProductProfileID={id}
+        data={getProductReviewCol()}
     />)
 }
 
 const MainContent = props => {
 
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
     const goHome = useCallback(() => navigate('../tea-eCommerce-shop', { replace: true }), [navigate]);
 
-    const { getProductID, makePageAuto, makePageInherit } = useContext(PageTemplateContext)
-    const [productID, setProductID] = useState(getProductID()); 
-    const { openPanel, accountPanel, addProductMessage, openHamburger } = props; 
+    const { getProductID, makePageAuto, makePageInherit, getData } = useContext(PageTemplateContext)
+
+    //Acquire reviews of all products 
+    const review = getData();
+    const [productID, setProductID] = useState(getProductID());
     const [product, setProduct] = useState(TeaData.find(val => val.ID === productID))
     const [renderMessage, setMessage] = useState('')
     useEffect(() => {
         var item = TeaData.find(val => val.ID === productID)
-        setProduct(item) 
+        setProduct(item)
     }, [productID])
 
     const handleMessage = val => {
         setMessage(val)
     }
-    
+
     const changeHeight = () => {
         console.log('window.innerWidth: ' + window.innerWidth)
         if (window.innerWidth <= 540) {
@@ -65,19 +69,18 @@ const MainContent = props => {
             makePageInherit()
         }
     }
-    /*
+
     useEffect(() => {
-        changeHeight();
-        window.addEventListener('resize', changeHeight)
-        return () => {
-            window.removeEventListener('resize', changeHeight); 
+        if (review) {
+            makePageAuto();
         }
-    }, [])
-    */
+    }, [review])
+  
     return (
         <SecondInnerCont>
             {product ?
-                <MainSection id="ProductProfile_mainSection">
+                <ThirdInnerContainer>
+                <UpperSection>
                     {product.imageArray.length > 0 ?
                         <ImagePanel imageArray={product.imageArray} initial={product.image} />
                         :
@@ -99,7 +102,17 @@ const MainContent = props => {
                         shippingDays={product.shippingDays}
                         setMessage={handleMessage}
                     />
-                </MainSection > 
+                    </UpperSection>
+                    <ReviewSection>
+                        {review ? <ReviewPanel
+                            data={review}
+                            productID={productID}
+                        />
+                            :
+                            null
+                        }
+                    </ReviewSection>
+                </ThirdInnerContainer>
                 :
                 null
                 }
@@ -108,3 +121,16 @@ const MainContent = props => {
 }
 
 export default ProductProfile; 
+
+const ThirdInnerContainer = styled.div`
+`
+
+const UpperSection = styled.div`
+    display: flex;
+    width: 100%; 
+    height: 100%;
+@media screen and (max-width: 540px){
+    display: contents;
+}
+`
+const ReviewSection = styled.div``

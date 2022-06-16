@@ -32,6 +32,14 @@ const RenderCartItem = props => {
             productID: cartData.ID, 
         }
     }), [navigate])
+    const goReturnProduct = useCallback(() => navigate('../return_product', {
+        replace: true,
+        state: {
+            productID: cartData.ID,
+        }
+    }), [navigate])
+
+
     useEffect(() => {
         if (currentDate > returnExpDate) {
             setReturn(false)
@@ -74,7 +82,7 @@ const RenderCartItem = props => {
                     {canBeReturned ? 
                                 <Block>   
                     <Text>Is there something wrong with the product?</Text>
-                            <ButtonStyled id = "WhiteButton">Return Item</ButtonStyled>
+                            <ButtonStyled id="WhiteButton" onClick={goReturnProduct}>Return Item</ButtonStyled>
                         </Block>
                         :
                         null
