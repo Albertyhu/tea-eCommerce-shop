@@ -19,7 +19,7 @@ import { genKey } from './components/randGen.js'
 import ProductReviewPage from './screens/productReview/productReviewPage.js'; 
 import ReturnProductPage from './screens/productReturn/returnProdPage.js'; 
 import PostReturnRequest from './screens/productReturn/postReturnRequest.js'; 
-import PageTemplate from './PageTemplate.js'; 
+import AboutUsPage from './screens/aboutUs/AboutUs.js'; 
 
 //firebase code 
 import { db } from './firebase/initializeFirebase.js';
@@ -367,7 +367,15 @@ function App() {
                             openHamburger={hamburgerPanel}
                             accountPanel={accountPanel}
                         />}
-                        />
+                            />
+                    <Route
+                        path='/About_Us'
+                        element={<AboutUsPage
+                            openPanel={openPanel}
+                            openHamburger={hamburgerPanel}
+                            accountPanel={accountPanel}
+                        />}
+                    />
               </Routes>
           </BrowserRouter>    
       </div>

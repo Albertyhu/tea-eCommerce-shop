@@ -1,9 +1,49 @@
 import '../style/myStyle.css'
-
+import styled from "styled-components"; 
+import RenderNewLetterSubsc from './footerSections/newsLetterSubsc.js'; 
 const Footer = () => {
     return (
-        <div id="footer"></div>
+        <FooterContainer>
+            <Section id= "Section">
+            </Section>
+            <Section id = "Section">
+            </Section>
+            <Section id = "Section">
+            </Section>
+            <Section id = "Section">
+                <RenderNewLetterSubsc /> 
+            </Section>
+
+        </FooterContainer>
     )
 }
 
 export default Footer; 
+
+
+
+const FooterContainer = styled.div`
+    background-color: #9D5F38;
+    height: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: inherit;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+@media screen and (max-width: 540px) {
+        position: relative;
+        left: 0;
+        right: 0;
+grid-template-columns: none;
+    }
+
+`
+
+const Section = styled.div`
+display: inline-block
+@media screen and (max-width: 540px) {
+    
+}
+`

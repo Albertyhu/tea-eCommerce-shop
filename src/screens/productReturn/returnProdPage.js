@@ -33,8 +33,6 @@ const MainContent = props => {
     const { makePageAuto, makePageInherit, getProductID } = useContext(PageTemplateContext);
     const [OtherFeedback, setOtherFeedback] = useState('');
     const [choice, setChoice] = useState(""); 
-    //for resizing textarea to make website responsive
-    const [colLength, setColLength] = useState(window.innerWidth > 540 ? 150 : 49)
 
     const navigate = useNavigate();
     const goOrderPage = useCallback(() => navigate('../orders', {replace: true}),[navigate])
