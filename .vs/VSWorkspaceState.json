@@ -2,15 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\src",
+    "\\src\\base_elements",
+    "\\src\\base_elements\\footerSections",
+    "\\src\\components",
     "\\src\\screens",
-    "\\src\\screens\\account",
-    "\\src\\screens\\account_panel",
-    "\\src\\screens\\cart",
-    "\\src\\screens\\product_page",
-    "\\src\\screens\\product_page\\addProductMessage",
-    "\\src\\screens\\product_page\\productProfile",
-    "\\src\\test"
+    "\\src\\screens\\nonMember",
+    "\\src\\screens\\productReturn",
+    "\\src\\screens\\productReview",
+    "\\src\\searchBar"
   ],
-  "SelectedNode": "\\src\\screens\\product_page\\productProfile\\reviewPanel.js",
+  "SelectedNode": "\\src\\base_elements\\footerSections\\sectionStyle.js",
   "PreviewInSolutionExplorer": false
 }

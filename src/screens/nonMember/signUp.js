@@ -23,6 +23,7 @@ import { checkEmail } from './checkEmail.js'
 import { Bounce } from "react-activity";
 import "react-activity/dist/library.css";
 import RenderPanels from '../../components/renderPanels.js'; 
+import styled from 'styled-components'; 
 
 //firebase 
 import { getAuth, createUserWithEmailAndPassword} from 'firebase/auth'
@@ -44,7 +45,8 @@ const SignUp = props => {
     const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false); 
     const [loading, setLoading] = useState(false); 
     const navigate = useNavigate(); 
-
+    const [termsConfirm, setTermsConfirm] = useState(false); 
+    const [subscribe, setSubscribe] = useState(false)
     const { setCurrentUser } = useContext(MyContext); 
 
     const handleFirst = event => {
@@ -95,6 +97,11 @@ const SignUp = props => {
             errorMessage += 'Both of your passwords need to match. \n';
             isValid = false;
         }
+        if (!termsConfirm) {
+            errorMessage += 'You must agree to our Terms and Condition \n';
+            isValid = false;
+        }
+
         if (isValid) {
             createUserWithEmailAndPassword(auth, userEmail, password)
                 .then(setLoading(true))
@@ -157,6 +164,31 @@ const SignUp = props => {
             setIsPasswordConfirmed(false)
         }
     }, [confirmPass])
+
+    useEffect(() => {
+        console.log(termsConfirm)
+    }, [termsConfirm])
+
+    const toggleTerms = () => {
+        setTermsConfirm(!termsConfirm)
+    }
+
+    const toggleSubscription = () => {
+        setSubscribe(!subscribe)
+    }
+
+    const RenderTermsPanel = () => {
+        return (
+            <CheckInputCont><Check type="checkbox" checked={termsConfirm} onChange={toggleTerms} />By signing up, you agree to our <TermsSpan onClick={() => window.open('../terms_and_condition', '_blank')}>Terms and Conditions</TermsSpan></CheckInputCont>
+            )
+    }
+
+    const SubscriptionRequest = () => {
+        return (
+            <CheckInputCont><Check type="checkbox" checked={subscribe} onChange={toggleSubscription} />Subscribe to our newsletter to get updates about our latest offers and deals.</CheckInputCont>
+        )
+    }
+
 
     return (
         <MainContainer>
@@ -241,10 +273,14 @@ const SignUp = props => {
                                     <InvalidIcon />
                                 }
                             </InputContainer>
-                        </InputDiv>
-                        <SubmitButton onClick={handleSubmit}>Sign Up</SubmitButton>
-                        <h2>Already have an account with us?</h2>
-                        <Button2 onClick={goSignIn}>Sign In</Button2>
+                    </InputDiv>
+                    <CheckBoxMainCont>
+                        <RenderTermsPanel />
+                        <SubscriptionRequest />
+                    </CheckBoxMainCont>
+                    <SubmitButton onClick={handleSubmit}>Sign Up</SubmitButton>
+                    <h2>Already have an account with us?</h2>
+                    <Button2 onClick={goSignIn}>Sign In</Button2>
 
                 </InnerShell>
                 {loading ?
@@ -266,3 +302,34 @@ const iconStyle = {
     padding: "10px", 
 }
 
+const CheckInputCont = styled.div`
+`
+
+const Check = styled.input`
+width: 20px;
+height: 20px;
+`
+
+const TermsSpan = styled.span`
+    color: #5b5b5b; 
+    text-decoration: underline; 
+    cursor: pointer; 
+&:hover{
+    color: #cbcbcb; 
+    text-decoration: none; 
+}
+&:active{
+    color: #5b5b5b; 
+    text-decoration: underline; 
+}
+
+`
+
+const CheckBoxMainCont = styled.div`
+width: 58%; 
+margin-left: auto;
+margin-right: auto; 
+margin-top: 10px;
+margin-bottom: 25px;
+text-align: left;
+`

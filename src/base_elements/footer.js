@@ -1,14 +1,21 @@
 import '../style/myStyle.css'
 import styled from "styled-components"; 
 import RenderNewLetterSubsc from './footerSections/newsLetterSubsc.js'; 
+import RenderInformationSection from './footerSections/infoSection.js'; 
+import CustomerSection from './footerSections/customerSection.js'; 
+import ContactSection from './footerSections/contactSection.js'; 
+
 const Footer = () => {
     return (
         <FooterContainer>
-            <Section id= "Section">
+            <Section id="Section">
+                <RenderInformationSection />
             </Section>
-            <Section id = "Section">
+            <Section id="Section">
+                <CustomerSection />
             </Section>
-            <Section id = "Section">
+            <Section id="Section">
+                <ContactSection />
             </Section>
             <Section id = "Section">
                 <RenderNewLetterSubsc /> 

@@ -12,3 +12,15 @@ order: {
 	trackingNumber, 
 }
 
+Information Panel 
+About Us 
+Careers 
+Sitemap 
+
+Customer Service Panel 
+Refund and Return Policy 
+Privacy Policy 
+Terms of Service 
+Order History 
+
+Contact Us

@@ -42,6 +42,16 @@ width: 200px;
 height: 200px;
 }
 
+#LinkStyle {
+    color: #ffffff; 
+    text-decoration: none; 
+
+}
+#LinkStyle:hover {
+    color: #333333;
+    transition-duration: 1s;
+}
+
 @media screen and (max-width: 540px) {
     #home_mainContainer {
 

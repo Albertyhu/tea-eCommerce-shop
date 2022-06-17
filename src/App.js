@@ -14,12 +14,16 @@ import RenderWishList from './screens/wishlist/wishlist.js';
 import RenderCartPage from './screens/cart/renderCartPage.js'; 
 import OrderPage from './screens/order/order.js'; 
 import OrderCompletePage from './screens/order/orderComplete.js'; 
-import PrivacyPolicy from './screens/privacy_statement/privacy_policy.js'; 
+import PrivacyPolicy from './screens/policy_statement/privacy_policy.js'; 
+import RefundPolicy from './screens/policy_statement/refund_policy.js'; 
+import TermsAndConditions from './screens/policy_statement/termsAndCondition.js'; 
 import { genKey } from './components/randGen.js'
 import ProductReviewPage from './screens/productReview/productReviewPage.js'; 
 import ReturnProductPage from './screens/productReturn/returnProdPage.js'; 
 import PostReturnRequest from './screens/productReturn/postReturnRequest.js'; 
 import AboutUsPage from './screens/aboutUs/AboutUs.js'; 
+import CareerPage from './screens/career'; 
+import RenderSiteMap from './screens/sitemap'; 
 
 //firebase code 
 import { db } from './firebase/initializeFirebase.js';
@@ -371,6 +375,38 @@ function App() {
                     <Route
                         path='/About_Us'
                         element={<AboutUsPage
+                            openPanel={openPanel}
+                            openHamburger={hamburgerPanel}
+                            accountPanel={accountPanel}
+                        />}
+                            />
+                    <Route
+                        path='/career'
+                        element={<CareerPage
+                            openPanel={openPanel}
+                            openHamburger={hamburgerPanel}
+                            accountPanel={accountPanel}
+                        />}
+                    />
+                    <Route
+                        path='/sitemap'
+                        element={<RenderSiteMap
+                            openPanel={openPanel}
+                            openHamburger={hamburgerPanel}
+                            accountPanel={accountPanel}
+                        />}
+                            />
+                    <Route
+                        path='/return_and_refund_policy'
+                        element={<RefundPolicy
+                            openPanel={openPanel}
+                            openHamburger={hamburgerPanel}
+                            accountPanel={accountPanel}
+                        />}
+                    />
+                    <Route
+                        path='/terms_and_condition'
+                                element={<TermsAndConditions
                             openPanel={openPanel}
                             openHamburger={hamburgerPanel}
                             accountPanel={accountPanel}

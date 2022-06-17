@@ -1,7 +1,7 @@
-import React, { createRef, useEffect } from 'react'; 
+import React, { createRef, useEffect, useCallback } from 'react'; 
 import './home.css'; 
 import '../../images/pouring_tea.jpg'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../../style/button.css';  
 import '../../style/myStyle.css'; 
 import Header from '../../base_elements/header.js';
@@ -15,7 +15,8 @@ import { Filler } from '../../style/globalStyledComp.js';
 const Home = props => {
     const { openPanel, openHamburger, accountPanel } = props;
     var windowWidth;  
-
+    const navigate = useNavigate(); 
+    const goProductPage = useCallback(() => navigate('../product_page', {}), [navigate])
     return (
         <div id="home_mainContainer">
             <div id='home_innerContainer'>
@@ -34,7 +35,7 @@ const Home = props => {
                         <p>Browse our collection of authentic tea leaves.</p>
                     </div>
                     <div id="buttonContainer">
-                        <Link to="/product_page" style={{ textDecoration: "none" }}><ShopNowButton>Shop Now</ShopNowButton></Link>
+                        <ShopNowButton onClick={goProductPage}>Shop Now</ShopNowButton>
                         </div>
                 </div>
       
