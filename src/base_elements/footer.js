@@ -4,10 +4,13 @@ import RenderNewLetterSubsc from './footerSections/newsLetterSubsc.js';
 import RenderInformationSection from './footerSections/infoSection.js'; 
 import CustomerSection from './footerSections/customerSection.js'; 
 import ContactSection from './footerSections/contactSection.js'; 
+import RenderSocialPanel from './footerSections/socialMedia.js'; 
 
 const Footer = () => {
     return (
         <FooterContainer>
+            <Section id="Space">
+            </Section>
             <Section id="Section">
                 <RenderInformationSection />
             </Section>
@@ -17,6 +20,9 @@ const Footer = () => {
             <Section id="Section">
                 <ContactSection />
             </Section>
+            <Section id="Section">
+                <RenderSocialPanel />
+                </Section>
             <Section id = "Section">
                 <RenderNewLetterSubsc /> 
             </Section>
@@ -38,7 +44,7 @@ const FooterContainer = styled.div`
     position: inherit;
     z-index: 2;
     display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns: 10% 15% 15% 15% 20% 25%;
 @media screen and (max-width: 540px) {
         position: relative;
         left: 0;
@@ -51,6 +57,8 @@ grid-template-columns: none;
 const Section = styled.div`
 display: inline-block
 @media screen and (max-width: 540px) {
-    
+    &#Space{
+    display: none;
+}
 }
 `

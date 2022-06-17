@@ -4,13 +4,13 @@
     "\\src",
     "\\src\\base_elements",
     "\\src\\base_elements\\footerSections",
-    "\\src\\components",
+    "\\src\\firebase",
     "\\src\\screens",
+    "\\src\\screens\\checkout",
     "\\src\\screens\\nonMember",
-    "\\src\\screens\\productReturn",
-    "\\src\\screens\\productReview",
-    "\\src\\searchBar"
+    "\\src\\screens\\policy_statement",
+    "\\src\\style"
   ],
-  "SelectedNode": "\\src\\base_elements\\footerSections\\sectionStyle.js",
+  "SelectedNode": "\\src\\base_elements\\SecondaryHeaderBar.js",
   "PreviewInSolutionExplorer": false
 }

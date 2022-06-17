@@ -35,7 +35,7 @@ const RenderNewLetterSubsc = props => {
     }, [email])
 
     return (
-        <Container>
+        <Container id = "SubscriptionCont">
             <TextBlock>
                 <Title>Get the latest news about our offers</Title> 
                 <div>Subscribe to our newsletter. </div>
@@ -87,6 +87,7 @@ export const InvalidIcon = () => {
 }
 
 const Container = styled.div`
+margin-left: 10px;
 @media screen and (max-width: 540px){
 width: 85%; 
 margin-left: auto;

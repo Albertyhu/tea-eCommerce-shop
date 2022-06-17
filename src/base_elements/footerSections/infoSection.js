@@ -1,5 +1,7 @@
 import React, {useCallback} from 'react'
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { Header3 } from './sectionStyle.js'; 
+
 import {
     Container,
     TextBlock,
@@ -15,7 +17,7 @@ const RenderInformationSection = () => {
 
     return (
         <Container>
-            <h3>Information</h3>
+            <Header3>Information</Header3>
             <ListItem onClick={goAboutUs }>About Us</ListItem>
             <ListItem onClick={goCareer}>Careers</ListItem>
             <ListItem onClick={goSiteMap}>Site Map</ListItem>

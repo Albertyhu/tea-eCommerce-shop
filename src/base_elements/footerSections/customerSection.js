@@ -5,6 +5,7 @@ import {
     TextBlock,
     ListItem,
     UnorderedList,
+    Header3,
 } from './sectionStyle.js';
 
 const CustomerSection = () => {
@@ -16,7 +17,7 @@ const CustomerSection = () => {
 
     return (
         <Container>
-            <h3>Customer Service</h3>
+            <Header3>Customer Service</Header3>
             <ListItem onClick={goRefund}>Refund and Return Policy </ListItem>
             <ListItem onClick={goPrivacy}>Privacy Policy</ListItem>
             <ListItem onClick={goTerms}>Terms of Service </ListItem>
