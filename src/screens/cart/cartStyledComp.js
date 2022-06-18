@@ -9,9 +9,6 @@ export const MainContainer = styled.div`
     background-size: cover;
     background-color: #ffffff;
     font-family: serif;
-   // margin-top: 210px; 
-
-    
 `
 
 export const InnerContainer = styled.div`
@@ -31,11 +28,25 @@ export const Shell = styled.div`
     width: 80%;
     &#rightPanel{
         width: 20%;
+
     }
+
+@media screen and (max-width: 540px){
+    width: 95%; 
+
+    &#rightPanel{
+        margin-top: 10px;
+        width: 95%;
+    }
+}
 `
 
 export const OuterShell = styled.div`
     display: flex;
+@media screen and (max-width: 540px){
+    display: grid;
+    margin-bottom: 20px;
+}
 `
 
 export const CheckOutContainer = styled.div`

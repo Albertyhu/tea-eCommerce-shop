@@ -70,10 +70,10 @@ const RenderList = props => {
 
 
     return (
-        <ListItem>
+        <ListItem id = "renderList-ListItem">
             <Image src={image} onClick={() => goProductProfile(ID)} />
             <DetailTable>
-                <tbody>
+                <tbody id = "tbody">
                     <tr><th><Title>{name}</Title></th></tr>
                     <tr><TH>Price: </TH><td><SalesPrice>${price.toFixed(2)}</SalesPrice></td></tr>
                     <tr><TH>Quantity: </TH><td><RenderStockSelection
@@ -88,7 +88,8 @@ const RenderList = props => {
                     /></td><TDseparator><SecondaryLinks onClick={() => {
                             removeFromCart(ID);
                             removeItem(ID);
-                        }}>Delete</SecondaryLinks></TDseparator><TDseparator><SecondaryLinks onClick={moveToWishList}>Save to Wishlist</SecondaryLinks></TDseparator></tr>
+                        }}>Delete</SecondaryLinks></TDseparator>
+                        <TDseparator><SecondaryLinks onClick={moveToWishList}>Save to Wishlist</SecondaryLinks></TDseparator></tr>
                 </tbody>
             </DetailTable>
             

@@ -1,46 +1,31 @@
-import React, { useEffect, useState, useCallback, useContext } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import RenderList from '../checkout/renderList.js';  
 import { TeaData } from '../../components/teaData.js'; 
+import Header from '../../base_elements/header.js';
+import Footer from '../../base_elements/footer.js';
+import RenderMessage from '../product_page/addProductMessage/renderMessagePanel.js';
+import RenderPanels from '../../components/renderPanels.js'; 
 import { RenderSubtotal } from '../../components/renderTotal.js';
 import { useNavigate } from 'react-router-dom'; 
-import PageTemplate from '../../PageTemplate.js'; 
-import { PageTemplateContext } from '../../components/pageTemplateContext.js'; 
-import { SecondInnerCont } from '../../style/globalStyledComp.js'; 
 
 import uuid from 'react-uuid'; 
 import {
+    MainContainer,
+    InnerContainer,
     Title,
     CheckOutContainer,
     Shell, 
     OuterShell, 
 } from './cartStyledComp.js'; 
 import { TanButton, BrownButton } from '../../style/styledButton.js';
-
+import { Filler } from '../../style/globalStyledComp.js'; 
 const RenderCartPage = props => {
-    const {
-        cart, 
+    const { cart,
         openHamburger,
         openPanel,
         accountPanel,
-        addProductMessage,
+        addProductMessage
     } = props;
-
-    return (<PageTemplate MainContent={MainContent}
-        openHamburger={openHamburger}
-        openPanel={openPanel}
-        accountPanel={accountPanel}
-        addProductMessage={addProductMessage}
-        cart={cart}
-    />)
-}
-
-const MainContent = props => {
-    const { 
-        addProductMessage, 
-        cart
-    } = props;
-
-    const { changeMessage, makePageAuto, makePageInherit  } = useContext(PageTemplateContext)
     const loadData = () => {
         var arr = []; 
         cart.forEach(val => {
@@ -67,43 +52,31 @@ const MainContent = props => {
     const goProductPage = useCallback(() => navigate('../product_page',
         {}), [navigate]) 
     const [cartList, setCartList] = useState(loadData())
+    const [innerContHeight, setInnerContHeight] = useState("inherit")
     const removeItem = prodID => {
         var arr = cartList.filter(val => val.ID !== prodID)
         setCartList(arr)
     }
 
     useEffect(() => {
-        if (cartList.length > 0) {
-            if (window.innerWidth > 540) {
-                makePageInherit();
-            }
-            else
-                makePageAuto();
+        if (cartList.length > 1) {
+            setInnerContHeight("auto")
         }
         else
-            makePageInherit();
+            setInnerContHeight("inherit")
     }, [cart])
 
-
-    const resizeEvent = e => {
-        if (cartList.length > 0) {
-            if (window.innerWidth > 540) {
-                makePageInherit();
-            }
-            else
-                makePageAuto();
-        }
-        else
-            makePageInherit();
-    }
-    document.addEventListener('resize', resizeEvent);
-    useEffect(() => {
- 
-        return () => { document.removeEventListener('resize', resizeEvent);}
-    }, [])
-
     return (
-            <SecondInnerCont>
+        <MainContainer>
+            <InnerContainer heightType={innerContHeight}>
+                <RenderPanels
+                    burgerTrigger={openHamburger}
+                    cartTrigger={openPanel}
+                    accountTrigger={accountPanel}
+                />
+                <RenderMessage addProductMessage={addProductMessage} message="Product has been added to your cart." />
+                <Header />
+                <Filler />
                 <h1>Shopping Cart</h1>
                 {cartList !== null && cartList.length !== 0 ?
                     <OuterShell>
@@ -126,7 +99,9 @@ const MainContent = props => {
                     :
                     <Title>Your shopping cart is currently empty</Title>
                 }
-            </SecondInnerCont>
+            </InnerContainer>
+            <Footer />
+        </MainContainer>
         )
 }
 
