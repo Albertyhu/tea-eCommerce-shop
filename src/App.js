@@ -24,6 +24,7 @@ import PostReturnRequest from './screens/productReturn/postReturnRequest.js';
 import AboutUsPage from './screens/aboutUs/AboutUs.js'; 
 import CareerPage from './screens/career'; 
 import RenderSiteMap from './screens/sitemap'; 
+import { storageAvailable } from './localStorage/storageAvailability.js'; 
 
 //firebase code 
 import { db } from './firebase/initializeFirebase.js';
@@ -40,6 +41,7 @@ const currentUser = auth.currentUser;
 const stripePromise = loadStripe(`${process.env.REACT_APP_PUBLISHABLE_KEY}`);
 
 function App() {
+    const [currentUser, setCurrentUser] = useState({})
     const [cart, setCart] = useState([])
     const [wishlist, setWish] = useState([]); 
     const [teaData, setTeaData] = useState(null)
@@ -49,6 +51,9 @@ function App() {
     const [accountPanel, setAccountPanel] = useState(false); 
     const [addProductMessage, setAddProductMessage] = useState(false); 
     const [user, setUser] = useState(currentUser); 
+
+    //Ordered products are stored here 
+    //This one happens to contain a sample order for demoing purposes 
     const [pendingOrders, setPendingOrders] = useState([{
         orderID: genKey(10), 
         cart: [{ ID: 2, stock: 5, price: 4.99 }, { ID: 0, stock: 3, price: 5.25 }],
@@ -57,6 +62,7 @@ function App() {
     }]); 
 
     //For storing reviews of each of the products 
+    //The following items are samples for demoing purposes 
     const [productRevCol, setProductRev] = useState([
         {
             ID: 0,
@@ -74,8 +80,14 @@ function App() {
         review: "The leaves arrived fresh. I made a pot from them immediately and one sip gave me a sense of alertness and clarity. I would recommend this product to anyone.",
         },
     ])
-
-    //This is for storing the user's shipping information. The information initialized here is just the sample. 
+    if (storageAvailable('localStorage')) {
+        console.log('Local storage is available')
+    }
+    else {
+        console.log('locao storage is not available')
+    }
+    //This is for storing the user's shipping information. 
+    //The information initialized here is just the sample. 
     const [shipping, setShipping] = useState({
         address1: '742 Evergreen Terrace',
         address2: 'n/a',
@@ -93,9 +105,13 @@ function App() {
         zipcode: '94575',
         country: "US"
     })
+    //ref for the cart panel 
     const ref = useRef();
+    //ref for the hamburger menu panel 
     const hamburgerRef = useRef()
+    //ref for the message panel that pops up 
     const messageRef = useRef() 
+   //ref for the account panel 
     const accountPanelRef = useRef()
     const context = {
         addProduct: (productID, additionalStock, ProductPrice) => {
@@ -225,12 +241,25 @@ function App() {
             setProductRev(arr); 
         },
         getProductReviewCol: () => productRevCol, 
+        getAuthToken: () => localStorage.getItem("authToken"), 
     }
 
-    const options = {
-        // passing the client secret obtained from the server
-        clientSecret: '{{CLIENT_SECRET}}',
-    };
+    useEffect(() => {
+        if (localStorage.getItem("authToken")) {
+            var newLogin = {
+                first_name: localStorage.getItem("first_name"),
+                last_name: localStorage.getItem("last_name"),
+                email: localStorage.getItem("email"),
+                userID: localStorage.getItem("userID"),
+                password: localStorage.getItem("password"),
+                authToken: localStorage.getItem("authToken")
+            }
+            setCurrentUser(newLogin)
+        }
+        else {
+            setCurrentUser(null)
+        }
+    }, [])
 
     return (
       <Elements stripe={stripePromise}>

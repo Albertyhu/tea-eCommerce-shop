@@ -9,10 +9,11 @@ import CloseIcon from '../images/icon/cancel-round-dark.png';
 import Logo from './logo/Earth Tone-white-transparent.png'; 
 import { LogoContainer, LinkCont } from './headerStyle.js'
 import { HiOutlineSwitchHorizontal } from 'react-icons/hi';
-import { GoSignOut } from 'react-icons/go';
+import { GoSignOut, GoSignIn } from 'react-icons/go';
+import { HandleSignOut } from '../components/signOut.js'; 
 const HamburgerPanel = props => {
     const { openHamburger } = props;
-    const { closeHamburgerPanel, openCartPanel, getHamburgerRef  } = useContext(MyContext)
+    const { closeHamburgerPanel, openCartPanel, getHamburgerRef, getAuthToken  } = useContext(MyContext)
     var hamburgerRef = getHamburgerRef(); 
 
     useEffect(() => {
@@ -26,8 +27,8 @@ const HamburgerPanel = props => {
     }, [openHamburger])
 
     const navigate = useNavigate(); 
-
-    const goSignin = useCallback(() => navigate('../sign_in', { replace: true }), [navigate])
+   
+    const goSignin = useCallback(() => navigate('../sign_in', {}), [navigate])
 
     return (
         <SlidingPanel
@@ -44,11 +45,25 @@ const HamburgerPanel = props => {
                     closeHamburgerPanel();
                     openCartPanel();
                 }} className="hamburgerLinks"><img src={CartIcon} className='burgerIcon' /><div>Cart</div></div>
-                <div onClick={() => {
-                    closeHamburgerPanel(); 
-                    goSignin(); 
-                }} className="hamburgerLinks"><HiOutlineSwitchHorizontal  className='burgerIcon' /><div>Switch Accounts</div></div>
-                <div onClick={closeHamburgerPanel} className="hamburgerLinks"><GoSignOut src={CloseIcon} className='burgerIcon' /><div>Sign Out</div></div>
+
+                {getAuthToken() !== null?
+                    <div>
+                        <div onClick={() => {
+                            closeHamburgerPanel();
+                            goSignin();
+                        }} className="hamburgerLinks"><HiOutlineSwitchHorizontal className='burgerIcon' /><div>Switch Accounts</div></div>
+                        <div onClick={() => {
+                            closeHamburgerPanel();
+                            HandleSignOut();
+                        }} className="hamburgerLinks"><GoSignOut src={CloseIcon} className='burgerIcon' /><div>Sign Out</div></div>
+                        </div>
+                    :
+                    <div onClick={() => {
+                        closeHamburgerPanel();
+                        goSignin(); 
+                    }} className="hamburgerLinks"><GoSignIn src={CloseIcon} className='burgerIcon' /><div>Sign In</div></div>
+
+                    }
                 <div onClick={closeHamburgerPanel} className="hamburgerLinks"><img src={CloseIcon} className='burgerIcon' /><div>Close Menu</div></div>
             </div>
         </SlidingPanel>

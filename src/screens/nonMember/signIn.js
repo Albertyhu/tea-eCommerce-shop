@@ -30,8 +30,7 @@ import { AiOutlineLock } from 'react-icons/ai';
 import { Bounce } from "react-activity";
 import "react-activity/dist/library.css";
 import RenderPanels from '../../components/renderPanels.js'; 
-
-const auth = getAuth();
+import { genKey } from '../../components/randGen.js'; 
 
 const SignIn = props => {
     const { openPanel, openHamburger, accountPanel } = props;
@@ -40,7 +39,7 @@ const SignIn = props => {
     const [password, setPass] = useState(''); 
     const [loading, setLoading] = useState(false); 
     const navigate = useNavigate(); 
-
+    const [opacityLevel, setOpacityLev] = useState(1)
     const { setCurrentUser} = useContext(MyContext); 
 
     const handleEmail = event => {
@@ -63,21 +62,22 @@ const SignIn = props => {
             isValid = false; 
         }
 
+        if (localStorage.getItem("email") !== email) {
+            errMessage += "The email address you typed in does not belong to any account. \n";
+            isValid = false; 
+        }
+
+        if (localStorage.getItem("password" !== password)){
+            errMessage += "The password you typed in does not match our records. \n";
+            isValid = false; 
+        }
+
         if (isValid) {
             setLoading(true)
-            signInWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    setLoading(false)
-                    alert('You are now logged in. \n Welcome back.')
-                    setCurrentUser(userCredential.user); 
-                    goHome();
-                })
-                .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    alert(errorCode + ': ' + errorMessage);
-                    setLoading(false);
-                });
+            localStorage.setItem("authToken", genKey(5))
+            setLoading(false)
+            alert('You are now logged in. \n Welcome back.')
+            goHome();
             setEmail('');
             setPass('');
         }
@@ -100,6 +100,15 @@ const SignIn = props => {
 
     }, [email])
 
+    useEffect(() => {
+        if (loading) {
+            setOpacityLev(0.3)
+        }
+        else {
+            setOpacityLev(1)
+        }
+    }, [loading])
+
     return (
         <MainSignInContainer>
             <RenderPanels
@@ -110,7 +119,7 @@ const SignIn = props => {
             <Header />
             <ETLogoContainer><ETLogo src={EarthToneLogo} /></ETLogoContainer>
             <OuterShell logo={EarthToneLogo}>
-                <InnerShell loading={loading}>
+                <InnerShell opacity={opacityLevel}>
                 <h1>Sign In</h1>
                 <InputDiv>
                     <SubTitle>Email </SubTitle>

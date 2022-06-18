@@ -10,8 +10,8 @@ import Logo from '../../base_elements/logo/Earth Tone-white-transparent.png';
 import { LogoContainer } from '../../base_elements/headerStyle.js'
 
 const AccountPanel = props => {
-    const { openPanel } = props; 
-    const { getAccountPanelRef, closeAccountPanel } = React.useContext(MyContext); 
+    const { openPanel } = props;   
+    const { getAccountPanelRef, closeAccountPanel} = React.useContext(MyContext); 
     const accountRef = getAccountPanelRef(); 
     const navigate = useNavigate(); 
     useEffect(() => {

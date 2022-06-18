@@ -4,9 +4,8 @@ import { BrownButton } from '../style/styledButton.js';
 const auth = getAuth(); 
 
 export const HandleSignOut = () => {
-    signOut(auth).then(() => {
-        alert('You have successfully signed out')
-    })
+    localStorage.removeItem("authToken")
+    alert('You have successfully signed out')
 }
 
 export const SignOutButton = () => {

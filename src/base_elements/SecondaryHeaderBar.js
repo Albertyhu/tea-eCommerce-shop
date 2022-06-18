@@ -23,7 +23,7 @@ const auth = getAuth()
 
 
 const SecondaryHeaderBar = props => {
-    const [member, setMember] = useState(null)
+    const [member, setMember] = useState(false)
     const [data, setData] = useState(null)
     const { getCurrentUser, openAccountPanel, openHamburgerPanel, toggleHamburgerPanel } = useContext(MyContext); 
     const [isMobile, setIsMobile] = useState(window.innerWidth > 540 ? false : true)
@@ -41,26 +41,24 @@ const SecondaryHeaderBar = props => {
 
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                setMember(user)
-                const docRef = doc(db, "users", user.uid)
-                const docSnap = await getDoc(docRef); 
-                if (docSnap.exists()) {
-                    setData(docSnap.data())
-                }
-            }
-            else {
-                setMember(null)
-                setData(null)
-            }
-        })
+        if (localStorage.getItem("authToken")) {
+            var newLogin = {
+                first_name: localStorage.getItem("first_name"),
+                last_name: localStorage.getItem("last_name"),
 
+            }
+            setMember(true)
+            setData(newLogin)
+        }
+        else {
+            setMember(false)
+            setData(null)
+        }
         window.addEventListener('resize', handleWindowResize)
 
         //The following code is necessary. The component needs to unmount for sliding panel to work
         return () => {
-            unsubscribe();
+
             window.removeEventListener('resize', handleWindowResize)
         } 
         

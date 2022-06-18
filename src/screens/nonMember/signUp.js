@@ -24,6 +24,8 @@ import { Bounce } from "react-activity";
 import "react-activity/dist/library.css";
 import RenderPanels from '../../components/renderPanels.js'; 
 import styled from 'styled-components'; 
+import { GenUserID } from './genUserID.js'; 
+import { genKey } from '../../components/randGen.js';
 
 //firebase 
 import { getAuth, createUserWithEmailAndPassword} from 'firebase/auth'
@@ -44,6 +46,7 @@ const SignUp = props => {
     const [confirmPass, setConfirm] = useState('');
     const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false); 
     const [loading, setLoading] = useState(false); 
+    const [opacityLevel, setOpacityLev] = useState(1); 
     const navigate = useNavigate(); 
     const [termsConfirm, setTermsConfirm] = useState(false); 
     const [subscribe, setSubscribe] = useState(false)
@@ -69,6 +72,13 @@ const SignUp = props => {
         setConfirm(event.target.value)
     }
 
+    const reset = ()  => {
+        setFirst('');
+        setLast('');
+        setEmail('');
+        setPass('');
+        setConfirm('');
+    }
 
     const handleSubmit = () => {
         var errorMessage = 'Unsuccessful submission. Please, correct the following: \n' 
@@ -89,6 +99,10 @@ const SignUp = props => {
             errorMessage += 'Your email needs to be in the correct format [For example: name@gmail.com]. \n';
             isValid = false;
         }
+        if (localStorage.getItem("email") === userEmail) {
+            errorMessage += 'The current email you wrote down is already in use. Please, use another one. \n';
+            isValid = false;
+        }
         if (password === '') {
             errorMessage += 'Your password has not been typed. \n';
             isValid = false;
@@ -103,31 +117,22 @@ const SignUp = props => {
         }
 
         if (isValid) {
-            createUserWithEmailAndPassword(auth, userEmail, password)
-                .then(setLoading(true))
-                .then(async (userCredentials) => {
-                    await setDoc(doc(db, 'users', auth.currentUser.uid), {
-                        email: userEmail,
-                        first_name: first,
-                        last_name: last, 
-                    })
-                    setLoading(false)
-                    alert("Your account has been created.")
-                    setFirst('');
-                    setLast('');
-                    setEmail('');
-                    setPass('');
-                    setConfirm('');
-                    goHome();
-                })
-                .catch((error) => {
-                    if (error.code === 'auth/email-already-in-use') {
-                        alert("The email you typed is already in use.")
-                    }
-                    else
-                        alert(error.code + ": " + error.message)
-                    setLoading(false)
-                })
+            setLoading(true)
+            try {
+                localStorage.setItem("email", userEmail);
+                localStorage.setItem("userID", GenUserID());
+                localStorage.setItem("first_name", first);
+                localStorage.setItem("last_name", last);
+                localStorage.setItem("password", password);
+                localStorage.setItem("authToken", genKey(5))
+                reset(); 
+                setLoading(false)
+                alert("Your account has been created.");
+                goHome();
+            } catch (e) {
+                setLoading(false)
+                console.log(e.message)
+            }
         }
         else {
             alert(errorMessage)
@@ -165,10 +170,6 @@ const SignUp = props => {
         }
     }, [confirmPass])
 
-    useEffect(() => {
-        console.log(termsConfirm)
-    }, [termsConfirm])
-
     const toggleTerms = () => {
         setTermsConfirm(!termsConfirm)
     }
@@ -189,6 +190,14 @@ const SignUp = props => {
         )
     }
 
+    useEffect(() => {
+        if (loading) {
+            setOpacityLev(0.3)
+        }
+        else {
+            setOpacityLev(1)
+        }
+    }, [loading])
 
     return (
         <MainContainer>
@@ -199,7 +208,7 @@ const SignUp = props => {
             />
             <Header />
             <OuterShell>
-                <InnerShell loading={loading}>
+                <InnerShell opacity={setOpacityLev}>
                         <h1>Create a New Account</h1>
 
                         <InputDiv>
