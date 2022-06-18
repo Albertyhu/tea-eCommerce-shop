@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/tea-eCommerce-shop/static/css/main.03dd1cec.css",
-    "main.js": "/tea-eCommerce-shop/static/js/main.57df978f.js",
+    "main.js": "/tea-eCommerce-shop/static/js/main.5ec22942.js",
     "static/media/jasmine_tea_pouring.jpg": "/tea-eCommerce-shop/static/media/jasmine_tea_pouring.e8ddbf09306935fd070c.jpg",
     "static/media/Tea_chinese_character.png": "/tea-eCommerce-shop/static/media/Tea_chinese_character.3a767468176d61fc6dba.png",
     "static/media/green-tea-leaves-collection.jpg": "/tea-eCommerce-shop/static/media/green-tea-leaves-collection.982ae75b7709a6c2d732.jpg",
@@ -39,10 +39,10 @@
     "static/media/ginseng_tea.jpg": "/tea-eCommerce-shop/static/media/ginseng_tea.d3192b02b3cd1cf45497.jpg",
     "index.html": "/tea-eCommerce-shop/index.html",
     "main.03dd1cec.css.map": "/tea-eCommerce-shop/static/css/main.03dd1cec.css.map",
-    "main.57df978f.js.map": "/tea-eCommerce-shop/static/js/main.57df978f.js.map"
+    "main.5ec22942.js.map": "/tea-eCommerce-shop/static/js/main.5ec22942.js.map"
   },
   "entrypoints": [
     "static/css/main.03dd1cec.css",
-    "static/js/main.57df978f.js"
+    "static/js/main.5ec22942.js"
   ]
 }
