@@ -18,6 +18,7 @@ import { doc, getDoc} from 'firebase/firestore'
 import { db } from '../firebase/initializeFirebase.js';
 import EarthToneTextLogo from './logo/EarthToneTextLogoTan.png'; 
 import {useNavigate} from 'react-router-dom'
+import styled from 'styled-components'; 
 
 const auth = getAuth() 
 
@@ -66,8 +67,9 @@ const SecondaryHeaderBar = props => {
 
 
     const navigate = useNavigate(); 
-    const goCart = useCallback(() => navigate('../cart', {replace:true}), [navigate])
-    const goSignin = useCallback(() => navigate('../sign_in', {replace: true}), [navigate])
+    const goCart = useCallback(() => navigate('../cart', {}), [navigate])
+    const goSignin = useCallback(() => navigate('../sign_in', {}), [navigate])
+    const goSignup = useCallback(()=>navigate('../sign_up, {}'), [navigate])
     const goHome = useCallback(() => navigate('../tea-eCommerce-shop', { replace: true }), [navigate])
 
     return (
@@ -84,8 +86,8 @@ const SecondaryHeaderBar = props => {
                 member ?
                     <MemberTag onClick={handleOpenPanel}><BsFilePersonFill />Account</MemberTag>
                     :
-                    <NonMemberTag><Link to="/sign_in" style={styledLink}>Sign in</Link>,
-                    or <Link to="/sign_up" style={styledLink}>create a new account.</Link></NonMemberTag>
+                        <NonMemberTag><StyledLink onClick={goSignin}>Sign in</StyledLink>,
+                    or <StyledLink onClick={goSignup} >create a new account.</StyledLink></NonMemberTag>
             }
                     
         </SecHeadBarCont>
@@ -109,6 +111,11 @@ const styledLink = {
     fontWeight: "bold",
 }
 
+const StyledLink = styled.div`
+    color: "#ffffff",
+    fontWeight: "bold",
+`
+
 
 export default SecondaryHeaderBar; 
 
@@ -126,3 +133,4 @@ const logoStyle = {
     width: "auto",
     height: "100%"
 }
+

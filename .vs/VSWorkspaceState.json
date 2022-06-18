@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\base_elements",
-    "\\src\\base_elements\\footerSections",
+    "\\src\\components",
     "\\src\\firebase",
+    "\\src\\localStorage",
     "\\src\\screens",
-    "\\src\\screens\\checkout",
-    "\\src\\screens\\nonMember",
-    "\\src\\screens\\policy_statement",
-    "\\src\\style"
+    "\\src\\screens\\account",
+    "\\src\\screens\\account_panel",
+    "\\src\\screens\\nonMember"
   ],
-  "SelectedNode": "\\src\\base_elements\\SecondaryHeaderBar.js",
+  "SelectedNode": "\\src\\components\\signOut.js",
   "PreviewInSolutionExplorer": false
 }
