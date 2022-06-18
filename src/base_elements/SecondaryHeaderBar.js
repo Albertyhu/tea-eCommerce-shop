@@ -14,8 +14,6 @@ import HamburgerIcon from '../images/icon/hamburger_menu_white.png';
 import { MobileMenuCont } from './headerStyle.js';
 import { BsPersonSquare } from 'react-icons/bs';
 import { getAuth, onAuthStateChanged} from 'firebase/auth'
-import { doc, getDoc} from 'firebase/firestore' 
-import { db } from '../firebase/initializeFirebase.js';
 import EarthToneTextLogo from './logo/EarthToneTextLogoTan.png'; 
 import {useNavigate} from 'react-router-dom'
 import styled from 'styled-components'; 
@@ -26,7 +24,7 @@ const auth = getAuth()
 const SecondaryHeaderBar = props => {
     const [member, setMember] = useState(false)
     const [data, setData] = useState(null)
-    const { getCurrentUser, openAccountPanel, openHamburgerPanel, toggleHamburgerPanel } = useContext(MyContext); 
+    const { getCurrentUser, openAccountPanel, openHamburgerPanel, toggleHamburgerPanel, getAuthToken } = useContext(MyContext); 
     const [isMobile, setIsMobile] = useState(window.innerWidth > 540 ? false : true)
     const handleOpenPanel = () => { openAccountPanel() }; 
 
@@ -42,7 +40,7 @@ const SecondaryHeaderBar = props => {
 
 
     useEffect(() => {
-        if (localStorage.getItem("authToken")) {
+        if (getAuthToken()) {
             var newLogin = {
                 first_name: localStorage.getItem("first_name"),
                 last_name: localStorage.getItem("last_name"),
@@ -69,7 +67,7 @@ const SecondaryHeaderBar = props => {
     const navigate = useNavigate(); 
     const goCart = useCallback(() => navigate('../cart', {}), [navigate])
     const goSignin = useCallback(() => navigate('../sign_in', {}), [navigate])
-    const goSignup = useCallback(()=>navigate('../sign_up, {}'), [navigate])
+    const goSignup = useCallback(()=>navigate('../sign_up', {}), [navigate])
     const goHome = useCallback(() => navigate('../tea-eCommerce-shop', { replace: true }), [navigate])
 
     return (
@@ -86,8 +84,7 @@ const SecondaryHeaderBar = props => {
                 member ?
                     <MemberTag onClick={handleOpenPanel}><BsFilePersonFill />Account</MemberTag>
                     :
-                        <NonMemberTag><StyledLink onClick={goSignin}>Sign in</StyledLink>,
-                    or <StyledLink onClick={goSignup} >create a new account.</StyledLink></NonMemberTag>
+                        <NonMemberTag><StyledLink onClick={goSignin}>Sign in</StyledLink>, or &#160;<StyledLink onClick={goSignup}> create a new account.</StyledLink></NonMemberTag>
             }
                     
         </SecHeadBarCont>
@@ -111,9 +108,11 @@ const styledLink = {
     fontWeight: "bold",
 }
 
-const StyledLink = styled.div`
-    color: "#ffffff",
-    fontWeight: "bold",
+const StyledLink = styled.span`
+    color: #ffffff;
+    text-decoration: underline; 
+    cursor: pointer; 
+
 `
 
 

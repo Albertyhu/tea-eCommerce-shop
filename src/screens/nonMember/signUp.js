@@ -46,7 +46,6 @@ const SignUp = props => {
     const [confirmPass, setConfirm] = useState('');
     const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false); 
     const [loading, setLoading] = useState(false); 
-    const [opacityLevel, setOpacityLev] = useState(1); 
     const navigate = useNavigate(); 
     const [termsConfirm, setTermsConfirm] = useState(false); 
     const [subscribe, setSubscribe] = useState(false)
@@ -190,14 +189,6 @@ const SignUp = props => {
         )
     }
 
-    useEffect(() => {
-        if (loading) {
-            setOpacityLev(0.3)
-        }
-        else {
-            setOpacityLev(1)
-        }
-    }, [loading])
 
     return (
         <MainContainer>
@@ -208,7 +199,7 @@ const SignUp = props => {
             />
             <Header />
             <OuterShell>
-                <InnerShell opacity={setOpacityLev}>
+                <InnerShell opacitylev={loading? 0.3 : 1.0}>
                         <h1>Create a New Account</h1>
 
                         <InputDiv>

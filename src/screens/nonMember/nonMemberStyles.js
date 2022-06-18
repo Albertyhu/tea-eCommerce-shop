@@ -73,7 +73,7 @@ export const OuterShell = styled.div`
 `
 
 export const InnerShell = styled.div`
-opacity: ${props => props.opacity}; 
+opacity: ${props => props.opacitylev}; 
 `
 export const SubmitButton = styled.div`
     margin-top: 10px;

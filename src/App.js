@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'; 
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './screens/home_page';
 import ProductPage from './screens/product_page'; 
 import './style/myStyle.css'
@@ -7,7 +7,6 @@ import { MyContext } from './components/contextItem.js';
 import SignIn from './screens/nonMember/signIn.js';
 import SignUp from './screens/nonMember/signUp.js'; 
 import AccountPage from './screens/account/accountPage.js';
-import { LoadProducts } from './components/loadProducts.js'; 
 import ProductProfilePage from './screens/product_page/productProfile/productProfile.js'; 
 import RenderCheckOut from './screens/checkout/checkoutPage.js'; 
 import RenderWishList from './screens/wishlist/wishlist.js';
@@ -36,7 +35,6 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 
 const auth = getAuth(); 
-const currentUser = auth.currentUser;
 
 const stripePromise = loadStripe(`${process.env.REACT_APP_PUBLISHABLE_KEY}`);
 
@@ -265,7 +263,7 @@ function App() {
       <Elements stripe={stripePromise}>
       <MyContext.Provider value = {context}>
       <div className="App" id="rootContainer" >
-          <BrowserRouter>
+            <BrowserRouter>
               <Routes>
                 <Route
                     path="/tea-eCommerce-shop"
@@ -442,7 +440,7 @@ function App() {
                         />}
                     />
               </Routes>
-          </BrowserRouter>    
+        </BrowserRouter>    
       </div>
     </MyContext.Provider>
     </Elements>

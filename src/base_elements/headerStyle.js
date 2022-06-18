@@ -31,6 +31,7 @@ export const NonMemberTag = styled.div`
     position: absolute;
     right: 20px;
     top: 10px;
+    display: flex;
    @media screen and (max-width: 540px) {
     position: relative;
     text-align: center;

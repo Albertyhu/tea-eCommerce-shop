@@ -1,6 +1,8 @@
+import { GenUserID } from '../screens/nonMember/genUserID.js'; 
 
 export var users = [{
     userID: 'Gsgzxxefefee', 
+    authToken: GenUserID(), 
     first_name: "Ron",
     last_name: "Swanson",
     email: "ron@aol.com",
