@@ -2,15 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\base_elements",
-    "\\src\\components",
-    "\\src\\firebase",
-    "\\src\\localStorage",
     "\\src\\screens",
-    "\\src\\screens\\account",
-    "\\src\\screens\\account_panel",
-    "\\src\\screens\\nonMember"
+    "\\src\\screens\\checkout",
+    "\\src\\screens\\policy_statement",
+    "\\src\\screens\\product_page",
+    "\\src\\screens\\shipping",
+    "\\src\\screens\\wishlist",
+    "\\src\\style",
+    "\\src\\test"
   ],
-  "SelectedNode": "\\src\\components\\signOut.js",
+  "SelectedNode": "\\src\\test\\creditCard.test.js",
   "PreviewInSolutionExplorer": false
 }

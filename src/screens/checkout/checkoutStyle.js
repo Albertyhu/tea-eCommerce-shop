@@ -162,3 +162,32 @@ export const LoadingContainer = styled.div`
         left: 50%;
 
 `
+
+export const CardElement = styled.div`
+border: 1px solid rgba(0,0,0,0.5); 
+border-radius: 5px;
+resize: none; 
+width: 100%;
+height: 50px;
+    box-shadow: rgba(10, 225, 65, 0.35) 0px 5px 25px;
+    justify-content: center;
+display: flex;
+`
+
+export const InnerCardElements = styled.div`
+    width: 100%; 
+    margin: auto; 
+
+    justify-content: center;
+    border: none;
+    outline: none;
+`
+
+export const CreditCardInput = styled.input`
+        margin-top:auto;
+    margin-bottom: auto;
+    border-radius: 5px;
+    border: 1px solid rgba(0,0,0,0.5);
+    width: 90%;
+font-family: Roboto, Open Sans, Segoe UI, sans-serif;
+`

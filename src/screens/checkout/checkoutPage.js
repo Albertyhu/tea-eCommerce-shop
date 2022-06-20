@@ -6,7 +6,10 @@ import {
     CheckOutContainer,
     Shell, 
     OuterShell,
-    LoadingContainer
+    LoadingContainer, 
+    CardElement, 
+    InnerCardElements, 
+    CreditCardInput, 
 } from './checkoutStyle.js'; 
 import { TanButton, BrownButton } from '../../style/styledButton.js';
 import { MyContext } from '../../components/contextItem.js'; 
@@ -20,7 +23,7 @@ import { PageTemplateContext } from '../../components/pageTemplateContext.js';
 import { RenderAddress } from '../account/accountPage.js';
 import RenderShippingForm from '../shipping/shippingForm.js';
 import styled from 'styled-components'
-import { PaymentElement, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import './stripe.css';
 import axios from 'axios'; 
 import { Bounce } from "react-activity";
@@ -69,7 +72,8 @@ const MainContent = props => {
     const [editBilling, setEditBilling] = useState(false)
     const { makePageAuto } = React.useContext(PageTemplateContext)
     const [processingIndicator, setProcessingInd] = useState(false); 
-    const [finalCost, ck_setFinalCost] = useState(0)
+    const [finalCost, ck_setFinalCost] = useState(0); 
+    const [cardNum, setCardNum] = useState("")
 
     const loadData = () => {
         if (cart) {
@@ -149,21 +153,35 @@ const MainContent = props => {
         var isValid = true; 
         var errMessage = "Please, correct the following issues. \n "; 
         if (shipping.address1 === "") {
-            errMessage += "Please, write your address on Address Line 1."; 
+            errMessage += "Please, write your address on Address Line 1. \n"; 
             isValid = false; 
         }
         if (shipping.city === "") {
-            errMessage += "Please, write down your city.";
+            errMessage += "Please, write down your city. \n";
             isValid = false;
         }
         if (shipping.zipcode === "") {
-            errMessage += "Please, write down your zipcode";
+            errMessage += "Please, write down your zipcode. \n";
             isValid = false;
         }
-
- 
+        if (cardNum.length !== 31) {
+            errMessage += "Please, complete your credit card info. \n";
+            isValid = false;
+        }
+        else {
+            if (!validateCreditMonth()) {
+                errMessage += "The month of your card's expiration date is not correct. It needs to be in the range of 1 - 12. \n";
+                isValid = false;
+            }
+            else {
+                if (!validateCreditYear()) {
+                    errMessage += "The date on your card has already expired. \n";
+                    isValid = false;
+                }
+            }
+        }
         if (isValid) {
-           await confirmOrder(e)
+            confirmOrder();
         }
         else {
             alert(errMessage)
@@ -171,62 +189,96 @@ const MainContent = props => {
 
     };
 
-    const stripe = useStripe();
-    const elements = useElements();
-    const confirmOrder = async (e) => {
-        e.preventDefault(); 
-        if (!stripe || !elements) {
-            // Stripe.js has not yet loaded.
-            // Make sure to disable form submission until Stripe.js has loaded.
-            return;
+    const validateCreditMonth = () => {
+        var month = parseInt(cardNum.substring(20, 22)); 
+        console.log("month = " + month)
+        if (month < 1 || month > 12) {
+            return false;
         }
-        var shippingData = getShippingAdd(); 
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
-            type: "card",
-            card: elements.getElement(CardElement),
-            billing_details: {
-                address: {
-                    line1: `${shippingData.address1}`, 
-                    line2: `${shippingData.address2}`, 
-                    city: `${shippingData.city}`,
-                    state: `${shippingData.state}`,
-                    postal_code: `${shippingData.zipcode}`, 
-                    country: `${shippingData.country}`,
-                },
-                email: "",
-                name: "",
-                phone: "", 
-            },
-        })
+        else
+            return true; 
+    }
 
-        if (!error) {
+    const validateCreditYear = () => {
+        var isValid = true; 
+        var month = parseInt(cardNum.substring(20, 22)); 
+        var year = parseInt(cardNum.substring(23, 27))
+        console.log("year = " + year)
+        const current = new Date()
+        const expDate = new Date(year, month - 1, 1)
+        if (expDate < current)
+            isValid = false;
+        return isValid; 
+    }
+
+    const handleCreditInput = (event) => {
+        var userInput = event;
+        if (event.target.value.length < 32) {
+            var formatted = formatCreditCardNum(userInput)
+            setCardNum(formatted)
+        }
+    }
+    //As the user types in their credit card numbers, this function formats it to the following 
+    // xxxx\xxxx\xxxx\xxxx mm\yyyy cvv
+    const formatCreditCardNum = (e) => {
+        var raw = e.target.value;
+        var regExp = /[^0-9]/g 
+        var regExp2 = /\s/g
+        var digitsOnly = raw.replace(regExp, "")
+        var userInput = digitsOnly.replace(regExp2, "")
+
+        var userLength = userInput.length;
+        var formatted = '';
+        if (userLength <= 4) {
+            return `${userInput}`; 
+
+        }
+        if (userLength > 4 && userLength <= 8) {
+            return `${userInput.slice(0, 4)}\\${userInput.slice(4)}`
+        }
+        if (userLength > 8 && userLength  < 13) {
+            return `${userInput.slice(0, 4)}\\${userInput.slice(4, 8)}\\${userInput.slice(8)}`
+        }
+        if (userLength >= 13 && userLength < 17) {
+            return`${userInput.slice(0, 4)}\\${userInput.slice(4, 8)}\\${userInput.slice(8, 12)}\\${userInput.slice(12, 16)}`
+        }
+        //month 
+        if (userLength >= 17 && userLength < 19) {
+            return `${userInput.slice(0, 4)}\\${userInput.slice(4, 8)}\\${userInput.slice(8, 12)}\\${userInput.slice(12, 16) + " "}${userInput.slice(16, 18)}`
+        }
+        //year
+        if (userLength >= 19 && userLength < 23) {
+            return `${userInput.slice(0, 4)}\\${userInput.slice(4, 8)}\\${userInput.slice(8, 12)}\\${userInput.slice(12, 16) + " "}${userInput.slice(16, 18)}\\${userInput.slice(18,22)}`
+        }
+        //cvv
+        if (userLength >= 23 && userLength < 26) {
+            return `${userInput.slice(0, 4)}\\${userInput.slice(4, 8)}\\${userInput.slice(8, 12)}\\${userInput.slice(12, 16) + " "}${userInput.slice(16, 18)}\\${userInput.slice(18, 22) + " "}${userInput.slice(22,25)}`
+
+        }
+
+    }
+
+    const confirmOrder = () => {
             try {
-                const { id } = paymentMethod;
+       
                 const amount_to_charge = (finalCost * 100).toFixed(0);
                 var dateObj = new Date();
                 var newOrder = {
-                    orderID: id,
+             
                     cart,
                     amountPaid: finalCost,
                     orderDate: dateObj,
                 }
 
-                const response = await axios.post("http://localhost:4000/payment", {
-                    amount: amount_to_charge,
-                    id,
-                }).then(setProcessingInd(true))
 
-                if (response.data.success) {
                     setProcessingInd(false);
                     setNewOrder(newOrder);
                     goOrderCompletePage();
                     clearCart(); 
-                }
+                
             } catch (e) { console.log("[ERROR]" + e) }
-        }
-        else {
-            console.log(error.message)
-        }
+        
+
 
     }
 
@@ -268,7 +320,17 @@ const MainContent = props => {
                                 isCheckout={true}
                             />
                             <h2>Card</h2>
-                            <CardElement className="card" options={CARD_OPTIONS}  />
+                            <CardElement id ="CardElement">
+                                <InnerCardElements id ="InnerCardElements">
+                                    <CreditCardInput
+                                        value={cardNum}
+                                        type="text"
+                                        placeholder="Credit Card Number  MM/YYYY  CVV"
+                                        onChange={handleCreditInput}
+                                        id = "CreditCardInput"
+                                    />
+                                </InnerCardElements>
+                            </CardElement>
                             </CheckOutContainer>
                     </Shell>
                     {processingIndicator ?
@@ -313,9 +375,11 @@ color: #575757;
 text-align: center; 
 `
 
+/*
+
 const CARD_OPTIONS = {
     iconStyle: "solid",
-    /*added */
+
     hidePostalCode: true,
     style: {
         base: {
@@ -336,3 +400,4 @@ const CARD_OPTIONS = {
         }
     }
 }
+*/
