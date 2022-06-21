@@ -24,8 +24,9 @@ import AboutUsPage from './screens/aboutUs/AboutUs.js';
 import CareerPage from './screens/career'; 
 import RenderSiteMap from './screens/sitemap'; 
 import { storageAvailable } from './localStorage/storageAvailability.js'; 
+import PostSubmissionPage from './screens/career/PostSubmissionPage.js';
 
-//firebase code 
+//firebase code
 import { db } from './firebase/initializeFirebase.js';
 import { getAuth, onAuthStateChanged } from 'firebase/auth'; 
 import { doc, getDoc } from "firebase/firestore";
@@ -449,6 +450,14 @@ function App() {
                     <Route
                         path='/terms_and_condition'
                                 element={<TermsAndConditions
+                            openPanel={openPanel}
+                            openHamburger={hamburgerPanel}
+                            accountPanel={accountPanel}
+                        />}
+                    />
+                    <Route
+                        path='/resume_submitted'
+                            element={<PostSubmissionPage
                             openPanel={openPanel}
                             openHamburger={hamburgerPanel}
                             accountPanel={accountPanel}
