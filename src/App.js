@@ -25,7 +25,7 @@ import CareerPage from './screens/career';
 import RenderSiteMap from './screens/sitemap'; 
 import { storageAvailable } from './localStorage/storageAvailability.js'; 
 import PostSubmissionPage from './screens/career/PostSubmissionPage.js';
-
+import ContactUsPage from './screens/contact'; 
 //firebase code
 import { db } from './firebase/initializeFirebase.js';
 import { getAuth, onAuthStateChanged } from 'firebase/auth'; 
@@ -424,7 +424,7 @@ function App() {
                         />}
                             />
                     <Route
-                        path='/career'
+                                path='/About_Us'
                         element={<CareerPage
                             openPanel={openPanel}
                             openHamburger={hamburgerPanel}
@@ -458,6 +458,14 @@ function App() {
                     <Route
                         path='/resume_submitted'
                             element={<PostSubmissionPage
+                            openPanel={openPanel}
+                            openHamburger={hamburgerPanel}
+                            accountPanel={accountPanel}
+                />}
+                    />
+                    <Route
+                        path='/contact_us'
+                        element={<ContactUsPage
                             openPanel={openPanel}
                             openHamburger={hamburgerPanel}
                             accountPanel={accountPanel}

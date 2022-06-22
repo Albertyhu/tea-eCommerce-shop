@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\screens",
-    "\\src\\screens\\checkout",
-    "\\src\\screens\\policy_statement",
-    "\\src\\screens\\product_page",
+    "\\src\\screens\\career",
+    "\\src\\screens\\nonMember",
+    "\\src\\screens\\productReview",
     "\\src\\screens\\shipping",
     "\\src\\screens\\wishlist",
     "\\src\\style",
     "\\src\\test"
   ],
-  "SelectedNode": "\\src\\readme.md",
+  "SelectedNode": "\\src\\notes.txt",
   "PreviewInSolutionExplorer": false
 }
