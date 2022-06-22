@@ -26,6 +26,7 @@ import RenderSiteMap from './screens/sitemap';
 import { storageAvailable } from './localStorage/storageAvailability.js'; 
 import PostSubmissionPage from './screens/career/PostSubmissionPage.js';
 import ContactUsPage from './screens/contact'; 
+
 //firebase code
 import { db } from './firebase/initializeFirebase.js';
 import { getAuth, onAuthStateChanged } from 'firebase/auth'; 
@@ -424,7 +425,7 @@ function App() {
                         />}
                             />
                     <Route
-                                path='/About_Us'
+                                path='/career'
                         element={<CareerPage
                             openPanel={openPanel}
                             openHamburger={hamburgerPanel}
@@ -469,7 +470,7 @@ function App() {
                             openPanel={openPanel}
                             openHamburger={hamburgerPanel}
                             accountPanel={accountPanel}
-                        />}
+                />}
                     />
               </Routes>
         </BrowserRouter>    

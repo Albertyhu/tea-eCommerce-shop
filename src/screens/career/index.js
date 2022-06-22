@@ -5,6 +5,7 @@ import { SecondInnerCont } from '../../style/globalStyledComp.js'
 import styled from 'styled-components';
 import { GreenButton, WhiteButton } from '../../style/styledButton.js'; 
 import { useNavigate } from 'react-router-dom';
+import { checkEmail } from '../nonMember/checkEmail.js'; 
 
 const CareerPage = props => {
     const {
@@ -51,7 +52,41 @@ const MainContent = props => {
     }
 
     const navigate = useNavigate(); 
-    const goSubmissionPage = useCallback(()=>navigate('/resume_submitted', {}), [navigate])
+    const goSubmissionPage = useCallback(() => navigate('/resume_submitted', {}), [navigate])
+
+    const handleSubmission = () => {
+        var errMess = "Please, correct the following before submitting: \n";
+        var isValid = true;
+        if (first === '') {
+            errMess += "You must leave us with your first name. \n";
+            isValid = false;
+        }
+        if (last === '') {
+            errMess += "You must leave us with your last name. \n";
+            isValid = false;
+        }
+        if (email === '') {
+            errMess += "You must leave us with your email address so that we can reply back to you. \n";
+            isValid = false;
+        }
+        if (!checkEmail(email)) {
+            errMess += "The format of your email address is incorrect. It must in the form of john@email.com \n";
+            isValid = false;
+        }
+        if (coverletter === '') {
+            errMess += "Your cover letter cannot be empty! \n";
+            isValid = false;
+        }
+
+        if (isValid) {
+            reset();
+            goSubmissionPage(); 
+        }
+        else {
+            alert(errMess)
+        }
+    } 
+
     const resizeEvent = e => {
         if (window.innerWidth > 540)
             makePageAuto()
@@ -93,7 +128,7 @@ const MainContent = props => {
                 value={coverletter}
                 rows="5"
                 />
-                <WhiteButton id="CareerPageSubmit" onClick={goSubmissionPage}>Submit</WhiteButton>
+                <WhiteButton id="CareerPageSubmit" onClick={handleSubmission}>Submit</WhiteButton>
             </FormDiv>
         </SecondInnerCont>
     )
@@ -116,6 +151,7 @@ display: flex;
  margin-left: auto;
 margin-right: auto;
 justify-content: center; 
+
 `
 
 const InlineBlock = styled.div`
@@ -135,6 +171,7 @@ display: block;
 margin-left: auto;
 margin-right: auto;
 width: 90%;
+padding: 5px;
 `
 
 const Textbox = styled.textarea`
