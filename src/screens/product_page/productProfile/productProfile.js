@@ -44,11 +44,11 @@ const MainContent = props => {
     const navigate = useNavigate();
     const goHome = useCallback(() => navigate('../tea-eCommerce-shop', { replace: true }), [navigate]);
 
-    const { getProductID, makePageAuto, makePageInherit, getData } = useContext(PageTemplateContext)
+    const { getProductID, makePageAuto, makePageInherit, getData, ProductProfileID } = useContext(PageTemplateContext)
 
     //Acquire reviews of all products 
     const review = getData();
-    const [productID, setProductID] = useState(getProductID());
+    const [productID, setProductID] = useState(ProductProfileID);
     const [product, setProduct] = useState(TeaData.find(val => val.ID === productID))
     const [renderMessage, setMessage] = useState('')
     useEffect(() => {
@@ -75,6 +75,10 @@ const MainContent = props => {
             makePageAuto();
         }
     }, [review])
+
+    useEffect(() => {
+        setProductID(ProductProfileID)
+    }, [ProductProfileID])
   
     return (
         <SecondInnerCont>

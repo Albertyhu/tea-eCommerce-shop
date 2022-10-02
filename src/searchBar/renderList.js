@@ -1,20 +1,23 @@
-import React, { useEffect, useRef } from 'react'; 
+import React, { useEffect, useRef, useCallback } from 'react'; 
 import styled from 'styled-components'; 
 import uuid from 'react-uuid'; 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useLocation  } from 'react-router-dom'
 
 const RenderItem = props => {
     const { reset } = props;
+    const navigate = useNavigate(); 
+    const GoProductProfile = useCallback(() => navigate('/product_profile', {
+        state: {
+            id: props.ID,
+        }
+    }), [navigate]); 
+
     return (
-        <div>
-            <Link to="/product_profile"
-                state={{
-                    id: props.ID,
-                }}
-                style={linkStyle}
-                onClick={reset}
-            ><ListItem>{props.name}</ListItem></Link>
-        </div>
+        <ListItem
+            onClick={() => {
+                GoProductProfile();
+                reset();
+            }}>{props.name}</ListItem>
 
         )
 }
@@ -64,6 +67,7 @@ const ListItem = styled.div`
     margin-top: 20px;
     margin-bottom: 20px;
     font-family: 'Times New Roman', Times, serif; 
+    cursor: pointer;
     &:hover {
      background-color: #cbcbcb;
     }

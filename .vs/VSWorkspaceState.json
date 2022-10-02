@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\screens",
-    "\\src\\screens\\career",
-    "\\src\\screens\\nonMember",
+    "\\src\\screens\\contact",
     "\\src\\screens\\productReview",
     "\\src\\screens\\shipping",
+    "\\src\\screens\\sitemap",
     "\\src\\screens\\wishlist",
     "\\src\\style",
     "\\src\\test"
   ],
-  "SelectedNode": "\\src\\notes.txt",
+  "SelectedNode": "\\src\\screens\\nonMember\\checkEmail.js",
   "PreviewInSolutionExplorer": false
 }
